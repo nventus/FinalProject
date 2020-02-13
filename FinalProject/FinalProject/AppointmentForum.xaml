@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="FinalProject.AppointmentForum">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Appointment Date:" 
+               FontSize="Large"/>
+            <DatePicker
+                x:Name="AppointmentDateEntry"
+                Date="02/06/2020"
+                Format="d"/>
+            <Label Text="Appointment Time:"
+                   FontSize="Large"
+                   />
+            <TimePicker 
+                x:Name="AppointmentTimeEntry"/>
+            <Label Text="Follow-Up Date:" 
+               FontSize="Large" />
+            <DatePicker
+                x:Name="FollowUpDateEntry"
+                Date="02/06/2020"
+                Format="d"/>
+            <Label Text="Follow-Up Appointment Time:"
+                   FontSize="Large"
+                   />
+            <TimePicker 
+                x:Name="FollowUpTimeEntry"/>
+            <Label Text="Follow-Up Recommendations From Doctor:" 
+               FontSize="Large" />
+            <Editor Text=""
+                x:Name="FollowUpRecsEntry"/>
+            <Label Text="Prescriptions:" 
+               FontSize="Large" />
+            <Editor Text=""
+                x:Name="PrescriptionEntry"/>
+            <Button x:Name="SubmitButton" Text = "Submit" FontSize="Large" HorizontalOptions="Center"
+                    VerticalOptions="Fill" Clicked="ButtonClicked" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
