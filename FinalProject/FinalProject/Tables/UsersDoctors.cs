@@ -1,30 +1,24 @@
-﻿using SQLite;
+﻿using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace FinalProject
 {
-    public class User
+    public class UsersDoctors
     {
-        [PrimaryKey]
-
-        public string Name
+        [ForeignKey(typeof(User))]
+        public int uId
+        {
+            get;
+            set;
+        }
+        [ForeignKey(typeof(Doctor))]
+        public int dId
         {
             get;
             set;
         }
 
-        public DateTime Birthday
-        {
-            get;
-            set;
-        }
-
-        public string Email
-        {
-            get;
-            set;
-        }
     }
 }

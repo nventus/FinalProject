@@ -42,7 +42,7 @@ namespace FinalProject
         private void UserSelected(object sender, SelectedItemChangedEventArgs e)
         {
             User selectedUser = e.SelectedItem as User;
-            Navigation.PushModalAsync(new NavigationPage(new DoctorList(selectedUser)));
+            Navigation.PushModalAsync(new NavigationPage(new OptionList(selectedUser.Id)));
         }
     }
 }

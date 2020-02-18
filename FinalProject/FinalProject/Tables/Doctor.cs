@@ -8,8 +8,14 @@ namespace FinalProject
 {
     public class Doctor
     {
-        [PrimaryKey, Unique]
-        public String dName
+        [PrimaryKey, AutoIncrement]
+        public int Id
+        {
+            get;
+            set;
+        }
+        [NotNull]
+        public string dName
         {
             get;
             set;
@@ -41,14 +47,20 @@ namespace FinalProject
             get;
             set;
         }
-        [ForeignKey(typeof(User))]
-        public string uName
+        [ManyToMany(typeof(UsersDoctors))]
+        public List<User> Users
         {
             get;
             set;
         }
-        [ManyToOne]
-        public User User
+        [OneToMany]
+        public List<Appointment> Appointments
+        {
+            get;
+            set;
+        }
+        [OneToMany]
+        public List<Prescription> Prescriptions
         {
             get;
             set;

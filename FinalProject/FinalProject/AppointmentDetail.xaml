@@ -22,11 +22,6 @@
             <Label
                 x:Name="FollowUpRecs"
                 FontSize="Large"/>
-            <Label Text="Prescriptions:" 
-               FontSize="Large" />
-            <Label
-                x:Name="Prescription"
-                FontSize="Large"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

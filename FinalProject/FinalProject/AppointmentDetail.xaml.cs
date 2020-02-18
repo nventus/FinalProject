@@ -22,10 +22,9 @@ namespace FinalProject
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            AppointmentDate.Text = viewedAppt.aptDate;
-            FollowUpDate.Text = viewedAppt.followUpApt;
+            AppointmentDate.Text = viewedAppt.aptDate.ToString();
+            FollowUpDate.Text = viewedAppt.followUpApt.ToString();
             FollowUpRecs.Text = viewedAppt.followUpAdvice;
-            Prescription.Text = viewedAppt.prescriptions;
         }
 
         private void editAppointmentClicked(object sender, EventArgs e)

@@ -20,9 +20,11 @@ namespace FinalProject
         {
             User user = new User()
             {
-                Name = uNameEntry.Text,
-                Birthday = bdayPick.Date,
-                Email = uEmailEntry.Text
+                Name = nameEntry.Text,
+                Birthday = (bdayPick.Date).ToString(),
+                Email = emailEntry.Text,
+                Allergies = allergyEntry.Text,
+                Conditions = conditionEntry.Text
             };
 
             if (user.Name == "")
@@ -30,10 +32,20 @@ namespace FinalProject
             }
             else
             {
+                user.Appointments = new List<Appointment>
+                {
+
+                };
+                user.Prescriptions = new List<Prescription>
+                {
+
+                };
                 using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
                 {
                     conn.CreateTable<User>();
-                    int rowsAdded = conn.Insert(user);
+                    conn.CreateTable<Appointment>();
+                    conn.CreateTable<Prescription>();
+                    conn.Insert(user);
                     await Navigation.PopModalAsync();
                 }
             }

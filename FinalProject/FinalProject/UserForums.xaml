@@ -11,7 +11,7 @@
             <Label Text="Your Name:" 
                FontSize="Large" />
             <Editor Text=""
-                x:Name="uNameEntry"/>
+                x:Name="nameEntry"/>
             <Label Text="Birthday:" 
                FontSize="Large"/>
             <DatePicker 
@@ -21,7 +21,15 @@
             <Label Text="Email:" 
                FontSize="Large" />
             <Editor Text="" 
-                x:Name="uEmailEntry"/>
+                x:Name="emailEntry"/>
+            <Label Text="Allergies:" 
+               FontSize="Large" />
+            <Editor Text="" 
+                x:Name="allergyEntry"/>
+            <Label Text="Conditions:" 
+               FontSize="Large" />
+            <Editor Text="" 
+                x:Name="conditionEntry"/>
             <Button x:Name="uForumSubmit" Text = "Submit" FontSize="Large" HorizontalOptions="Center"
                     VerticalOptions="Fill" Clicked="ButtonClicked" />
         </StackLayout>
