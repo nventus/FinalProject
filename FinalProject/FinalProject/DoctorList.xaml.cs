@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FinalProject.Tables;
+using SQLiteNetExtensions.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,28 +15,25 @@ namespace FinalProject
     public partial class DoctorList : ContentPage
     {
         User user;
-        public DoctorList(User usr)
+        int uid;
+        public DoctorList(int id)
         {
             InitializeComponent();
-            user = usr;
+            uid = id;          
         }
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
-            /*
-             * Initially opens up a database with all registered users. If the database is empty, then open up the user signup forum
-             */
-
-
-            //Creates the Doctor table if it doesn't exist. Sends them all to a list at the mainpage.
             using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
             {
+                conn.CreateTable<User>();
                 //Ignored if the table already exists
                 conn.CreateTable<Doctor>();
-                var doctors = conn.Query<Doctor>("select * from Doctor where uName=?", user.Name);
-                doctorListView.ItemsSource = doctors;
+                conn.CreateTable<UsersDoctors>();
+                conn.CreateTable<Vaccine>();
+                user = conn.GetWithChildren<User>(uid);
             }
+            doctorListView.ItemsSource = user.Doctors;
         }
 
         //Brings the user to the new doctor forum
@@ -49,5 +48,6 @@ namespace FinalProject
             Doctor selectedDoctor = e.SelectedItem as Doctor;
             Navigation.PushAsync(new AppointmentList(selectedDoctor, user));
         }
+
     }
 }

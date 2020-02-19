@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FinalProject.Tables;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,13 +30,27 @@ namespace FinalProject
             using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
             {
                 conn.CreateTable<Appointment>();
-                var appointments = conn.Query<Appointment>("select * from Appointment where DName=? AND uName=?", doctor.dName, user.Name);
+                var appointments = conn.Query<Appointment>("select * from Appointment where dId=? AND uId=?", doctor.Id, user.Id);
                 appointmentListView.ItemsSource = appointments;
             }
         }
         private void newAppointmentClicked(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new AppointmentForum(doctor, user));
+            Appointment appointment = new Appointment
+            {
+                dId = doctor.Id,
+                uId = user.Id
+            };
+            Navigation.PushModalAsync(new AppointmentForum(appointment));
+        }
+        private void futureAppointmentClicked(object sender, EventArgs e)
+        {
+            Appointment appointment = new Appointment
+            {
+                dId = doctor.Id,
+                uId = user.Id
+            };
+            Navigation.PushModalAsync(new FutureAppointmentForum(appointment));
         }
 
         private void appointmentSelected(object sender, SelectedItemChangedEventArgs e)

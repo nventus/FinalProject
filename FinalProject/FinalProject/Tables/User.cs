@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using FinalProject.Tables;
+using SQLite;
 using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
@@ -6,63 +7,62 @@ using System.Text;
 
 namespace FinalProject
 {
-    public class Appointment
+    public class User
     {
-        [PrimaryKey, AutoIncrement, NotNull]
-        public int aId
+        [PrimaryKey, AutoIncrement]
+        public int Id
         {
             get;
             set;
         }
 
-        [NotNull]
-        public string aptDate
+        public string Name
         {
             get;
             set;
         }
 
-        public string followUpApt
+        public string Birthday
         {
             get;
             set;
         }
 
-        public string followUpAdvice
+        public string Email
         {
             get;
             set;
         }
-
-        public string prescriptions
+        public string Allergies
         {
             get;
             set;
         }
-
-        [ForeignKey(typeof(Doctor))]
-        public string DName
+        public string Conditions
         {
             get;
             set;
         }
-
-        [ForeignKey(typeof(User))]
-
-        public string uName
+        [ManyToMany(typeof(UsersDoctors))]
+        public List<Doctor> Doctors
         {
             get;
             set;
         }
-
-        [ManyToOne]
-        public Doctor Doctor
+        [OneToMany]
+        public List<Appointment> Appointments
         {
             get;
             set;
         }
-        [ManyToOne]
-        public User User
+        [OneToMany]
+        public List<Prescription> Prescriptions
+        {
+            get;
+            set;
+        }
+        [OneToMany]
+        public List<Vaccine> Vaccines
         {
             get;
             set;

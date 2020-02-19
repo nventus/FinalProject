@@ -4,20 +4,13 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="FinalProject.AppointmentList">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Log Appointment"
-                     Clicked="newAppointmentClicked"/>
-        <ToolbarItem Text="Future Appointment"
-                     Clicked="futureAppointmentClicked"/>
-    </ContentPage.ToolbarItems>
+             x:Class="FinalProject.ScriptList">
     <ContentPage.Content>
-        <ListView x:Name="appointmentListView" 
-                  ItemSelected="appointmentSelected">
+        <ListView x:Name="RxListView" 
+                  ItemSelected="RxSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding aptDate}"
-                              Detail="{Binding reasonForVisit}"
+                    <TextCell Text="{Binding RxName}"
                               TextColor="Aqua"/>
                 </DataTemplate>
             </ListView.ItemTemplate>

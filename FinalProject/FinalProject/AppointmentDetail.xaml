@@ -5,27 +5,33 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="FinalProject.AppointmentDetail">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Edit Appointment"
+                     Clicked="editAppointmentClicked"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Appointment Date:" 
+            <Label x:Name="AppointmentDateLabel"
+                Text="Appointment Date:" 
                FontSize="Large"/>
             <Label 
                 x:Name="AppointmentDate"
                 FontSize="Large"/>
-            <Label Text="Follow-Up Date:" 
-               FontSize="Large" />
-            <Label
-                x:Name="FollowUpDate"
-                FontSize="Large"/>
-            <Label Text="Follow-Up Recommendations From Doctor:" 
-               FontSize="Large" />
+            <Label x:Name="ReasonLabel" 
+                   Text="Reason For Visit:"
+                   FontSize="Large"/>
+            <Label x:Name="Reason"
+                   FontSize="Large"/>
+            <Label x:Name="DiagnosisLabel" 
+                   Text="Diagnosis:"
+                   FontSize="Large"/>
+            <Label x:Name="Diagnosis"
+                   FontSize="Large"/>
+            <Label x:Name="FollowUpRecsLabel"
+                   Text="Aftercare:" 
+                   FontSize="Large" />
             <Label
                 x:Name="FollowUpRecs"
-                FontSize="Large"/>
-            <Label Text="Prescriptions:" 
-               FontSize="Large" />
-            <Label
-                x:Name="Prescription"
                 FontSize="Large"/>
         </StackLayout>
     </ContentPage.Content>
