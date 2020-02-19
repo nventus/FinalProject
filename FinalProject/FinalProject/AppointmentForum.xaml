@@ -19,21 +19,36 @@
                        />
                 <TimePicker 
                     x:Name="AppointmentTimeEntry"/>
-                <Label Text="Follow-Up Date:" 
+                <Label Text="Reason For Visit:"
+                       FontSize="Large"/>
+                <Editor x:Name="Reason"
+                    Text=""/>
+                <Label Text="Diagnosis:"
+                    FontSize="Large"/>
+                <Editor x:Name="Diagnosis"
+                        Text=""/>
+                <Label Text="Aftercare:" 
+                   FontSize="Large" />
+                <Editor Text=""
+                    x:Name="FollowUpRecsEntry"/>
+                <Label Text="Did You Schedule A Follow-Up Appointment?"
+                       FontSize="Large"/>
+                <Switch IsToggled="false" 
+                        x:Name="togSwitch6"
+                        Toggled="OnToggle6"/>
+                <Label x:Name="FollowUpDateLabel"
+                    Text="Follow-Up Date:" 
                    FontSize="Large" />
                 <DatePicker
                     x:Name="FollowUpDateEntry"
                     Date="02/06/2020"
                     Format="d"/>
-                <Label Text="Follow-Up Appointment Time:"
-                       FontSize="Large"
+                <Label x:Name="FollowUpTimeLabel"
+                    Text="Follow-Up Appointment Time:"
+                    FontSize="Large"
                        />
                 <TimePicker 
                     x:Name="FollowUpTimeEntry"/>
-                <Label Text="Follow-Up Recommendations From Doctor:" 
-                   FontSize="Large" />
-                <Editor Text=""
-                    x:Name="FollowUpRecsEntry"/>
                 <Label Text="Did You Receive Any Medication?"
                        FontSize="Large"/>
                 <Switch IsToggled="false" 

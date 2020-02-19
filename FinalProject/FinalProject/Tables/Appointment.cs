@@ -22,13 +22,18 @@ namespace FinalProject
             set;
         }
 
-        public DateTime followUpApt
+        public string followUpAdvice
+        {
+            get;
+            set;
+        }
+        public string reasonForVisit
         {
             get;
             set;
         }
 
-        public string followUpAdvice
+        public string diagnosis
         {
             get;
             set;

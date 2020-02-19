@@ -16,12 +16,17 @@ namespace FinalProject
     {
         Doctor doctor;
         User user;
-        bool t0, t1, t2, t3, t4, t5, p0renew, p1renew, p2renew = false;
-        public AppointmentForum(Doctor doc, User usr)
+        bool t0, t1, t2, t3, t4, t5, t6, p0renew, p1renew, p2renew = false;
+        public AppointmentForum(Appointment appointment)
         {
             InitializeComponent();
-            doctor = doc;
-            user = usr;
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
+            {
+                var users = conn.Query<User>("select * from User where Id=?", appointment.uId);
+                user = users[0];
+                var doctors = conn.Query<Doctor>("select * from Doctor where Id=?", appointment.dId);
+                doctor = doctors[0];
+            }
             Rx0EndDate.IsVisible = false;
             Rx0EndLabel.IsVisible = false;
             Rx0Label.IsVisible = false;
@@ -54,6 +59,10 @@ namespace FinalProject
             Vaccine2More.IsVisible = false;
             Vaccine2Name.IsVisible = false;
             togSwitch5.IsVisible = false;
+            FollowUpDateEntry.IsVisible = false;
+            FollowUpTimeEntry.IsVisible = false;
+            FollowUpDateLabel.IsVisible = false;
+            FollowUpTimeLabel.IsVisible = false;
         }
 
         async void ButtonClicked(object sender, EventArgs e)
@@ -62,7 +71,8 @@ namespace FinalProject
             Appointment appointment = new Appointment()
             {
                 aptDate = AppointmentDateEntry.Date.Add(AppointmentTimeEntry.Time),
-                followUpApt = FollowUpDateEntry.Date.Add(FollowUpTimeEntry.Time),
+                reasonForVisit = Reason.Text,
+                diagnosis = Diagnosis.Text,
                 followUpAdvice = FollowUpRecsEntry.Text,
                 dId = doctor.Id,
                 uId = user.Id
@@ -116,6 +126,13 @@ namespace FinalProject
             {
                 VaccineName = Vaccine2Name.Text,
                 Date = AppointmentDateEntry.Date.ToString(),
+                dId = doctor.Id,
+                uId = user.Id
+            };
+            //Creates a future appointment for the user
+            Appointment fa = new Appointment()
+            {
+                aptDate = FollowUpDateEntry.Date.Add(AppointmentTimeEntry.Time),
                 dId = doctor.Id,
                 uId = user.Id
             };
@@ -348,6 +365,26 @@ namespace FinalProject
                     };
                 }
             }
+            if (t6)
+            {
+                using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
+                {
+                    conn.CreateTable<Appointment>();
+                    conn.Insert(fa);
+                }
+
+                if (user.Appointments != null)
+                {
+                    user.Appointments.Add(fa);
+                }
+                else
+                {
+                    user.Appointments = new List<Appointment>
+                    {
+                        fa
+                    };
+                }
+            }
             //Adds the appointment to the database
             //updates the user with its new appointment info
             //Updates the doctor with its new appointment info
@@ -401,6 +438,8 @@ namespace FinalProject
                 Rx2Name.IsVisible = false;
                 Rx2StartDate.IsVisible = false;
                 Rx2StartLabel.IsVisible = false;
+                t1 = false;
+                t2 = false;
             }
         }
         private void OnToggle1(object sender, ToggledEventArgs e)
@@ -433,6 +472,7 @@ namespace FinalProject
                 Rx2Name.IsVisible = false;
                 Rx2StartDate.IsVisible = false;
                 Rx2StartLabel.IsVisible = false;
+                t2 = false;
             }
         }
         private void OnToggle2(object sender, ToggledEventArgs e)
@@ -485,6 +525,8 @@ namespace FinalProject
                 Vaccine2Label.IsVisible = false;
                 Vaccine2More.IsVisible = false;
                 Vaccine2Name.IsVisible = false;
+                t4 = false;
+                t5 = false;
             }
         }
 
@@ -506,6 +548,7 @@ namespace FinalProject
                 togSwitch5.IsVisible = false;
                 Vaccine2Label.IsVisible = false;
                 Vaccine2Name.IsVisible = false;
+                t5 = false;
             }
         }
 
@@ -522,6 +565,25 @@ namespace FinalProject
             {
                 Vaccine2Label.IsVisible = false;
                 Vaccine2Name.IsVisible = false;
+            }
+        }
+        private void OnToggle6(object sender, EventArgs e)
+        {
+            t6 = !t6;
+
+            if (t6)
+            {
+                FollowUpDateEntry.IsVisible = true;
+                FollowUpDateLabel.IsVisible = true;
+                FollowUpTimeEntry.IsVisible = true;
+                FollowUpTimeLabel.IsVisible = true;
+            }
+            else
+            {
+                FollowUpDateEntry.IsVisible = false;
+                FollowUpTimeEntry.IsVisible = false;
+                FollowUpDateLabel.IsVisible = false;
+                FollowUpTimeLabel.IsVisible = false;
             }
         }
     }

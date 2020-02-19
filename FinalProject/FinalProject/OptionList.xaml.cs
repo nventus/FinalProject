@@ -28,5 +28,10 @@ namespace FinalProject
         {
             Navigation.PushAsync(new ScriptList(uid));
         }
+
+        private void VaccineClicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new VaccineList(uid));
+        }
     }
 }
