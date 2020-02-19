@@ -372,7 +372,7 @@ namespace FinalProject
                 Rx0EndLabel.IsVisible = true;
                 Rx0Label.IsVisible = true;
                 Rx0Name.IsVisible = true;
-                Rx0StartDate.IsVisible = true;
+                Rx0StartDate.IsVisible = true; 
                 Rx0StartLabel.IsVisible = true;
                 Rx0More.IsVisible = true;
                 togSwitch1.IsVisible = true;
