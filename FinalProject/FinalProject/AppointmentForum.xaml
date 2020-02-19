@@ -102,6 +102,39 @@
                 <DatePicker x:Name="Rx2EndDate"
                 Date="02/06/2020"
                 Format="d"/>
+                <Label x:Name="Vaccine0More"
+                       FontSize="Large"
+                       Text="Did You Receive Any Vaccinations?"/>
+                <Switch IsToggled="false" 
+                        x:Name="togSwitch3"
+                        Toggled="OnToggle3"/>
+                <Label x:Name="Vaccine0Label"
+                    Text="Vaccine Name:" 
+                   FontSize="Large" />
+                <Editor Text=""
+                        x:Name="Vaccine0Name"/>
+                <Label x:Name="Vaccine1More"
+                       FontSize="Large"
+                       Text="Did You Receive Any More Vaccinations?"/>
+                <Switch IsToggled="false" 
+                        x:Name="togSwitch4"
+                        Toggled="OnToggle4"/>
+                <Label x:Name="Vaccine1Label"
+                    Text="Vaccine Name:" 
+                   FontSize="Large" />
+                <Editor Text=""
+                        x:Name="Vaccine1Name"/>
+                <Label x:Name="Vaccine2More"
+                       FontSize="Large"
+                       Text="Did You Receive Any More Vaccinations?"/>
+                <Switch IsToggled="false" 
+                        x:Name="togSwitch5"
+                        Toggled="OnToggle5"/>
+                <Label x:Name="Vaccine2Label"
+                    Text="Vaccine Name:" 
+                   FontSize="Large" />
+                <Editor Text=""
+                        x:Name="Vaccine2Name"/>
                 <Button x:Name="SubmitButton" Text = "Submit" FontSize="Large" HorizontalOptions="Center"
                     VerticalOptions="Fill" Clicked="ButtonClicked" />
             </StackLayout>

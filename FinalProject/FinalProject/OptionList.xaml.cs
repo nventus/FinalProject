@@ -24,9 +24,9 @@ namespace FinalProject
             Navigation.PushAsync(new DoctorList(uid));
         }
 
-        async void RxClicked(object sender, EventArgs e)
+        private void RxClicked(object sender, EventArgs e)
         {
-
+            Navigation.PushAsync(new ScriptList(uid));
         }
     }
 }

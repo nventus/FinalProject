@@ -1,4 +1,5 @@
-﻿using SQLiteNetExtensions.Extensions;
+﻿using FinalProject.Tables;
+using SQLiteNetExtensions.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace FinalProject
     {
         Doctor doctor;
         User user;
-        bool t0, t1, t2, p0renew, p1renew, p2renew = false;
+        bool t0, t1, t2, t3, t4, t5, p0renew, p1renew, p2renew = false;
         public AppointmentForum(Doctor doc, User usr)
         {
             InitializeComponent();
@@ -43,6 +44,16 @@ namespace FinalProject
             Rx2Name.IsVisible = false;
             Rx2StartDate.IsVisible = false;
             Rx2StartLabel.IsVisible = false;
+            Vaccine0Label.IsVisible = false;
+            Vaccine0Name.IsVisible = false;
+            Vaccine1Label.IsVisible = false;
+            Vaccine1More.IsVisible = false;
+            Vaccine1Name.IsVisible = false;
+            togSwitch4.IsVisible = false;
+            Vaccine2Label.IsVisible = false;
+            Vaccine2More.IsVisible = false;
+            Vaccine2Name.IsVisible = false;
+            togSwitch5.IsVisible = false;
         }
 
         async void ButtonClicked(object sender, EventArgs e)
@@ -61,7 +72,7 @@ namespace FinalProject
             {
                 RxName = Rx0Name.Text,
                 startDate = Rx0StartDate.Date.ToString(),
-                endDate = Rx0EndDate.ToString(),
+                endDate = Rx0EndDate.Date.ToString(),
                 dId = doctor.Id,
                 uId = user.Id
             };
@@ -70,7 +81,7 @@ namespace FinalProject
             {
                 RxName = Rx1Name.Text,
                 startDate = Rx1StartDate.Date.ToString(),
-                endDate = Rx1EndDate.ToString(),
+                endDate = Rx1EndDate.Date.ToString(),
                 dId = doctor.Id,
                 uId = user.Id
             };
@@ -79,7 +90,32 @@ namespace FinalProject
             {
                 RxName = Rx2Name.Text,
                 startDate = Rx2StartDate.Date.ToString(),
-                endDate = Rx2EndDate.ToString(),
+                endDate = Rx2EndDate.Date.ToString(),
+                dId = doctor.Id,
+                uId = user.Id
+            };
+
+            //Creates the vaccine 0 item to be inserted in the database
+            Vaccine v0 = new Vaccine()
+            {
+                VaccineName = Vaccine0Name.Text,
+                Date = AppointmentDateEntry.Date.ToString(),
+                dId = doctor.Id,
+                uId = user.Id
+            };
+            //Creates the vaccine 1 item to be inserted in the database
+            Vaccine v1 = new Vaccine()
+            {
+                VaccineName = Vaccine1Name.Text,
+                Date = AppointmentDateEntry.Date.ToString(),
+                dId = doctor.Id,
+                uId = user.Id
+            };
+            //Creates the vaccine 2 item to be inserted in the database
+            Vaccine v2 = new Vaccine()
+            {
+                VaccineName = Vaccine2Name.Text,
+                Date = AppointmentDateEntry.Date.ToString(),
                 dId = doctor.Id,
                 uId = user.Id
             };
@@ -249,6 +285,69 @@ namespace FinalProject
                     doctor.Prescriptions.Add(p2);
                 }
             }
+            if (!(v0.VaccineName.Equals("")))
+            {
+                using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
+                {
+                    //Ignored if the table already exists
+                    conn.CreateTable<Vaccine>();
+                    conn.Insert(v0);
+                }
+
+                if (user.Vaccines != null)
+                {
+                    user.Vaccines.Add(v0);
+                }
+                else
+                {
+                    user.Vaccines = new List<Vaccine>
+                    {
+                        v0
+                    };
+                }
+            }
+            if (!(v1.VaccineName.Equals("")))
+            {
+                using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
+                {
+                    //Ignored if the table already exists
+                    conn.CreateTable<Vaccine>();
+                    conn.Insert(v1);
+                }
+
+                if (user.Vaccines != null)
+                {
+                    user.Vaccines.Add(v1);
+                }
+                else
+                {
+                    user.Vaccines = new List<Vaccine>
+                    {
+                        v1
+                    };
+                }
+            }
+            if (!(v2.VaccineName.Equals("")))
+            {
+                using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
+                {
+                    //Ignored if the table already exists
+                    conn.CreateTable<Vaccine>();
+                    conn.Insert(v2);
+                }
+
+                if (user.Vaccines != null)
+                {
+                    user.Vaccines.Add(v2);
+                }
+                else
+                {
+                    user.Vaccines = new List<Vaccine>
+                    {
+                        v2
+                    };
+                }
+            }
             //Adds the appointment to the database
             //updates the user with its new appointment info
             //Updates the doctor with its new appointment info
@@ -356,6 +455,73 @@ namespace FinalProject
                 Rx2Name.IsVisible = false;
                 Rx2StartDate.IsVisible = false;
                 Rx2StartLabel.IsVisible = false;
+            }
+        }
+
+
+
+
+
+        private void OnToggle3(object sender, EventArgs e)
+        {
+            t3 = !t3;
+
+            if(t3)
+            {
+                Vaccine0Label.IsVisible = true;
+                Vaccine1More.IsVisible = true;
+                Vaccine0Name.IsVisible = true;
+                togSwitch4.IsVisible = true;
+            }
+            else
+            {
+                Vaccine0Label.IsVisible = false;
+                Vaccine0Name.IsVisible = false;
+                togSwitch4.IsVisible = false;
+                Vaccine1Label.IsVisible = false;
+                Vaccine1More.IsVisible = false;
+                Vaccine1Name.IsVisible = false;
+                togSwitch5.IsVisible = false;
+                Vaccine2Label.IsVisible = false;
+                Vaccine2More.IsVisible = false;
+                Vaccine2Name.IsVisible = false;
+            }
+        }
+
+        private void OnToggle4(object sender, EventArgs e)
+        {
+            t4 = !t4;
+            if (t4)
+            {
+                Vaccine1Label.IsVisible = true;
+                Vaccine2More.IsVisible = true;
+                Vaccine1Name.IsVisible = true;
+                togSwitch5.IsVisible = true;
+            }
+            else
+            {
+                Vaccine1Label.IsVisible = false;
+                Vaccine2More.IsVisible = false;
+                Vaccine1Name.IsVisible = false;
+                togSwitch5.IsVisible = false;
+                Vaccine2Label.IsVisible = false;
+                Vaccine2Name.IsVisible = false;
+            }
+        }
+
+        private void OnToggle5(object sender, EventArgs e)
+        {
+            t5 = !t5;
+
+            if (t5)
+            {
+                Vaccine2Label.IsVisible = true;
+                Vaccine2Name.IsVisible = true;
+            }
+            else
+            {
+                Vaccine2Label.IsVisible = false;
+                Vaccine2Name.IsVisible = false;
             }
         }
     }

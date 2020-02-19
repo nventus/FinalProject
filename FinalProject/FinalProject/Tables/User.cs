@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using FinalProject.Tables;
+using SQLite;
 using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
@@ -56,6 +57,12 @@ namespace FinalProject
         }
         [OneToMany]
         public List<Prescription> Prescriptions
+        {
+            get;
+            set;
+        }
+        [OneToMany]
+        public List<Vaccine> Vaccines
         {
             get;
             set;

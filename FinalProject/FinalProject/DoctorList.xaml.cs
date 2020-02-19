@@ -1,4 +1,5 @@
-﻿using SQLiteNetExtensions.Extensions;
+﻿using FinalProject.Tables;
+using SQLiteNetExtensions.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,7 @@ namespace FinalProject
                 //Ignored if the table already exists
                 conn.CreateTable<Doctor>();
                 conn.CreateTable<UsersDoctors>();
+                conn.CreateTable<Vaccine>();
                 user = conn.GetWithChildren<User>(uid);
             }
             doctorListView.ItemsSource = user.Doctors;
@@ -46,5 +48,6 @@ namespace FinalProject
             Doctor selectedDoctor = e.SelectedItem as Doctor;
             Navigation.PushAsync(new AppointmentList(selectedDoctor, user));
         }
+
     }
 }
