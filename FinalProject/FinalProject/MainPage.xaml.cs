@@ -15,6 +15,7 @@ namespace FinalProject
     {
         public MainPage()
         {
+            NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
         }
 
@@ -42,7 +43,7 @@ namespace FinalProject
         private void UserSelected(object sender, SelectedItemChangedEventArgs e)
         {
             User selectedUser = e.SelectedItem as User;
-            Navigation.PushModalAsync(new NavigationPage(new OptionList(selectedUser.Id)));
+            Navigation.PushAsync(new OptionList(selectedUser.Id));
         }
     }
 }

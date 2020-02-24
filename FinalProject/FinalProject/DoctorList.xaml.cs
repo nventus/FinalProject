@@ -39,7 +39,7 @@ namespace FinalProject
         //Brings the user to the new doctor forum
         private void newDoctorClicked(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new DoctorForums(user));
+            Navigation.PushAsync(new DoctorForums(user));
         }
 
         //Sends the user to the appointment listings, with the chosen doctor's name as a parameter

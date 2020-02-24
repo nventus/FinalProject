@@ -11,7 +11,7 @@ namespace FinalProject
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new FinalProject.MainPage());
             FilePath = filePath;
         }
 

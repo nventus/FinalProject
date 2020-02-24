@@ -93,7 +93,7 @@ namespace FinalProject
                         doc.Users.Add(user);
                         conn.UpdateWithChildren(doc);
                     }
-                    await Navigation.PopModalAsync();
+                    await Navigation.PopAsync();
                 }
                 else
                 {
@@ -123,7 +123,7 @@ namespace FinalProject
                         conn.Insert(doctor);
                         conn.UpdateWithChildren(doctor);
                     }
-                    await Navigation.PopModalAsync();
+                    await Navigation.PopAsync();
                 }
             }
         }
