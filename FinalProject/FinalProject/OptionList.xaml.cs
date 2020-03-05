@@ -33,5 +33,22 @@ namespace FinalProject
         {
             Navigation.PushAsync(new VaccineList(uid));
         }
+
+        private void AllergyClicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new AllergyList(uid));
+        }
+        private void accountInfoClicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new ProfileInfo(uid));
+        }
+        private void ConditionClicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new ConditionList(uid));
+        }
+        private void CalendarClicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new Calendar(uid));
+        }
     }
 }

@@ -6,12 +6,21 @@
              mc:Ignorable="d"
              x:Class="FinalProject.ScriptList">
     <ContentPage.Content>
-        <ListView x:Name="RxListView" 
+        <ListView x:Name="RxListView"
                   ItemSelected="RxSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding RxName}"
-                              TextColor="Aqua"/>
+                    <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Clicked="OnEdit"
+                                  CommandParameter="{Binding Id}"
+                             Text="Edit" IsDestructive="True" />
+                        </ViewCell.ContextActions>
+                        <StackLayout Padding="15,0">
+                            <Label Text="{Binding RxName}"/>
+                            <Label Text="{Binding endDate}"/>
+                        </StackLayout>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

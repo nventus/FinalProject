@@ -4,25 +4,15 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="FinalProject.UserForums">
+             x:Class="FinalProject.AllergyForums">
     <ContentPage.Content>
         <StackLayout>
             <!-- Place new controls here -->
-            <Label Text="Your Name:" 
+            <Label Text="Allergy Name:" 
                FontSize="Large" />
             <Editor Text=""
-                x:Name="nameEntry"/>
-            <Label Text="Birthday:" 
-               FontSize="Large"/>
-            <DatePicker 
-            x:Name="bdayPick"
-            Date="02/06/2020"
-            Format="d"/>
-            <Label Text="Email:" 
-               FontSize="Large" />
-            <Editor Text="" 
-                x:Name="emailEntry"/>
-            <Button x:Name="uForumSubmit" Text = "Submit" FontSize="Large" HorizontalOptions="Center"
+                x:Name="NameEntry"/>
+            <Button x:Name="SubmitButton" Text = "Submit" FontSize="Large" HorizontalOptions="Center"
                     VerticalOptions="Fill" Clicked="ButtonClicked" />
         </StackLayout>
     </ContentPage.Content>
