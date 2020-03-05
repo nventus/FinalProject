@@ -22,10 +22,10 @@ namespace FinalProject
             InitializeComponent();
             using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
             {
-                var users = conn.Query<User>("select * from User where Id=?", appointment.uId);
-                user = users[0];
-                var doctors = conn.Query<Doctor>("select * from Doctor where Id=?", appointment.dId);
-                doctor = doctors[0];
+                user = conn.GetWithChildren<User>(appointment.uId);
+                doctor = conn.GetWithChildren<Doctor>(appointment.dId);
+                //var doctors = conn.Query<Doctor>("select * from Doctor where Id=?", appointment.dId);
+                //doctor = doctors[0];
             }
             Rx0EndDate.IsVisible = false;
             Rx0EndLabel.IsVisible = false;
@@ -81,8 +81,8 @@ namespace FinalProject
             Prescription p0 = new Prescription()
             {
                 RxName = Rx0Name.Text,
-                startDate = Rx0StartDate.Date.ToString(),
-                endDate = Rx0EndDate.Date.ToString(),
+                startDate = Rx0StartDate.Date.ToShortDateString(),
+                endDate = Rx0EndDate.Date.ToShortDateString(),
                 dId = doctor.Id,
                 uId = user.Id
             };
@@ -90,8 +90,8 @@ namespace FinalProject
             Prescription p1 = new Prescription()
             {
                 RxName = Rx1Name.Text,
-                startDate = Rx1StartDate.Date.ToString(),
-                endDate = Rx1EndDate.Date.ToString(),
+                startDate = Rx1StartDate.Date.ToShortDateString(),
+                endDate = Rx1EndDate.Date.ToShortDateString(),
                 dId = doctor.Id,
                 uId = user.Id
             };
@@ -99,8 +99,8 @@ namespace FinalProject
             Prescription p2 = new Prescription()
             {
                 RxName = Rx2Name.Text,
-                startDate = Rx2StartDate.Date.ToString(),
-                endDate = Rx2EndDate.Date.ToString(),
+                startDate = Rx2StartDate.Date.ToShortDateString(),
+                endDate = Rx2EndDate.Date.ToShortDateString(),
                 dId = doctor.Id,
                 uId = user.Id
             };
@@ -109,7 +109,7 @@ namespace FinalProject
             Vaccine v0 = new Vaccine()
             {
                 VaccineName = Vaccine0Name.Text,
-                Date = AppointmentDateEntry.Date.ToString(),
+                Date = AppointmentDateEntry.Date.ToShortDateString(),
                 dId = doctor.Id,
                 uId = user.Id
             };
@@ -117,7 +117,7 @@ namespace FinalProject
             Vaccine v1 = new Vaccine()
             {
                 VaccineName = Vaccine1Name.Text,
-                Date = AppointmentDateEntry.Date.ToString(),
+                Date = AppointmentDateEntry.Date.ToShortDateString(),
                 dId = doctor.Id,
                 uId = user.Id
             };
@@ -125,7 +125,7 @@ namespace FinalProject
             Vaccine v2 = new Vaccine()
             {
                 VaccineName = Vaccine2Name.Text,
-                Date = AppointmentDateEntry.Date.ToString(),
+                Date = AppointmentDateEntry.Date.ToShortDateString(),
                 dId = doctor.Id,
                 uId = user.Id
             };

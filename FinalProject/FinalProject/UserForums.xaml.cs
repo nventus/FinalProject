@@ -21,10 +21,8 @@ namespace FinalProject
             User user = new User()
             {
                 Name = nameEntry.Text,
-                Birthday = (bdayPick.Date).ToString(),
-                Email = emailEntry.Text,
-                Allergies = allergyEntry.Text,
-                Conditions = conditionEntry.Text
+                Birthday = (bdayPick.Date).ToShortDateString(),
+                Email = emailEntry.Text
             };
 
             if (user.Name == "")

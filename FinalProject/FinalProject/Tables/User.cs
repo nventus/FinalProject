@@ -33,16 +33,6 @@ namespace FinalProject
             get;
             set;
         }
-        public string Allergies
-        {
-            get;
-            set;
-        }
-        public string Conditions
-        {
-            get;
-            set;
-        }
         [ManyToMany(typeof(UsersDoctors))]
         public List<Doctor> Doctors
         {
@@ -63,6 +53,18 @@ namespace FinalProject
         }
         [OneToMany]
         public List<Vaccine> Vaccines
+        {
+            get;
+            set;
+        }
+        [ManyToMany(typeof(UsersAllergies))]
+        public List<Allergy> Allergies
+        {
+            get;
+            set;
+        }
+        [ManyToMany(typeof(UsersConditions))]
+        public List<Conditions> Conditions
         {
             get;
             set;
