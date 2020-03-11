@@ -5,10 +5,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="FinalProject.AppointmentDetail">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Edit Appointment"
-                     Clicked="editAppointmentClicked"/>
-    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <Label x:Name="AppointmentDateLabel"

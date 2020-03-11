@@ -137,6 +137,19 @@ namespace FinalProject
                 uId = user.Id
             };
 
+            if (appointment.reasonForVisit == null)
+            {
+                appointment.reasonForVisit = " ";
+            }
+            if (appointment.diagnosis == null)
+            {
+                appointment.diagnosis = " ";
+            }
+
+            fa.reasonForVisit = " ";
+            
+            fa.diagnosis = " ";
+            
             //Adds the appointment to the user's appointment list
             if (user.Appointments == null)
             {

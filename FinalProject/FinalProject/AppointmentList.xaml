@@ -11,16 +11,35 @@
         <ToolbarItem Text="Future Appointment"
                      Clicked="futureAppointmentClicked"/>
     </ContentPage.ToolbarItems>
-    <ContentPage.Content>
-        <ListView x:Name="appointmentListView" 
+    <ScrollView>
+        <StackLayout>
+            <SearchBar x:Name="search"
+                   TextChanged="OnSearch"/>
+            <ListView x:Name="appointmentListView" 
                   ItemSelected="appointmentSelected">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell Text="{Binding aptDate}"
-                              Detail="{Binding reasonForVisit}"
-                              TextColor="Aqua"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </ContentPage.Content>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem
+                                    Clicked="OnEdit"
+                                    CommandParameter="{Binding Id}"
+                                    Text="Edit"/>
+                                <MenuItem
+                                    Clicked="OnDelete"
+                                    CommandParameter="{Binding Id}"
+                                    Text="Delete"/>
+                            </ViewCell.ContextActions>
+                            <StackLayout>
+                                <Label Text="{Binding aptDate}"
+                                       TextColor="Aqua"/>
+                                <Label Text="{Binding reasonForVisit}"
+                                       TextColor="Aqua"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

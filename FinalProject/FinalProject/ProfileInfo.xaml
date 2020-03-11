@@ -6,37 +6,39 @@
              mc:Ignorable="d"
              x:Class="FinalProject.ProfileInfo">
     <ContentPage.Content>
-        <StackLayout>
-            <!-- Place new controls here -->
-            <Label 
+        <ScrollView>
+            <StackLayout>
+                <!-- Place new controls here -->
+                <Label 
                 Text="Your Name:" 
                 FontSize="Large" />
-            <Label 
+                <Label 
                 FontSize="Large"
                 x:Name="Name"/>
-            <Label Text="Birthday:" 
+                <Label Text="Birthday:" 
                 FontSize="Large"/>
-            <Label 
+                <Label 
                 x:Name="Bday"
                 FontSize="Large"/>
-            <Label 
+                <Label 
                 Text="Email:" 
                 FontSize="Large" />
-            <Label 
+                <Label 
                 FontSize="Large"
                 x:Name="Email"/>
-            <Label
+                <Label
                 Text="Conditions:"
                 FontSize="Large" />
-            <Label 
+                <Label 
                 FontSize="Large"
                 x:Name="Conditions"/>
-            <Label 
+                <Label 
                 Text="Allergies"
                 FontSize="Large"/>
-            <Label
+                <Label
                 FontSize="Large"
                 x:Name="Allergies"/>
-        </StackLayout>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

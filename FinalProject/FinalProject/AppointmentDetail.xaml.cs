@@ -34,17 +34,5 @@ namespace FinalProject
             Reason.Text = viewedAppt.reasonForVisit;
             Diagnosis.Text = viewedAppt.diagnosis;
         }
-
-        private void editAppointmentClicked(object sender, EventArgs e)
-        {
-            if (viewedAppt.aptDate > DateTime.Now)
-            {
-                Navigation.PushModalAsync(new FutureAppointmentForum(viewedAppt));
-            }
-            else
-            {
-                Navigation.PushModalAsync(new EditAppointment(viewedAppt));
-            }
-        }
     }
 }

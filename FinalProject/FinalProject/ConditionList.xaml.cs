@@ -16,6 +16,10 @@ namespace FinalProject
     {
         int uid;
         User user;
+        List<Conditions> conditions = new List<Conditions>
+        {
+
+        };
         public ConditionList(int id)
         {
             InitializeComponent();
@@ -24,6 +28,12 @@ namespace FinalProject
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            SearchBar searchBar = new SearchBar
+            {
+                Text = "",
+                VerticalOptions = LayoutOptions.FillAndExpand,
+                FontSize = 25
+            };
             using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
             {
                 conn.CreateTable<User>();
@@ -40,7 +50,7 @@ namespace FinalProject
             Conditions al;
             if (user.Conditions.Count > 0)
             {
-                List<Conditions> conditions = user.Conditions;
+                conditions = user.Conditions;
                 for (int i = 0; i < conditions.Count - 1; i++)
                 {
                     for (int j = 0; j < conditions.Count - i - 1; j++)
@@ -86,6 +96,11 @@ namespace FinalProject
                 conn.UpdateWithChildren(user);
             }
             OnAppearing();
+        }
+        private void OnSearch(object sender, EventArgs e)
+        {
+            SearchBar searchBar = (SearchBar)sender;
+            conditionListView.ItemsSource = conditions.Where(condition => condition.Type.ToUpper().Contains(searchBar.Text.ToUpper()));
         }
     }
 }
