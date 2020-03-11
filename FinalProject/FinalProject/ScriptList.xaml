@@ -6,23 +6,29 @@
              mc:Ignorable="d"
              x:Class="FinalProject.ScriptList">
     <ContentPage.Content>
-        <ListView x:Name="RxListView"
+        <ScrollView>
+            <StackLayout>
+                <SearchBar x:Name="search"
+                   TextChanged="OnSearch"/>
+                <ListView x:Name="RxListView"
                   ItemSelected="RxSelected">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <ViewCell.ContextActions>
-                            <MenuItem Clicked="OnEdit"
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.ContextActions>
+                                    <MenuItem Clicked="OnEdit"
                                   CommandParameter="{Binding Id}"
                              Text="Edit" IsDestructive="True" />
-                        </ViewCell.ContextActions>
-                        <StackLayout Padding="15,0">
-                            <Label Text="{Binding RxName}"/>
-                            <Label Text="{Binding endDate}"/>
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                                </ViewCell.ContextActions>
+                                <StackLayout Padding="15,0">
+                                    <Label Text="{Binding RxName}"/>
+                                    <Label Text="{Binding endDate}"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

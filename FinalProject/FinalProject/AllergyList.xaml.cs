@@ -16,6 +16,10 @@ namespace FinalProject
     {
         User user;
         int uid;
+        List<Allergy> allergies = new List<Allergy>
+        {
+
+        };
         public AllergyList(int id)
         {
             InitializeComponent();
@@ -42,7 +46,7 @@ namespace FinalProject
             Allergy al;
             if (user.Allergies.Count > 0)
             {
-                List<Allergy> allergies = user.Allergies;
+                allergies = user.Allergies;
                 for (int i = 0; i < allergies.Count - 1; i++)
                 {
                     for (int j = 0; j < allergies.Count - i - 1; j++)
@@ -84,6 +88,11 @@ namespace FinalProject
                 conn.UpdateWithChildren(user);
             }
             OnAppearing();
+        }
+        private void OnSearch(object sender, EventArgs e)
+        {
+            SearchBar searchBar = (SearchBar)sender;
+            allergyListView.ItemsSource = allergies.Where(allergy => allergy.Type.ToUpper().Contains(searchBar.Text.ToUpper()));
         }
     }
 }

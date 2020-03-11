@@ -6,15 +6,21 @@
              mc:Ignorable="d"
              x:Class="FinalProject.VaccineList">
     <ContentPage.Content>
-        <ListView x:Name="VaccineListView" 
+        <ScrollView>
+            <StackLayout>
+                <SearchBar x:Name="search"
+                   TextChanged="OnSearch"/>
+                <ListView x:Name="VaccineListView" 
                   ItemSelected="vaccineSelected">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell Text="{Binding VaccineName}"
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding VaccineName}"
                               Detail="{Binding Date}"
                               TextColor="Aqua"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
