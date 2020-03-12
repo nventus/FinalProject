@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Plugin.LocalNotifications;
 
 namespace FinalProject
 {
@@ -24,12 +25,14 @@ namespace FinalProject
             {
                 AppointmentDateEntry.Date = DateTime.Now;
                 AppointmentTimeEntry.Time = DateTime.Now.TimeOfDay;
+                BeforeAppt.Time = DateTime.Now.TimeOfDay;
                 editing = false;
             }
             else
             {
                 AppointmentDateEntry.Date = appointment.aptDate;
                 AppointmentTimeEntry.Time = appointment.aptDate.TimeOfDay;
+                BeforeAppt.Time = DateTime.Now.TimeOfDay;
                 editing = true;
             }
         }
@@ -81,6 +84,10 @@ namespace FinalProject
                         conn.Update(user);
                         conn.Update(doctor);
                     }
+                    DateTime RemindTime = appointment.aptDate;
+                    RemindTime = RemindTime.Date + BeforeAppt.Time;
+                    CrossLocalNotifications.Current.Show("Appointment Reminder", "You have an appointment with Dr. " + doctor.dName + " at " + appointment.aptDate.ToShortTimeString(), appointment.Id, RemindTime);
+                    //Will have to call CrossLocalNotifications.Current.Cancel(appointment.Id); to remove reminder if we add the option to delete appointments.
                 }
                 else
                 {
