@@ -84,10 +84,17 @@ namespace FinalProject
                         conn.Update(user);
                         conn.Update(doctor);
                     }
+                    //DateTime is immutable, so we will create a new DateTime and set it's date to the current appointment date.
                     DateTime RemindTime = appointment.aptDate;
+
+                    //RemindTime will have the date of the appointment and the reminder time chosen in the BeforeAppt TimePicker.
                     RemindTime = RemindTime.Date + BeforeAppt.Time;
                     CrossLocalNotifications.Current.Show("Appointment Reminder", "You have an appointment with Dr. " + doctor.dName + " at " + appointment.aptDate.ToShortTimeString(), appointment.Id, RemindTime);
-                    //Will have to call CrossLocalNotifications.Current.Cancel(appointment.Id); to remove reminder if we add the option to delete appointments.
+                    /* 
+                     * Will have to call 
+                     * CrossLocalNotifications.Current.Cancel(appointment.Id);
+                     * to remove reminder if we add the option to delete appointments.
+                    */
                 }
                 else
                 {

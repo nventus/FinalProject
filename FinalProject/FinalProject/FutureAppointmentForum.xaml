@@ -20,6 +20,7 @@
             <Label Text="Reason For Visit"
                    FontSize="Large"/>
             <Entry x:Name="Reason"/>
+            <!-- Reminder controls -->
             <Label Text="Remind Me At"
                    FontSize="Large"/>
             <TimePicker 
