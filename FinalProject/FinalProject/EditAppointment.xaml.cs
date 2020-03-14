@@ -83,11 +83,6 @@ namespace FinalProject
                 {
                     doctor.Appointments.Add(appointment);
                 }
-                conn.Update(user);
-                conn.Update(doctor);
-                conn.Update(appointment);
-
-
                 //Delete the old reminder and create a new one with the new details
                 //Cancel the current reminder
                 CrossLocalNotifications.Current.Cancel(appointment.Id);
@@ -96,6 +91,16 @@ namespace FinalProject
                 DateTime RemindTime = appointment.aptDate;
                 RemindTime = RemindTime.Date + BeforeAppt.Time;
                 CrossLocalNotifications.Current.Show("Appointment Reminder", "You have an appointment with Dr. " + doctor.dName + " at " + appointment.aptDate.ToShortTimeString(), appointment.Id, RemindTime);
+
+                //Update the stored reminderTime in the DB
+                appointment.reminderTime = RemindTime;
+
+                conn.Update(user);
+                conn.Update(doctor);
+                conn.Update(appointment);
+
+
+
             }
             await Navigation.PopModalAsync();
         }
