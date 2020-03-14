@@ -39,22 +39,6 @@ namespace FinalProject
                 else
                 {
                     ListMenu.ItemsSource = users;
-
-                    //Have to resubmit notifications after device restart because they are not saved.
-                    var appts = conn.Table<Appointment>().ToList();
-                    if(appts?.Any() == true)
-                    {
-                        foreach(var x in appts)
-                        {
-                            DateTime remindTime = x.reminderTime;
-                            var doctor = conn.GetWithChildren<Doctor>(x.dId);
-
-                            if (remindTime > DateTime.Now)
-                            {
-                                CrossLocalNotifications.Current.Show("Appointment Reminder", "You have an appointment with Dr. " + doctor.dName + " at " + x.aptDate.ToShortTimeString(), x.Id, remindTime);
-                            }
-                        }
-                    }
                 }
             }
 

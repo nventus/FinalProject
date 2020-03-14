@@ -54,8 +54,8 @@ namespace FinalProject
             RemindTime = RemindTime.Date + BeforeAppt.Time;
             //Storing the reminderTime as part of the appointment entry in the database.
             //We will need to re-submit any pending notifications after device reboot.
-
             appointment.reminderTime = RemindTime;
+
             if (appointment.aptDate > DateTime.Now)
             {
                 using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
