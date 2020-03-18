@@ -19,7 +19,6 @@ namespace FinalProject
         private void newUserClicked(object sender, EventArgs e)
         {
             Navigation.PushModalAsync(new NavigationPage(new UserForums()));
-            
         }
     }
 }

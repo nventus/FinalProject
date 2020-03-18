@@ -22,14 +22,6 @@ namespace FinalProject
             set;
         }
 
-        //Need to save the time that the user wants to be reminded of their appointment
-        //This will be used to resubmit the notifications after device restart, because they are not saved otherwise.
-        public DateTime reminderTime
-        {
-            get;
-            set;
-        }
-
         public string followUpAdvice
         {
             get;
