@@ -1,4 +1,4 @@
-﻿using FinalProject.Misc;
+﻿//using FinalProject.Misc;  This was causing an error, so I commented it out - Pat
 using FinalProject.Tables;
 using SQLiteNetExtensions.Extensions;
 using System;

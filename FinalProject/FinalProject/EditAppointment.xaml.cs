@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Plugin.LocalNotifications;
 
 namespace FinalProject
 {
@@ -21,6 +22,7 @@ namespace FinalProject
             apt = appt;
             AppointmentDateEntry.Date = appt.aptDate;
             AppointmentTimeEntry.Time = appt.aptDate.TimeOfDay;
+            BeforeAppt.Time = appt.reminderTime.TimeOfDay;
             Reason.Text = appt.reasonForVisit;
             Diagnosis.Text = appt.diagnosis;
             FollowUpRecsEntry.Text = appt.followUpAdvice;
@@ -28,16 +30,24 @@ namespace FinalProject
 
         async void ButtonClicked(object sender, EventArgs e)
         {
-            appointment.aptDate = AppointmentDateEntry.Date.Add(AppointmentTimeEntry.Time);
+
+
+            appointment.aptDate = AppointmentDateEntry.Date + AppointmentTimeEntry.Time;
             appointment.reasonForVisit = Reason.Text;
             appointment.diagnosis = Diagnosis.Text;
             appointment.followUpAdvice = FollowUpRecsEntry.Text;
+            
+            
+            //Update the stored reminderTime in the DB
+            appointment.reminderTime = appointment.aptDate.Date + BeforeAppt.Time;
+
+            
 
             using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
             {
                 User user;
                 Doctor doctor;
-                user= conn.GetWithChildren<User>(appointment.uId);
+                user = conn.GetWithChildren<User>(appointment.uId);
                 for (int i = 0; i < user.Appointments.Count; i++)
                 {
                     if (user.Appointments[i].Id == appointment.Id)
@@ -81,9 +91,15 @@ namespace FinalProject
                 {
                     doctor.Appointments.Add(appointment);
                 }
+              
                 conn.Update(user);
                 conn.Update(doctor);
                 conn.Update(appointment);
+                //Cancel the existing reminder
+                CrossLocalNotifications.Current.Cancel(appointment.Id);
+                //Submit a new notification (this must be done after doctor is retrieved from DB.
+                CrossLocalNotifications.Current.Show("Appointment Reminder", "You have an appointment with Dr. " + doctor.dName + " at " + appointment.aptDate.ToShortTimeString(), appointment.Id, appointment.reminderTime);
+
             }
             await Navigation.PopModalAsync();
         }

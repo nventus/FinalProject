@@ -29,6 +29,12 @@
                    FontSize="Large" />
             <Editor Text=""
                     x:Name="FollowUpRecsEntry"/>
+            <!-- Reminder controls -->
+            <Label Text="Remind Me At"
+                   FontSize="Large"/>
+            <TimePicker 
+                x:Name="BeforeAppt" />
+            <!-- End reminder controls-->
             <Button x:Name="SubmitButton" Text = "Submit" FontSize="Large" HorizontalOptions="Center"
                     VerticalOptions="Fill" Clicked="ButtonClicked" />
         </StackLayout>

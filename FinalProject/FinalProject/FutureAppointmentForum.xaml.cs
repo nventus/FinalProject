@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Plugin.LocalNotifications;
 
 namespace FinalProject
 {
@@ -24,12 +25,14 @@ namespace FinalProject
             {
                 AppointmentDateEntry.Date = DateTime.Now;
                 AppointmentTimeEntry.Time = DateTime.Now.TimeOfDay;
+                BeforeAppt.Time = DateTime.Now.TimeOfDay;
                 editing = false;
             }
             else
             {
                 AppointmentDateEntry.Date = appointment.aptDate;
                 AppointmentTimeEntry.Time = appointment.aptDate.TimeOfDay;
+                BeforeAppt.Time = DateTime.Now.TimeOfDay;
                 editing = true;
             }
         }
@@ -38,10 +41,17 @@ namespace FinalProject
         {
             User user;
             Doctor doctor;
-            appointment.aptDate = AppointmentDateEntry.Date.Add(AppointmentTimeEntry.Time);
+            appointment.aptDate = AppointmentDateEntry.Date + AppointmentTimeEntry.Time;
             appointment.reasonForVisit = Reason.Text;
 
-            if(appointment.aptDate > DateTime.Now)
+            //DateTime is immutable, so we will create a new DateTime and set it's date to the current appointment date.
+            DateTime RemindTime = appointment.aptDate.Date + BeforeAppt.Time;
+            //RemindTime will have the date of the appointment and the reminder time chosen in the BeforeAppt TimePicker.
+            //Storing the reminderTime as part of the appointment entry in the database.
+            //We will need to re-submit any pending notifications after device reboot.
+            appointment.reminderTime = RemindTime;
+
+            if (appointment.aptDate > DateTime.Now)
             {
                 using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
                 {
@@ -81,6 +91,14 @@ namespace FinalProject
                         conn.Update(user);
                         conn.Update(doctor);
                     }
+
+                    CrossLocalNotifications.Current.Show("Appointment Reminder", "You have an appointment with Dr. " + doctor.dName + " at " + appointment.aptDate.ToShortTimeString(), appointment.Id, RemindTime);
+                    /* 
+                     * Will have to call 
+                     * CrossLocalNotifications.Current.Cancel(appointment.Id);
+                     * to remove reminder if we add the option to delete appointments.
+                    */
+
                 }
                 else
                 {
@@ -129,6 +147,13 @@ namespace FinalProject
                         conn.Update(appointment);
                         conn.Update(user);
                         conn.Update(doctor);
+
+                        CrossLocalNotifications.Current.Show("Appointment Reminder", "You have an appointment with Dr. " + doctor.dName + " at " + appointment.aptDate.ToShortTimeString(), appointment.Id, RemindTime);
+                        /* 
+                         * Will have to call 
+                         * CrossLocalNotifications.Current.Cancel(appointment.Id);
+                         * to remove reminder if we add the option to delete appointments.
+                        */
                     }
                 }
                 await Navigation.PopModalAsync();

@@ -20,6 +20,12 @@
             <Label Text="Reason For Visit"
                    FontSize="Large"/>
             <Entry x:Name="Reason"/>
+            <!-- Reminder controls -->
+            <Label Text="Remind Me At"
+                   FontSize="Large"/>
+            <TimePicker 
+                x:Name="BeforeAppt"/>
+            <!-- End Reminder control -->
             <Button x:Name="SubmitButton" Text = "Submit" FontSize="Large" HorizontalOptions="Center"
                     VerticalOptions="Fill" Clicked="ButtonClicked" />
         </StackLayout>
