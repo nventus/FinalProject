@@ -7,31 +7,18 @@
              x:Class="FinalProject.DoctorList">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="New Doctor"
-                     Clicked="newDoctorClicked"/> 
+                     Clicked="newDoctorClicked"/>
     </ContentPage.ToolbarItems>
-    <ScrollView>
-        <StackLayout>
-            <SearchBar x:Name="search"
-                   TextChanged="OnSearch"/>
-            <ListView x:Name="doctorListView" 
+    <ContentPage.Content>
+        <ListView x:Name="doctorListView" 
                   ItemSelected="doctorSelected">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <ViewCell.ContextActions>
-                                <MenuItem Clicked="OnEdit"
-                                    CommandParameter="{Binding Id}"
-                                    Text="Edit"/>
-                            </ViewCell.ContextActions>
-                            <StackLayout>
-                                <Label Text="{Binding dName}"
-                                       TextColor="Blue"/>
-                                <Label Text="{Binding dPractice}"/>
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
-    </ScrollView>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding dName}"
+                              Detail="{Binding dPractice}"
+                              TextColor="Aqua"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
 </ContentPage>

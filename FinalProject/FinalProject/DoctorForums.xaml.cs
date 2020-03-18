@@ -13,26 +13,11 @@ namespace FinalProject
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DoctorForums : ContentPage
     {
-        bool newdoc = false;
-        Doctor doctor;
-        public DoctorForums(Doctor doc)
+        User user;
+        public DoctorForums(User usr)
         {
             InitializeComponent();
-            doctor = doc;
-            if(doc.dName != "")
-            {
-                newdoc = true;
-            }
-        }
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            NameEntry.Text = doctor.dName;
-            PracticeEntry.Text = doctor.dPractice;
-            TypeEntry.Text = doctor.dType;
-            AddressEntry.Text = doctor.dAddress;
-            PhoneEntry.Text = doctor.dPhone;
-            EmailEntry.Text = doctor.dEmail;           
+            user = usr;
         }
 
         //Completes the forum necessary to add a new doctor to the list
@@ -41,12 +26,15 @@ namespace FinalProject
             Doctor doc;
             Boolean duexists = false;
             Boolean dexists = false;
-            doctor.dName = NameEntry.Text;
-            doctor.dPractice = PracticeEntry.Text;
-            doctor.dType = TypeEntry.Text;
-            doctor.dAddress = AddressEntry.Text;
-            doctor.dPhone = PhoneEntry.Text;
-            doctor.dEmail = EmailEntry.Text;
+            Doctor doctor = new Doctor()
+            {
+                dName = NameEntry.Text,
+                dPractice = PracticeEntry.Text,
+                dType = TypeEntry.Text,
+                dAddress = AddressEntry.Text,
+                dPhone = PhoneEntry.Text,
+                dEmail = EmailEntry.Text
+            };
 
             //Only adds the document to the database if it has a valid marker for the Doctor's name
             if (doctor.dName.Equals(""))
@@ -59,88 +47,83 @@ namespace FinalProject
             }
             else
             {
-                if (newdoc)
+                //Checks to see whether the doctor already exists                
+                using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
                 {
-                    //Checks to see whether the doctor already exists                
-                    using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
+                    conn.CreateTable<Doctor>();
+                    var doctors = conn.Query<Doctor>("select * from Doctor where dName=? AND dPractice=?", doctor.dName, doctor.dPractice);
+                    //If the doctor already exists, then make sure that the user accessing this doesn't already see that doctor
+                    if (doctors?.Any() == true)
                     {
-                        conn.CreateTable<Doctor>();
-                        var doctors = conn.Query<Doctor>("select * from Doctor where dName=? AND dPractice=?", doctor.dName, doctor.dPractice);
-                        //If the doctor already exists, then make sure that the user accessing this doesn't already see that doctor
-                        if (doctors?.Any() == true)
+                        doc = conn.GetWithChildren<Doctor>(doctors[0].Id);
+                        dexists = true;
+                        foreach (User u in doc.Users)
                         {
-                            doc = conn.GetWithChildren<Doctor>(doctors[0].Id);
-                            dexists = true;
-                            foreach (User u in doc.Users)
+                            if (u.Name.Equals(user.Name))
                             {
-                                if (u.Id == doctor.Users[0].Id)
-                                {
-                                    duexists = true;
-                                }
+                                duexists = true;
                             }
                         }
                     }
+                }
 
-                    //If the doctor-user combination already exists, then display an alert
-                    if (duexists)
+                //If the doctor-user combination already exists, then display an alert
+                if (duexists)
+                {
+                    await DisplayAlert("Uh-oh!", user.Name + " already sees " + doctor.dName, "OK");
+                }
+
+                //If the doctor already exists, but not the doctor-user combination,
+                //Then add the user to the doctor's list of patients,
+                //and add the doctor to the user's list of doctors
+                //Also adds the user's id and the doctor's id to the usersdoctors table required for a manytomany relationship
+
+                //This iterates through a for loop, because it contains a list. But realistically,
+                //it will never return a list of a value greater or less than 1
+                else if (dexists)
+                {
+
+                    using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
                     {
-                        await DisplayAlert("Uh-oh!", doctor.Users[0].Name + " already sees " + doctor.dName, "OK");
+                        conn.CreateTable<Doctor>();
+                        conn.CreateTable<User>();
+                        conn.CreateTable<UsersDoctors>();
+                        var doctors = conn.Query<Doctor>("select * from Doctor where dName=? AND dPractice=?", doctor.dName, doctor.dPractice);
+                        doc = conn.GetWithChildren<Doctor>(doctors[0].Id);
+                        doc.Users.Add(user);
+                        conn.UpdateWithChildren(doc);
                     }
-
-                    //If the doctor already exists, but not the doctor-user combination,
-                    //Then add the user to the doctor's list of patients,
-                    //and add the doctor to the user's list of doctors
-                    //Also adds the user's id and the doctor's id to the usersdoctors table required for a manytomany relationship
-
-                    //This iterates through a for loop, because it contains a list. But realistically,
-                    //it will never return a list of a value greater or less than 1
-                    else if (dexists)
-                    {
-
-                        using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
-                        {
-                            conn.CreateTable<Doctor>();
-                            conn.CreateTable<User>();
-                            conn.CreateTable<UsersDoctors>();
-                            var doctors = conn.Query<Doctor>("select * from Doctor where dName=? AND dPractice=?", doctor.dName, doctor.dPractice);
-                            doc = conn.GetWithChildren<Doctor>(doctors[0].Id);
-                            doc.Users.Add(doctor.Users[0]);
-                            conn.UpdateWithChildren(doc);
-                        }
-                        await Navigation.PopModalAsync();
-                    }
-                    else
-                    {
-                        doctor.Appointments = new List<Appointment>
-                        {
-
-                        };
-                        doctor.Prescriptions = new List<Prescription>
-                        {
-
-                        };
-
-
-                        using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
-                        {
-                            //Ignored if the table already exists
-                            conn.CreateTable<Doctor>();
-                            conn.CreateTable<User>();
-                            conn.CreateTable<UsersDoctors>();
-                            conn.CreateTable<Appointment>();
-                            conn.CreateTable<Prescription>();
-                            conn.Insert(doctor);
-                            conn.UpdateWithChildren(doctor);
-                        }
-                        await Navigation.PopModalAsync();
-                    }
+                    await Navigation.PopModalAsync();
                 }
                 else
                 {
+                    doctor.Users = new List<User>
+                    {
+
+                    };
+                    doctor.Appointments = new List<Appointment>
+                    {
+
+                    };
+                    doctor.Prescriptions = new List<Prescription>
+                    {
+
+                    };
+                    doctor.Users.Add(user);
+
+
                     using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
                     {
-                        conn.Update(doctor);
+                        //Ignored if the table already exists
+                        conn.CreateTable<Doctor>();
+                        conn.CreateTable<User>();
+                        conn.CreateTable<UsersDoctors>();
+                        conn.CreateTable<Appointment>();
+                        conn.CreateTable<Prescription>();
+                        conn.Insert(doctor);
+                        conn.UpdateWithChildren(doctor);
                     }
+                    await Navigation.PopModalAsync();
                 }
             }
         }

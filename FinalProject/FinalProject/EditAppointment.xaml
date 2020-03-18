@@ -6,33 +6,31 @@
              mc:Ignorable="d"
              x:Class="FinalProject.EditAppointment">
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout>
-                <Label Text="Appointment Date:" 
+        <StackLayout>
+            <Label Text="Appointment Date:" 
                      FontSize="Large"/>
-                <DatePicker
+            <DatePicker
                     x:Name="AppointmentDateEntry"
                     Format="d"/>
-                <Label Text="Appointment Time:"
+            <Label Text="Appointment Time:"
                        FontSize="Large"
                        />
-                <TimePicker 
+            <TimePicker 
                     x:Name="AppointmentTimeEntry"/>
-                <Label Text="Reason For Visit:"
+            <Label Text="Reason For Visit:"
                        FontSize="Large"/>
-                <Editor x:Name="Reason"
+            <Editor x:Name="Reason"
                     Text=""/>
-                <Label Text="Diagnosis:"
+            <Label Text="Diagnosis:"
                     FontSize="Large"/>
-                <Editor x:Name="Diagnosis"
+            <Editor x:Name="Diagnosis"
                         Text=""/>
-                <Label Text="Aftercare:" 
+            <Label Text="Aftercare:" 
                    FontSize="Large" />
-                <Editor Text=""
+            <Editor Text=""
                     x:Name="FollowUpRecsEntry"/>
-                <Button x:Name="SubmitButton" Text = "Submit" FontSize="Large" HorizontalOptions="Center"
+            <Button x:Name="SubmitButton" Text = "Submit" FontSize="Large" HorizontalOptions="Center"
                     VerticalOptions="Fill" Clicked="ButtonClicked" />
-            </StackLayout>
-        </ScrollView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

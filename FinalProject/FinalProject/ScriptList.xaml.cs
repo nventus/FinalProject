@@ -1,8 +1,9 @@
-﻿using FinalProject.Tables;
+﻿using FinalProject.Misc;
+using FinalProject.Tables;
 using SQLiteNetExtensions.Extensions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,10 +13,6 @@ namespace FinalProject
     public partial class ScriptList : ContentPage
     {
         int uid;
-        List<Prescription> prescriptions = new List<Prescription>
-        {
-
-        };
         public ScriptList(int id)
         {
             InitializeComponent();
@@ -35,7 +32,7 @@ namespace FinalProject
                 conn.CreateTable<Prescription>();
                 conn.CreateTable<Conditions>();
                 conn.CreateTable<UsersConditions>();
-                prescriptions = conn.Query<Prescription>("select * from Prescription where uId=?", uid);
+                var prescriptions = conn.Query<Prescription>("select * from Prescription where uId=?", uid);
 
                 int result;
                 Prescription script;
@@ -73,11 +70,6 @@ namespace FinalProject
                 script = conn.GetWithChildren<Prescription>(mi.CommandParameter);
             }
             Navigation.PushAsync(new ScriptEdit(script));
-        }
-        private void OnSearch(object sender, EventArgs e)
-        {
-            SearchBar searchBar = (SearchBar)sender;
-            RxListView.ItemsSource = prescriptions.Where(prescription => prescription.RxName.ToUpper().Contains(searchBar.Text.ToUpper()));
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using FinalProject.Tables;
-using SQLiteNetExtensions.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +15,6 @@ namespace FinalProject
     {
         Doctor doctor;
         User user;
-        List<Appointment> appointments = new List<Appointment>
-        {
-
-        };
         public AppointmentList(Doctor doc, User usr)
         {
             InitializeComponent();
@@ -37,7 +32,7 @@ namespace FinalProject
                 int result;
                 Appointment appt;
                 conn.CreateTable<Appointment>();
-                appointments = conn.Query<Appointment>("select * from Appointment where dId=? AND uId=?", doctor.Id, user.Id);
+                var appointments = conn.Query<Appointment>("select * from Appointment where dId=? AND uId=?", doctor.Id, user.Id);
                 if (appointments.Count > 0)
                 {
                     for (int i = 0; i < appointments.Count - 1; i++)
@@ -80,53 +75,6 @@ namespace FinalProject
         {
             Appointment appt = e.SelectedItem as Appointment;
             Navigation.PushAsync(new AppointmentDetail(appt));
-        }
-        private void OnSearch(object sender, EventArgs e)
-        {
-            SearchBar searchBar = (SearchBar)sender;
-            appointmentListView.ItemsSource = appointments.Where(appointment => appointment.reasonForVisit.ToUpper().Contains(searchBar.Text.ToUpper()));        
-        }
-        private void OnEdit(object sender, EventArgs e)
-        {
-            Appointment apt;
-            int result;
-            var mi = ((MenuItem)sender);
-            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
-            {
-                apt = conn.GetWithChildren<Appointment>(mi.CommandParameter);
-            }
-            result = DateTime.Compare(apt.aptDate, DateTime.Now);
-            if (result <= 0)
-            {
-                Navigation.PushAsync(new EditAppointment(apt));
-            }
-            else
-            {
-                Navigation.PushModalAsync(new FutureAppointmentForum(apt));
-            }
-        }
-        private void OnDelete(object sender, EventArgs e)
-        {
-            Appointment apt;
-            int result;
-            var mi = ((MenuItem)sender);
-            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
-            {
-                apt = conn.GetWithChildren<Appointment>(mi.CommandParameter);
-            }
-            result = DateTime.Compare(apt.aptDate, DateTime.Now);
-            if (result <= 0)
-            {
-                DisplayAlert("Oops!", "You can only delete future appointments", "OK");
-            }
-            else
-            {
-                using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
-                {
-                    conn.Delete(apt, recursive: true);
-                }
-            }
-            OnAppearing();
         }
     }
 }

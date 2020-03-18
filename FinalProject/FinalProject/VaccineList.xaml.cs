@@ -14,10 +14,6 @@ namespace FinalProject
     public partial class VaccineList : ContentPage
     {
         int uid;
-        List<Vaccine> vaccines = new List<Vaccine>
-        {
-
-        };
         public VaccineList(int id)
         {
             InitializeComponent();
@@ -37,7 +33,7 @@ namespace FinalProject
                 conn.CreateTable<Prescription>();
                 conn.CreateTable<Conditions>();
                 conn.CreateTable<UsersConditions>();
-                vaccines = conn.Query<Vaccine>("select * from Vaccine where uId=?", uid);
+                var vaccines = conn.Query<Vaccine>("select * from Vaccine where uId=?", uid);
                 Vaccine vax;
                 int result;
                 if (vaccines.Count > 0)
@@ -63,11 +59,6 @@ namespace FinalProject
         {
             Vaccine v = e.SelectedItem as Vaccine;
             Navigation.PushAsync(new VaccineDetail(v));
-        }
-        private void OnSearch(object sender, EventArgs e)
-        {
-            SearchBar searchBar = (SearchBar)sender;
-            VaccineListView.ItemsSource = vaccines.Where(vaccine => vaccine.VaccineName.ToUpper().Contains(searchBar.Text.ToUpper()));
         }
     }
 }

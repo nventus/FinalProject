@@ -9,26 +9,20 @@
         <ToolbarItem Text="Add Condition"
                      Clicked="newConditionClicked"/>
     </ContentPage.ToolbarItems>
-    <ScrollView>
-        <StackLayout>
-            <SearchBar x:Name="search"
-                   TextChanged="OnSearch"/>
-            <ListView x:Name="conditionListView">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <ViewCell.ContextActions>
-                                <MenuItem Clicked="OnDelete"
-                                      CommandParameter="{Binding Type}"
-                                 Text="Delete" IsDestructive="True" />
-                            </ViewCell.ContextActions>
-                            <StackLayout Padding="15,0">
-                                <Label Text="{Binding Type}" />
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
-    </ScrollView>
+    <ListView x:Name="conditionListView">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <ViewCell.ContextActions>
+                        <MenuItem Clicked="OnDelete"
+                                  CommandParameter="{Binding Type}"
+                             Text="Delete" IsDestructive="True" />
+                    </ViewCell.ContextActions>
+                    <StackLayout Padding="15,0">
+                        <Label Text="{Binding Type}" />
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </ContentPage>

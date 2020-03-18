@@ -16,10 +16,6 @@ namespace FinalProject
     {
         User user;
         int uid;
-        List<Doctor> doctors = new List<Doctor>
-        {
-
-        };
         public DoctorList(int id)
         {
             InitializeComponent();
@@ -46,7 +42,7 @@ namespace FinalProject
             Doctor doc;
             if (user.Doctors.Count > 0)
             { 
-                doctors = user.Doctors;
+                List<Doctor> doctors = user.Doctors;
                 for (int i = 0; i < doctors.Count - 1; i++)
                 {
                     for (int j = 0; j < doctors.Count - i - 1; j++)
@@ -67,15 +63,7 @@ namespace FinalProject
         //Brings the user to the new doctor forum
         private void newDoctorClicked(object sender, EventArgs e)
         {
-            Doctor doctor = new Doctor
-            {
-
-            };
-            doctor.Users = new List<User>
-            {
-                user
-            };
-            Navigation.PushModalAsync(new DoctorForums(doctor));
+            Navigation.PushModalAsync(new DoctorForums(user));
         }
 
         //Sends the user to the appointment listings, with the chosen doctor's name as a parameter
@@ -84,20 +72,6 @@ namespace FinalProject
             Doctor selectedDoctor = e.SelectedItem as Doctor;
             Navigation.PushAsync(new AppointmentList(selectedDoctor, user));
         }
-        private void OnSearch(object sender, EventArgs e)
-        {
-            SearchBar searchBar = (SearchBar)sender;
-            doctorListView.ItemsSource = doctors.Where(doctor => (doctor.dName.ToUpper().Contains(searchBar.Text.ToUpper()) || doctor.dPractice.ToUpper().Contains(searchBar.Text.ToUpper())));
-        }
-        private void OnEdit(object sender, EventArgs e)
-        {
-            Doctor doc;
-            var mi = ((MenuItem)sender);
-            using(SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
-            {
-                doc = conn.GetWithChildren<Doctor>(mi.CommandParameter);
-            }
-            Navigation.PushAsync(new DoctorForums(doc));
-        }
+
     }
 }
