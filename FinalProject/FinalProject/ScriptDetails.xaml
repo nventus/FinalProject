@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="FinalProject.ScriptDetails">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Prescription Name:" 
+               FontSize="Large"/>
+            <Label 
+                x:Name="ScriptName"
+                FontSize="Large"/>
+            <Label Text="Prescribing Doctor:"
+                   FontSize="Large"/>
+            <Label
+                x:Name="DName"
+                FontSize="Large"/>
+            <Label Text="Date of Prescription:" 
+               FontSize="Large" />
+            <Label
+                x:Name="ScriptDate"
+                FontSize="Large"/>
+            <Label Text="Last Date of Use:" 
+               FontSize="Large" />
+            <Label
+                x:Name="LScriptDate"
+                FontSize="Large"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="FinalProject.AppointmentList">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Log Appointment"
+                     Clicked="newAppointmentClicked"/>
+        <ToolbarItem Text="Future Appointment"
+                     Clicked="futureAppointmentClicked"/>
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+        <StackLayout>
+            <SearchBar x:Name="search"
+                   TextChanged="OnSearch"/>
+            <ListView x:Name="appointmentListView" 
+                  ItemSelected="appointmentSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem
+                                    Clicked="OnEdit"
+                                    CommandParameter="{Binding Id}"
+                                    Text="Edit"/>
+                                <MenuItem
+                                    Clicked="OnDelete"
+                                    CommandParameter="{Binding Id}"
+                                    Text="Delete"/>
+                            </ViewCell.ContextActions>
+                            <StackLayout>
+                                <Label Text="{Binding aptDate}"
+                                       TextColor="Aqua"/>
+                                <Label Text="{Binding reasonForVisit}"
+                                       TextColor="Aqua"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

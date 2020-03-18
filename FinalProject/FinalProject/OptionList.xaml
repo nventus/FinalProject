@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="FinalProject.OptionList">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="My Account"
+                     Clicked="accountInfoClicked"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <Button x:Name="LogAppts" Text = "Appointment Log" FontSize="Large" HorizontalOptions="Fill"
+                    VerticalOptions="Fill" Clicked="LogAptClicked" />
+            <Button x:Name="PrescriptionList" Text="Prescriptions" FontSize="Large" HorizontalOptions="Fill"
+                    VerticalOptions="Fill" Clicked="RxClicked" />
+            <Button x:Name="VaccineList" Text="Vaccines" FontSize="Large" HorizontalOptions="Fill"
+                    VerticalOptions="Fill" Clicked="VaccineClicked"/>
+            <Button x:Name="AllergyList" Text="Allergies" FontSize="Large" HorizontalOptions="Fill"
+                    VerticalOptions="Fill" Clicked="AllergyClicked"/>
+            <Button x:Name="ConditionList" Text="Conditions" FontSize="Large" HorizontalOptions="Fill"
+                    VerticalOptions="Fill" Clicked="ConditionClicked"/>
+            <Button x:Name="CalendarButton" Text="Calendar" FontSize="Large" HorizontalOptions="Fill"
+                    VerticalOptions="Fill" Clicked="CalendarClicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

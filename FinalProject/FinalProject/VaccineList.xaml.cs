@@ -1,0 +1,73 @@
+﻿using FinalProject.Tables;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace FinalProject
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class VaccineList : ContentPage
+    {
+        int uid;
+        List<Vaccine> vaccines = new List<Vaccine>
+        {
+
+        };
+        public VaccineList(int id)
+        {
+            InitializeComponent();
+            uid = id;
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
+            {
+                conn.CreateTable<User>();
+                conn.CreateTable<Allergy>();
+                conn.CreateTable<UsersAllergies>();
+                conn.CreateTable<Doctor>();
+                conn.CreateTable<UsersDoctors>();
+                conn.CreateTable<Vaccine>();
+                conn.CreateTable<Prescription>();
+                conn.CreateTable<Conditions>();
+                conn.CreateTable<UsersConditions>();
+                vaccines = conn.Query<Vaccine>("select * from Vaccine where uId=?", uid);
+                Vaccine vax;
+                int result;
+                if (vaccines.Count > 0)
+                {
+                    for (int i = 0; i < vaccines.Count - 1; i++)
+                    {
+                        for (int j = 0; i < vaccines.Count - i - 1; i++)
+                        {
+                            result = DateTime.Compare(DateTime.Parse(vaccines[j + 1].Date), DateTime.Parse(vaccines[j].Date));
+                            if (result > 0)
+                            {
+                                vax = vaccines[j];
+                                vaccines[j] = vaccines[j + 1];
+                                vaccines[j + 1] = vax;
+                            }
+                        }
+                    }
+                }
+                VaccineListView.ItemsSource = vaccines;
+            }
+        }
+        private void vaccineSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            Vaccine v = e.SelectedItem as Vaccine;
+            Navigation.PushAsync(new VaccineDetail(v));
+        }
+        private void OnSearch(object sender, EventArgs e)
+        {
+            SearchBar searchBar = (SearchBar)sender;
+            VaccineListView.ItemsSource = vaccines.Where(vaccine => vaccine.VaccineName.ToUpper().Contains(searchBar.Text.ToUpper()));
+        }
+    }
+}
