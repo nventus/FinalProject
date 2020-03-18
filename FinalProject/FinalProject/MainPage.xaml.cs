@@ -5,8 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Plugin.LocalNotifications;
-using SQLiteNetExtensions.Extensions;
 
 namespace FinalProject
 {
@@ -31,7 +29,6 @@ namespace FinalProject
             {
                 conn.CreateTable<User>();
                 var users = conn.Table<User>().ToList();
-                var doctors = conn.Table<Doctor>();
                 if (users?.Any() == false)
                 {
                     Navigation.PushModalAsync(new NavigationPage(new UserForums()));
@@ -41,13 +38,11 @@ namespace FinalProject
                     ListMenu.ItemsSource = users;
                 }
             }
-
         }
         private void UserSelected(object sender, SelectedItemChangedEventArgs e)
         {
             User selectedUser = e.SelectedItem as User;
             Navigation.PushModalAsync(new NavigationPage(new OptionList(selectedUser.Id)));
         }
-
     }
 }
