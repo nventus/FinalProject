@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Plugin.LocalNotifications;
 
 namespace FinalProject
 {
@@ -32,6 +33,7 @@ namespace FinalProject
             appointment.reasonForVisit = Reason.Text;
             appointment.diagnosis = Diagnosis.Text;
             appointment.followUpAdvice = FollowUpRecsEntry.Text;
+
 
             using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
             {
@@ -81,9 +83,24 @@ namespace FinalProject
                 {
                     doctor.Appointments.Add(appointment);
                 }
+                //Delete the old reminder and create a new one with the new details
+                //Cancel the current reminder
+                CrossLocalNotifications.Current.Cancel(appointment.Id);
+
+                //Create a new reminder with the new details
+                DateTime RemindTime = appointment.aptDate;
+                RemindTime = RemindTime.Date + BeforeAppt.Time;
+                CrossLocalNotifications.Current.Show("Appointment Reminder", "You have an appointment with Dr. " + doctor.dName + " at " + appointment.aptDate.ToShortTimeString(), appointment.Id, RemindTime);
+
+                //Update the stored reminderTime in the DB
+                appointment.reminderTime = RemindTime;
+
                 conn.Update(user);
                 conn.Update(doctor);
                 conn.Update(appointment);
+
+
+
             }
             await Navigation.PopModalAsync();
         }
