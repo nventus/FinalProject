@@ -93,11 +93,7 @@ namespace FinalProject
                     }
 
                     CrossLocalNotifications.Current.Show("Appointment Reminder", "You have an appointment with Dr. " + doctor.dName + " at " + appointment.aptDate.ToShortTimeString(), appointment.Id, RemindTime);
-                    /* 
-                     * Will have to call 
-                     * CrossLocalNotifications.Current.Cancel(appointment.Id);
-                     * to remove reminder if we add the option to delete appointments.
-                    */
+
 
                 }
                 else
@@ -148,12 +144,9 @@ namespace FinalProject
                         conn.Update(user);
                         conn.Update(doctor);
 
+                        CrossLocalNotifications.Current.Cancel(appointment.Id);
                         CrossLocalNotifications.Current.Show("Appointment Reminder", "You have an appointment with Dr. " + doctor.dName + " at " + appointment.aptDate.ToShortTimeString(), appointment.Id, RemindTime);
-                        /* 
-                         * Will have to call 
-                         * CrossLocalNotifications.Current.Cancel(appointment.Id);
-                         * to remove reminder if we add the option to delete appointments.
-                        */
+
                     }
                 }
                 await Navigation.PopModalAsync();
