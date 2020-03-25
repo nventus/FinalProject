@@ -19,6 +19,10 @@ namespace FinalProject
             uid = id;
         }
 
+        private void newUserClicked(object sender, EventArgs e)
+        {
+            Navigation.PushModalAsync(new NavigationPage(new UserForums()));
+        }
         private void LogAptClicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new DoctorList(uid));

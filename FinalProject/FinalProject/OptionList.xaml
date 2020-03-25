@@ -8,6 +8,8 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="My Account"
                      Clicked="accountInfoClicked"/>
+        <ToolbarItem Text="New User"
+                     Clicked="newUserClicked"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>

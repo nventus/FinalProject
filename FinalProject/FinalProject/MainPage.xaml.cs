@@ -22,6 +22,7 @@ namespace FinalProject
         {
             base.OnAppearing();
 
+
             /*
              * Initially opens up a database with all registered users. If the database is empty, then open up the user signup forum
              */
@@ -36,14 +37,17 @@ namespace FinalProject
                 else
                 {
                     ListMenu.ItemsSource = users;
+
                 }
             }
         }
-        private void UserSelected(object sender, SelectedItemChangedEventArgs e)
+        private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            User selectedUser = e.SelectedItem as User;
+                User selectedUser = e.SelectedItem as User;
+                Detail = new NavigationPage(new OptionList(selectedUser.Id));
+
             //Navigation.PushModalAsync(new NavigationPage(new OptionList(selectedUser.Id)));
-            Detail = new NavigationPage(new OptionList(selectedUser.Id));
+
             IsPresented = false;
         }
     }
