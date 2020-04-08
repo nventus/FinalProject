@@ -3,27 +3,143 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="FinalProject.UserForums">
+             xmlns:converter="clr-namespace:FinalProject.Converters"
+             xmlns:viewModel="clr-namespace:FinalProject.ViewModels.Forms"
+             xmlns:core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
+             xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:control="clr-namespace:FinalProject.Controls"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             x:Class="FinalProject.UserForums"
+             Title="Sign Up"
+             BackgroundImageSource="{core:OnPlatformOrientationStringValue Default=intbackground.png,
+                                                                  iOSPhoneLandscape=LoginBackground-Landscape.png,
+                                                                  iOSTabletLandscape=LoginBackground-Landscape.png}"
+            NavigationPage.HasNavigationBar="False"
+            Style="{StaticResource ContentPageStyle}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="ColorConverter" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <viewModel:SignUpPageViewModel />
+    </ContentPage.BindingContext>
     <ContentPage.Content>
-        <StackLayout>
-            <!-- Place new controls here -->
-            <Label Text="Your Name:" 
-               FontSize="Large" />
-            <Editor Text=""
-                x:Name="nameEntry"/>
-            <Label Text="Birthday:" 
-               FontSize="Large"/>
-            <DatePicker 
-            x:Name="bdayPick"
-            Date="02/06/2020"
-            Format="d"/>
-            <Label Text="Email:" 
-               FontSize="Large" />
-            <Editor Text="" 
-                x:Name="emailEntry"/>
-            <Button x:Name="uForumSubmit" Text = "Submit" FontSize="Large" HorizontalOptions="Center"
-                    VerticalOptions="Fill" Clicked="ButtonClicked" />
-        </StackLayout>
+        <Grid>
+            <gradient:SfGradientView Style="{StaticResource SfGradientViewStyle}" />
+
+            <ScrollView HorizontalOptions="Center">
+                <ScrollView.VerticalOptions>
+                    <OnIdiom
+                        x:TypeArguments="LayoutOptions"
+                        Default="CenterAndExpand"
+                        Phone="FillAndExpand" />
+                </ScrollView.VerticalOptions>
+
+                <StackLayout
+                    Margin="{core:OnPlatformOrientationThickness PhonePortrait='20,32',
+                                                                 PhoneLandscape='150,32',
+                                                                 TabletPortrait='200,50',
+                                                                 TabletLandscape='300,50',
+                                                                 Desktop='30'}"
+                    Spacing="0"
+                    VerticalOptions="FillAndExpand"
+                    WidthRequest="{OnPlatform Default='-1',
+                                              UWP='350'}">
+                    <Image Source="logo.png" VerticalOptions="Center" HeightRequest="150"/>
+                    <StackLayout
+                        HorizontalOptions="Center"
+                        Spacing="24"
+                        VerticalOptions="CenterAndExpand">
+
+                        <!--  Label to display the title of this page  -->
+                        <Label
+                            FontFamily="{StaticResource Montserrat-SemiBold}"
+                            FontSize="20"
+                            HorizontalOptions="Center"
+                            Style="{StaticResource LabelStyle}"
+                            Text="Sign Up" />
+
+                        <!--  Label to display the description of this page  -->
+                        <Label
+                            Margin="0,-16,0,8"
+                            FontFamily="{StaticResource Montserrat-Medium}"
+                            HorizontalTextAlignment="Center"
+                            Style="{StaticResource LabelStyle}"
+                            Text="Create an account to start doing more" />
+
+                        <!--  Entry to get username from user  -->
+                        <Label Text="Name:"
+                               FontSize="18"
+                               FontFamily="{StaticResource Montserrat-Medium}"
+                               Margin="8,0,0,-15"
+                               TextColor="White" />
+                        <border:SfBorder
+                            Margin="8,0,0,-15"
+                            BorderColor="{Binding Source={x:Reference nameEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}" Style="{StaticResource SfBorderStyle}">
+                            <control:BorderlessEntry
+                                Margin="8,0,0,-8"
+                                x:Name="nameEntry"
+                                Style="{StaticResource EntryStyle}"
+                                Text="{Binding Name}" />
+                        </border:SfBorder>
+
+                        <!--  Entry to get Birthday from user  -->
+                        <Label Text="Birthday:"
+                               FontSize="18"
+                               FontFamily="{StaticResource Montserrat-Medium}"
+                               Margin="8,0,0,-15"
+                               TextColor="White"/>
+                        <border:SfBorder
+                               Margin="8,0,0,-15"
+                               BorderColor="{Binding Source={x:Reference bdayPick}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}" Style="{StaticResource SfBorderStyle}">
+                            <control:CalenderDatePicker
+                                Margin="8,0,0,-8"
+                                Date="{Binding Date}"
+                                x:Name="bdayPick"
+                                FontFamily="{StaticResource Montserrat-Regular}"
+                                TextColor="White"
+                                FontSize="16"
+                                Format="MM/dd/yy" />
+                        </border:SfBorder>
+
+                        <!--  Entry to get Email from user  -->
+                        <Label Text="Email:"
+                               FontSize="18"
+                               FontFamily="{StaticResource Montserrat-Medium}"
+                               Margin="8,0,0,-15"
+                               TextColor="White"/>
+                        <border:SfBorder
+                            Margin="8,0,0,-15"
+                            BorderColor="{Binding Source={x:Reference emailEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}" Style="{StaticResource SfBorderStyle}">
+                            <control:BorderlessEntry
+                                Margin="8,0,0,-8"
+                                x:Name="emailEntry"
+                                Style="{StaticResource EntryStyle}"
+                                Text="{Binding Email}" />
+                        </border:SfBorder>
+
+                        <!--  Entry to get Submit from user  -->
+                        <buttons:SfButton
+                                CornerRadius="20"
+                                FontFamily="{StaticResource Montserrat-SemiBold}"
+                                Style="{StaticResource SfButtonStyle}"
+                                Margin="8,20,8,40"
+                                x:Name="uForumSubmit"
+                                Text = "Submit"
+                                FontSize="18"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Fill"
+                        Clicked="ButtonClicked" />
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

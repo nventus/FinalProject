@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -34,23 +31,23 @@ namespace FinalProject
                 };
                 foreach (Appointment a in appointments)
                 {
-                    if(a.aptDate > DateTime.Now)
+                    if (a.aptDate > DateTime.Now)
                     {
                         Doctor doc = conn.Get<Doctor>(a.dId);
-                            specialDates.Add(
-                               new XamForms.Controls.SpecialDate(a.aptDate)
+                        specialDates.Add(
+                           new XamForms.Controls.SpecialDate(a.aptDate)
+                           {
+                               Selectable = true,
+                               BackgroundPattern = new XamForms.Controls.BackgroundPattern(1)
                                {
-                                   Selectable = true,
-                                   BackgroundPattern = new XamForms.Controls.BackgroundPattern(1)
+                                   Pattern = new List<XamForms.Controls.Pattern>
                                    {
-                                       Pattern = new List<XamForms.Controls.Pattern>
-                                       {
                                         new XamForms.Controls.Pattern { WidthPercent = 1f, HightPercent = 0.4f, Color = Color.Transparent },
                                         new XamForms.Controls.Pattern{ WidthPercent = 1f, HightPercent = 0.6f, Color = Color.CornflowerBlue, Text = doc.dName, TextColor=Color.Black, TextSize=11,TextAlign=XamForms.Controls.TextAlign.Middle},
-                                       }
                                    }
-                               });
-                        
+                               }
+                           });
+
                     }
                     MyCal.SpecialDates = specialDates;
                 }

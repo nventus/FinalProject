@@ -3,31 +3,101 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              mc:Ignorable="d"
-             x:Class="FinalProject.FutureAppointmentForum">
+             x:Class="FinalProject.FutureAppointmentForum"
+             BackgroundImageSource="LoginBackground.png">
     <ContentPage.Content>
         <StackLayout>
-            <!-- Place new controls here -->
-            <Label Text="Appointment Date:"
-                   FontSize="Large"/>
-            <DatePicker x:Name="AppointmentDateEntry"
-                    Date="02/06/2020"
-                    Format="d"/>
-            <Label Text="Appointment Time:" 
-               FontSize="Large" />
-            <TimePicker 
-                    x:Name="AppointmentTimeEntry"/>
-            <Label Text="Reason For Visit"
-                   FontSize="Large"/>
-            <Entry x:Name="Reason"/>
+            <Image
+                Source="logoInt.png"
+                VerticalOptions="Center"
+                HeightRequest="125"
+                Margin="0,30,0,30"/>
+
+            <!-- Appointment Date -->
+            <Label
+                Text="Appointment Date:"
+                TextColor="#005486"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                FontSize="18"
+                FontFamily="{StaticResource Montserrat-Bold}"
+                Margin="20,0,0,0"/>
+
+            <DatePicker
+                x:Name="AppointmentDateEntry"
+                FontFamily="{StaticResource Montserrat-SemiBold}"
+                FontSize="17"
+                Date="{Binding DateTime.Now}"
+                Format="d"
+                TextColor="Black"
+                Margin="20,0,20,10"/>
+
+            <!-- Appointment Time -->
+            <Label
+                Text="Appointment Time:"
+                TextColor="#005486"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                FontSize="18"
+                FontFamily="{StaticResource Montserrat-Bold}"
+                Margin="20,0,0,0"/>
+
+            <TimePicker
+                x:Name="AppointmentTimeEntry"
+                FontFamily="{StaticResource Montserrat-SemiBold}"
+                FontSize="17"
+                TextColor="Black"
+                Margin="20,0,20,10"/>
+
+            <!-- Reason For Visit -->
+            <Label
+                Text="Reason For Visit:"
+                TextColor="#005486"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                FontSize="18"
+                FontFamily="{StaticResource Montserrat-Bold}"
+                Margin="20,0,0,0"/>
+
+            <Editor
+                x:Name="Reason"
+                FontFamily="{StaticResource Montserrat-SemiBold}"
+                FontSize="17"
+                TextColor="Black"
+                Margin="20,0,20,10"/>
+
             <!-- Reminder controls -->
-            <Label Text="Remind Me At"
-                   FontSize="Large"/>
-            <TimePicker 
-                x:Name="BeforeAppt"/>
-            <!-- End Reminder control -->
-            <Button x:Name="SubmitButton" Text = "Submit" FontSize="Large" HorizontalOptions="Center"
-                    VerticalOptions="Fill" Clicked="ButtonClicked" />
+            <Label
+                Text="Remind Me At"
+                TextColor="#005486"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                FontSize="18"
+                FontFamily="{StaticResource Montserrat-Bold}"
+                Margin="20,0,0,0"/>
+
+            <TimePicker
+                x:Name="BeforeAppt"
+                FontFamily="{StaticResource Montserrat-SemiBold}"
+                FontSize="17"
+                TextColor="Black"
+                Margin="20,0,20,10"/>
+
+            <!-- Submit -->
+            <buttons:SfButton
+                    CornerRadius="20"
+                    BorderWidth="1"
+                    BorderColor="Black"
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                    Margin="8,20,8,40"
+                    x:Name="SubmitButton"
+                    Text = "Submit"
+                    FontSize="18"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Fill"
+                    Clicked="ButtonClicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

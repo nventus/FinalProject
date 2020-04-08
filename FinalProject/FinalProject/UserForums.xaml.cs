@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -18,11 +15,12 @@ namespace FinalProject
         }
         async void ButtonClicked(object sender, EventArgs e)
         {
+
             User user = new User()
             {
                 Name = nameEntry.Text,
                 Birthday = (bdayPick.Date).ToShortDateString(),
-                Email = emailEntry.Text
+                Email = emailEntry.Text,
             };
 
             if (user.Name == "")

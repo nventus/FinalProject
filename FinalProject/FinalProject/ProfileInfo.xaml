@@ -4,39 +4,102 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="FinalProject.ProfileInfo">
+             x:Class="FinalProject.ProfileInfo"
+             BackgroundImageSource="LoginBackground.png"
+             Title="My Profile">
+
     <ContentPage.Content>
-        <StackLayout>
-            <!-- Place new controls here -->
-            <Label 
-                Text="Your Name:" 
-                FontSize="Large" />
-            <Label 
-                FontSize="Large"
-                x:Name="Name"/>
-            <Label Text="Birthday:" 
-                FontSize="Large"/>
-            <Label 
-                x:Name="Bday"
-                FontSize="Large"/>
-            <Label 
-                Text="Email:" 
-                FontSize="Large" />
-            <Label 
-                FontSize="Large"
-                x:Name="Email"/>
-            <Label
-                Text="Conditions:"
-                FontSize="Large" />
-            <Label 
-                FontSize="Large"
-                x:Name="Conditions"/>
-            <Label 
-                Text="Allergies"
-                FontSize="Large"/>
-            <Label
-                FontSize="Large"
-                x:Name="Allergies"/>
-        </StackLayout>
+        <ScrollView>
+            <StackLayout>
+                <Image
+                    Source="logoInt.png"
+                    VerticalOptions="Center"
+                    HeightRequest="125"
+                    Margin="0,30,0,30"/>
+                <!-- Name -->
+                <Label
+                    Text="Your Name:"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <Label
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                    FontSize="17"
+                    x:Name="Name"
+                    TextColor="Black"
+                    Margin="20,0,0,10"/>
+                <!-- Birthday -->
+                <Label
+                    Text="Birthday:"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <Label
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                   FontSize="17"
+                    x:Name="Bday"
+                    TextColor="Black"
+                    Margin="20,0,0,10"/>
+
+                <!-- Email -->
+                <Label
+                    Text="Email:"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <Label
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                    FontSize="17"
+                    x:Name="Email"
+                    TextColor="Black"
+                    Margin="20,0,0,10"/>
+
+                <!-- Conditions -->
+                <Label
+                    Text="Conditions:"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <Label
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                    FontSize="17"
+                    x:Name="Conditions"
+                    TextColor="Black"
+                    Margin="20,0,0,10"/>
+
+                <!-- Allergies -->
+                <Label
+                    Text="Allergies:"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <Label
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                    FontSize="17"
+                    x:Name="Allergies"
+                    TextColor="Black"
+                    Margin="20,0,0,10"/>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

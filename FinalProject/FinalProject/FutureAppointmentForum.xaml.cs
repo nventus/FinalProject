@@ -1,13 +1,9 @@
-﻿using FinalProject.Tables;
+﻿using Plugin.LocalNotifications;
 using SQLiteNetExtensions.Extensions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Plugin.LocalNotifications;
 
 namespace FinalProject
 {

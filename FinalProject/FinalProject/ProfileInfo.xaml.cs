@@ -1,10 +1,5 @@
 ﻿using FinalProject.Tables;
 using SQLiteNetExtensions.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -40,7 +35,7 @@ namespace FinalProject
             }
             string allergies = "";
             string conditions = "";
-        
+
             if (!(user.Allergies.Count == 0))
             {
                 using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))

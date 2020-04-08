@@ -4,19 +4,45 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="FinalProject.DoctorList">
+             x:Class="FinalProject.DoctorList"
+             BackgroundImageSource="LoginBackground.png"
+             Title="My Doctors">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="New Doctor"
                      Clicked="newDoctorClicked"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <ListView x:Name="doctorListView" 
-                  ItemSelected="doctorSelected">
+        <ListView x:Name="doctorListView"
+                  ItemSelected="doctorSelected" 
+                  HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding dName}"
-                              Detail="{Binding dPractice}"
-                              TextColor="Aqua"/>
+                    <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem />
+                        </ViewCell.ContextActions>
+                        <StackLayout
+                            Padding="15,0"
+                            Margin="0,10,0,0">
+                            <Label
+                                Text="{Binding dName}"
+                                TextColor="#005486"
+                                HorizontalOptions="Start"
+                                VerticalOptions="Start"
+                                FontSize="18"
+                                FontFamily="{StaticResource Montserrat-SemiBold}"
+                                Margin="10,0,0,0" />
+
+                            <Label
+                                Text="{Binding dPractice}"
+                                TextColor="Black"
+                                HorizontalOptions="Start"
+                                VerticalOptions="Start"
+                                FontSize="16"
+                                FontFamily="{StaticResource Montserrat-SemiBold}"
+                                Margin="10,0,0,10" />
+                        </StackLayout>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

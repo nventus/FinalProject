@@ -1,9 +1,7 @@
 ﻿using FinalProject.Tables;
 using SQLite;
 using SQLiteNetExtensions.Attributes;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace FinalProject
 {
@@ -33,6 +31,7 @@ namespace FinalProject
             get;
             set;
         }
+
         [ManyToMany(typeof(UsersDoctors))]
         public List<Doctor> Doctors
         {

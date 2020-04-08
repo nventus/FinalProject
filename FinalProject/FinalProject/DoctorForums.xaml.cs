@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -18,6 +16,12 @@ namespace FinalProject
         {
             InitializeComponent();
             user = usr;
+            NameEntry.Text = "";
+            PracticeEntry.Text = "";
+            TypeEntry.Text = "";
+            AddressEntry.Text = "";
+            PhoneEntry.Text = "";
+            EmailEntry.Text = "";
         }
 
         //Completes the forum necessary to add a new doctor to the list

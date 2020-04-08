@@ -3,40 +3,139 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              mc:Ignorable="d"
-             x:Class="FinalProject.EditAppointment">
+             x:Class="FinalProject.EditAppointment"
+             BackgroundImageSource="LoginBackground.png">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Appointment Date:" 
-                     FontSize="Large"/>
-            <DatePicker
+        <ScrollView>
+            <StackLayout>
+                <Image
+                    Source="logoInt.png"
+                    VerticalOptions="Center"
+                    HeightRequest="125"
+                    Margin="0,30,0,30"/>
+
+                <!-- Appointment Date -->
+                <Label
+                    Text="Appointment Date:"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <DatePicker
                     x:Name="AppointmentDateEntry"
-                    Format="d"/>
-            <Label Text="Appointment Time:"
-                       FontSize="Large"
-                       />
-            <TimePicker 
-                    x:Name="AppointmentTimeEntry"/>
-            <Label Text="Reason For Visit:"
-                       FontSize="Large"/>
-            <Editor x:Name="Reason"
-                    Text=""/>
-            <Label Text="Diagnosis:"
-                    FontSize="Large"/>
-            <Editor x:Name="Diagnosis"
-                        Text=""/>
-            <Label Text="Aftercare:" 
-                   FontSize="Large" />
-            <Editor Text=""
-                    x:Name="FollowUpRecsEntry"/>
-            <!-- Reminder controls -->
-            <Label Text="Remind Me At"
-                   FontSize="Large"/>
-            <TimePicker 
-                x:Name="BeforeAppt" />
-            <!-- End reminder controls-->
-            <Button x:Name="SubmitButton" Text = "Submit" FontSize="Large" HorizontalOptions="Center"
-                    VerticalOptions="Fill" Clicked="ButtonClicked" />
-        </StackLayout>
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                    FontSize="17"
+                    Date="02/06/2020"
+                    Format="d"
+                    TextColor="Black"
+                    Margin="20,0,20,10"/>
+
+                <!-- Appointment Time -->
+                <Label
+                    Text="Appointment Time:"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <TimePicker
+                    x:Name="AppointmentTimeEntry"
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                    FontSize="17"
+                    TextColor="Black"
+                    Margin="20,0,20,10"/>
+
+                <!-- Reason For Visit -->
+                <Label
+                    Text="Reason For Visit:"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <Editor
+                    x:Name="Reason"
+                    Text=""
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                    FontSize="17"
+                    TextColor="Black"
+                    Margin="20,0,20,10"/>
+
+                <!-- Diagnosis -->
+                <Label
+                    Text="Diagnosis:"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <Editor
+                    x:Name="Diagnosis"
+                    Text=""
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                    FontSize="17"
+                    TextColor="Black"
+                    Margin="20,0,20,10"/>
+
+                <!-- Aftercare -->
+                <Label
+                    Text="Aftercare:"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <Editor
+                    x:Name="FollowUpRecsEntry"
+                    Text=""
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                    FontSize="17"
+                    TextColor="Black"
+                    Margin="20,0,20,10"/>
+
+                <!-- Reminder controls -->
+                <Label
+                    Text="Remind Me At"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <TimePicker
+                    x:Name="BeforeAppt"
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                    FontSize="17"
+                    TextColor="Black"
+                    Margin="20,0,20,10"/>
+
+                <!-- Submit -->
+                <buttons:SfButton
+                    x:Name="SubmitButton"
+                    CornerRadius="20"
+                    BorderWidth="1"
+                    BorderColor="Black"
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                    Margin="8,20,8,40"
+                    Text = "Submit"
+                    FontSize="18"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Fill"
+                    Clicked="ButtonClicked" />
+        </StackLayout></ScrollView>
     </ContentPage.Content>
 </ContentPage>

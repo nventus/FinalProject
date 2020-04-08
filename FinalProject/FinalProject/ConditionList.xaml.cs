@@ -2,9 +2,6 @@
 using SQLiteNetExtensions.Extensions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -38,9 +35,9 @@ namespace FinalProject
             }
             int result;
             Conditions al;
+            List<Conditions> conditions = user.Conditions;
             if (user.Conditions.Count > 0)
             {
-                List<Conditions> conditions = user.Conditions;
                 for (int i = 0; i < conditions.Count - 1; i++)
                 {
                     for (int j = 0; j < conditions.Count - i - 1; j++)
@@ -54,8 +51,8 @@ namespace FinalProject
                         }
                     }
                 }
-                conditionListView.ItemsSource = conditions;
             }
+            conditionListView.ItemsSource = conditions;
         }
 
         protected void newConditionClicked(object sender, EventArgs e)

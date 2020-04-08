@@ -4,35 +4,91 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="FinalProject.AppointmentDetail">
+             x:Class="FinalProject.AppointmentDetail"
+             BackgroundImageSource="LoginBackground.png">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Edit Appointment"
                      Clicked="editAppointmentClicked"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <Label x:Name="AppointmentDateLabel"
-                Text="Appointment Date:" 
-               FontSize="Large"/>
-            <Label 
+            <Image
+                Source="logoInt.png"
+                VerticalOptions="Center"
+                HeightRequest="125"
+                Margin="0,30,0,30"/>
+
+            <!-- Appointment Date -->
+            <Label
+                x:Name="AppointmentDateLabel"
+                Text="Appointment Date:"
+                TextColor="#005486"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                FontSize="18"
+                FontFamily="{StaticResource Montserrat-Bold}"
+                Margin="20,0,0,0"/>
+
+            <Label
                 x:Name="AppointmentDate"
-                FontSize="Large"/>
-            <Label x:Name="ReasonLabel" 
-                   Text="Reason For Visit:"
-                   FontSize="Large"/>
-            <Label x:Name="Reason"
-                   FontSize="Large"/>
-            <Label x:Name="DiagnosisLabel" 
-                   Text="Diagnosis:"
-                   FontSize="Large"/>
-            <Label x:Name="Diagnosis"
-                   FontSize="Large"/>
-            <Label x:Name="FollowUpRecsLabel"
-                   Text="Aftercare:" 
-                   FontSize="Large" />
+                FontFamily="{StaticResource Montserrat-SemiBold}"
+                FontSize="16"
+                TextColor="Black"
+                Margin="20,0,0,10"/>
+
+            <!-- Reason For Visit -->
+            <Label
+                x:Name="ReasonLabel"
+                Text="Reason For Visit:"
+                TextColor="#005486"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                FontSize="18"
+                FontFamily="{StaticResource Montserrat-Bold}"
+                Margin="20,0,0,0"/>
+
+            <Label
+                x:Name="Reason"
+                FontFamily="{StaticResource Montserrat-SemiBold}"
+                FontSize="16"
+                TextColor="Black"
+                Margin="20,0,0,10"/>
+
+            <!-- Diagnosis -->
+            <Label
+                x:Name="DiagnosisLabel"
+                Text="Diagnosis:"
+                TextColor="#005486"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                FontSize="18"
+                FontFamily="{StaticResource Montserrat-Bold}"
+                Margin="20,0,0,0"/>
+
+            <Label
+                x:Name="Diagnosis"
+                FontFamily="{StaticResource Montserrat-SemiBold}"
+                FontSize="16"
+                TextColor="Black"
+                Margin="20,0,0,10"/>
+
+            <!-- Aftercare -->
+            <Label
+                x:Name="FollowUpRecsLabel"
+                Text="Aftercare:"
+                TextColor="#005486"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                FontSize="18"
+                FontFamily="{StaticResource Montserrat-Bold}"
+                Margin="20,0,0,0"/>
+
             <Label
                 x:Name="FollowUpRecs"
-                FontSize="Large"/>
+                FontFamily="{StaticResource Montserrat-SemiBold}"
+                FontSize="16"
+                TextColor="Black"
+                Margin="20,0,0,10"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

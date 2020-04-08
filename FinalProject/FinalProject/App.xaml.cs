@@ -1,21 +1,22 @@
-﻿using System;
+﻿using Plugin.LocalNotifications;
+using SQLite;
+using SQLiteNetExtensions.Extensions;
+using System;
+using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Plugin.LocalNotifications;
-using SQLiteNetExtensions.Extensions;
 
 namespace FinalProject
 {
+    [Preserve(AllMembers = true)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    #region Constructor
     public partial class App : Application
     {
         public static string FilePath;
         public App(string filePath)
         {
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjMyMTM2QDMxMzgyZTMxMmUzMGpzYzNpT1FVcnp4ZDJwdWhQUDhNdnI0MlNxMTlLTEEyZkRIOStpYkpMTlE9");
             InitializeComponent();
 
             MainPage = new MainPage();
@@ -46,7 +47,9 @@ namespace FinalProject
                 conn.Close();
             }
         }
+        #endregion
 
+        #region Methods
         protected override void OnStart()
         {
         }
@@ -59,4 +62,5 @@ namespace FinalProject
         {
         }
     }
+    #endregion
 }

@@ -4,24 +4,67 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="FinalProject.VaccineDetail">
+             x:Class="FinalProject.VaccineDetail"
+             BackgroundImageSource="LoginBackground.png"
+             Title="My Vaccines">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Vaccine:" 
-               FontSize="Large"/>
-            <Label 
+            <Image
+                Source="logoInt.png"
+                VerticalOptions="Center"
+                HeightRequest="125"
+                Margin="0,30,0,30"/>
+
+            <!-- Vaccine -->
+            <Label
+                Text="Vaccine:"
+                TextColor="#005486"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                FontSize="18"
+                FontFamily="{StaticResource Montserrat-Bold}"
+                Margin="20,0,0,0"/>
+
+            <Label
                 x:Name="VaccineName"
-                FontSize="Large"/>
-            <Label Text="Vaccinating Doctor:"
-                   FontSize="Large"/>
+                FontFamily="{StaticResource Montserrat-SemiBold}"
+                FontSize="16"
+                TextColor="Black"
+                Margin="20,0,0,10"/>
+
+            <!-- Vaccinating Doctor -->
+            <Label
+                Text="Vaccinating Doctor:"
+                TextColor="#005486"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                FontSize="18"
+                FontFamily="{StaticResource Montserrat-Bold}"
+                Margin="20,0,0,0"/>
+
             <Label
                 x:Name="DName"
-                FontSize="Large"/>
-            <Label Text="Date of Vaccination:" 
-               FontSize="Large" />
+                FontFamily="{StaticResource Montserrat-SemiBold}"
+                FontSize="16"
+                TextColor="Black"
+                Margin="20,0,0,10"/>
+
+            <!-- Date of Vaccination -->
+            <Label
+                Text="Date of Vaccination:"
+                TextColor="#005486"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                FontSize="18"
+                FontFamily="{StaticResource Montserrat-Bold}"
+                Margin="20,0,0,0"/>
+
             <Label
                 x:Name="VaccineDate"
-                FontSize="Large"/>
+                FontFamily="{StaticResource Montserrat-SemiBold}"
+                FontSize="16"
+                TextColor="Black"
+                Margin="20,0,0,10"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

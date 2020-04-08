@@ -2,12 +2,10 @@
 using SQLiteNetExtensions.Extensions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Plugin.LocalNotifications;
 
 namespace FinalProject
 {
@@ -16,10 +14,19 @@ namespace FinalProject
     {
         Doctor doctor;
         User user;
-        bool t0, t1, t2, t3, t4, t5, t6, p0renew, p1renew, p2renew = false;
+        bool t0, t1, t2, t3, t4, t5, t6, p0renew, p1renew, p2renew, needReminder = false;
         public AppointmentForum(Appointment appointment)
         {
             InitializeComponent();
+            Reason.Text = appointment.reasonForVisit;
+            Diagnosis.Text = appointment.diagnosis;
+            FollowUpRecsEntry.Text = appointment.followUpAdvice;
+            Rx0Name.Text = "";
+            Rx1Name.Text = "";
+            Rx2Name.Text = "";
+            Vaccine0Name.Text = "";
+            Vaccine1Name.Text = "";
+            Vaccine2Name.Text = "";
             using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
             {
                 user = conn.GetWithChildren<User>(appointment.uId);
@@ -63,10 +70,12 @@ namespace FinalProject
             FollowUpTimeEntry.IsVisible = false;
             FollowUpDateLabel.IsVisible = false;
             FollowUpTimeLabel.IsVisible = false;
+            FollowUpReminderEntry.IsVisible = false;
         }
 
         async void ButtonClicked(object sender, EventArgs e)
         {
+
             //Creates the appointment item to be inserted in the database
             Appointment appointment = new Appointment()
             {
@@ -129,13 +138,21 @@ namespace FinalProject
                 dId = doctor.Id,
                 uId = user.Id
             };
+
             //Creates a future appointment for the user
             Appointment fa = new Appointment()
             {
-                aptDate = FollowUpDateEntry.Date.Add(AppointmentTimeEntry.Time),
+                aptDate = FollowUpDateEntry.Date.Add(FollowUpTimeEntry.Time),
+                reminderTime = FollowUpDateEntry.Date.Add(FollowUpReminderEntry.Time),
                 dId = doctor.Id,
                 uId = user.Id
             };
+
+            //Creates a reminder notification for a future appointment and submits it to the Android OS to handle
+            if(needReminder == true)
+            {
+                CrossLocalNotifications.Current.Show("Appointment Reminder", "You have an appointment with Dr. " + doctor.dName + " at " + fa.aptDate.ToShortTimeString(), fa.Id, fa.reminderTime);
+            }
 
             //Adds the appointment to the user's appointment list
             if (user.Appointments == null)
@@ -162,7 +179,7 @@ namespace FinalProject
             {
                 doctor.Appointments.Add(appointment);
             }
-            
+
             //Checks if the first prescription has a null value
             if (!(p0.RxName.Equals("")))
             {
@@ -176,7 +193,7 @@ namespace FinalProject
                 //If they do, then just change the end date
                 if (user.Prescriptions != null)
                 {
-                    foreach(Prescription rx in user.Prescriptions)
+                    foreach (Prescription rx in user.Prescriptions)
                     {
                         if (rx.RxName.Equals(p0.RxName))
                         {
@@ -409,7 +426,7 @@ namespace FinalProject
                 Rx0EndLabel.IsVisible = true;
                 Rx0Label.IsVisible = true;
                 Rx0Name.IsVisible = true;
-                Rx0StartDate.IsVisible = true; 
+                Rx0StartDate.IsVisible = true;
                 Rx0StartLabel.IsVisible = true;
                 Rx0More.IsVisible = true;
                 togSwitch1.IsVisible = true;
@@ -506,7 +523,7 @@ namespace FinalProject
         {
             t3 = !t3;
 
-            if(t3)
+            if (t3)
             {
                 Vaccine0Label.IsVisible = true;
                 Vaccine1More.IsVisible = true;
@@ -577,6 +594,9 @@ namespace FinalProject
                 FollowUpDateLabel.IsVisible = true;
                 FollowUpTimeEntry.IsVisible = true;
                 FollowUpTimeLabel.IsVisible = true;
+                FollowUpReminderLabel.IsVisible = true;
+                FollowUpReminderEntry.IsVisible = true;
+                needReminder = true;
             }
             else
             {
@@ -584,6 +604,9 @@ namespace FinalProject
                 FollowUpTimeEntry.IsVisible = false;
                 FollowUpDateLabel.IsVisible = false;
                 FollowUpTimeLabel.IsVisible = false;
+                FollowUpReminderLabel.IsVisible = false;
+                FollowUpReminderEntry.IsVisible = false;
+                needReminder = false;
             }
         }
     }

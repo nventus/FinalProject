@@ -4,29 +4,78 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="FinalProject.ScriptDetails">
+             x:Class="FinalProject.ScriptDetails"
+             BackgroundImageSource="LoginBackground.png"
+             Title="My Prescriptions Details">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Prescription Name:" 
-               FontSize="Large"/>
-            <Label 
+            <!-- Prescription Name -->
+            <Label
+                Text="Prescription Name:"
+                TextColor="#005486"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                FontSize="18"
+                FontFamily="{StaticResource Montserrat-Bold}"
+                Margin="20,0,0,0"/>
+
+            <Label
                 x:Name="ScriptName"
-                FontSize="Large"/>
-            <Label Text="Prescribing Doctor:"
-                   FontSize="Large"/>
+                FontFamily="{StaticResource Montserrat-SemiBold}"
+                FontSize="16"
+                TextColor="Black"
+                Margin="20,0,0,10"/>
+
+            <!-- Prescribing Doctor -->
+            <Label
+                Text="Prescribing Doctor:"
+                TextColor="#005486"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                FontSize="18"
+                FontFamily="{StaticResource Montserrat-Bold}"
+                Margin="20,0,0,0"/>
+
             <Label
                 x:Name="DName"
-                FontSize="Large"/>
-            <Label Text="Date of Prescription:" 
-               FontSize="Large" />
+                FontFamily="{StaticResource Montserrat-SemiBold}"
+                FontSize="16"
+                TextColor="Black"
+                Margin="20,0,0,10"/>
+
+            <!-- Date of Prescription -->
+            <Label
+                Text="Date of Prescription:"
+                TextColor="#005486"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                FontSize="18"
+                FontFamily="{StaticResource Montserrat-Bold}"
+                Margin="20,0,0,0"/>
+
             <Label
                 x:Name="ScriptDate"
-                FontSize="Large"/>
-            <Label Text="Last Date of Use:" 
-               FontSize="Large" />
+                FontFamily="{StaticResource Montserrat-SemiBold}"
+                FontSize="16"
+                TextColor="Black"
+                Margin="20,0,0,10"/>
+
+            <!-- Last Date of Use-->
+            <Label
+                Text="Last Date of Use:"
+                TextColor="#005486"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                FontSize="18"
+                FontFamily="{StaticResource Montserrat-Bold}"
+                Margin="20,0,0,0"/>
+
             <Label
                 x:Name="LScriptDate"
-                FontSize="Large"/>
+                FontFamily="{StaticResource Montserrat-SemiBold}"
+                FontSize="16"
+                TextColor="Black"
+                Margin="20,0,0,10"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

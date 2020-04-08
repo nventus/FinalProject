@@ -4,21 +4,35 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="FinalProject.ScriptList">
+             x:Class="FinalProject.ScriptList"
+             Title="My Precriptions"
+             BackgroundImageSource="LoginBackground.png">
     <ContentPage.Content>
         <ListView x:Name="RxListView"
-                  ItemSelected="RxSelected">
+                  ItemSelected="RxSelected"
+                  HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.ContextActions>
-                            <MenuItem Clicked="OnEdit"
-                                  CommandParameter="{Binding Id}"
-                             Text="Edit" IsDestructive="True" />
+                            <MenuItem
+                                Clicked="OnEdit"
+                                CommandParameter="{Binding Id}"
+                                Text="Edit"
+                                IsDestructive="True" />
                         </ViewCell.ContextActions>
+
                         <StackLayout Padding="15,0">
-                            <Label Text="{Binding RxName}"/>
-                            <Label Text="{Binding endDate}"/>
+
+                            <Label Text="{Binding RxName}"
+                                   TextColor="#005486"
+                                   FontSize="16"
+                                   FontFamily="{StaticResource Montserrat-SemiBold}"/>
+                            <Label Text="{Binding endDate}"
+                                   TextColor="Black"
+                                   FontSize="14"
+                                   FontFamily="{StaticResource Montserrat-SemiBold}"
+                                   Margin="0,0,0,10"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

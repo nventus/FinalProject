@@ -14,12 +14,21 @@
             <DataTemplate>
                 <ViewCell>
                     <ViewCell.ContextActions>
-                        <MenuItem Clicked="OnDelete"
-                                  CommandParameter="{Binding Type}"
-                             Text="Delete" IsDestructive="True" />
+                        <MenuItem
+                            Clicked="OnDelete"
+                            CommandParameter="{Binding Type}"
+                            Text="Delete" IsDestructive="True" />
                     </ViewCell.ContextActions>
-                    <StackLayout Padding="15,0">
-                        <Label Text="{Binding Type}" />
+                    <StackLayout Padding="15,0" Margin="0,20,0,0">
+                        <Label
+                            Text="{Binding Type}"
+                            TextColor="#005486"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Start"
+                            FontSize="18"
+                            FontFamily="{StaticResource Montserrat-SemiBold}"
+                            Margin="10,0,0,0" />
+
                     </StackLayout>
                 </ViewCell>
             </DataTemplate>

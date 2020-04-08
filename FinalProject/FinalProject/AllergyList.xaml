@@ -4,22 +4,32 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="FinalProject.AllergyList">
+             x:Class="FinalProject.AllergyList"
+             BackgroundImageSource="LoginBackground.png"
+             Title="My Allergies">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add Allergy"
                      Clicked="newAllergyClicked"/>
     </ContentPage.ToolbarItems>
-    <ListView x:Name="allergyListView">
+    <ListView x:Name="allergyListView" HasUnevenRows="True">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
                     <ViewCell.ContextActions>
-                        <MenuItem Clicked="OnDelete"
-                                  CommandParameter="{Binding Type}"
-                             Text="Delete" IsDestructive="True" />
+                        <MenuItem
+                            Clicked="OnDelete"
+                            CommandParameter="{Binding Type}"
+                            Text="Delete" IsDestructive="True" />
                     </ViewCell.ContextActions>
-                    <StackLayout Padding="15,0">
-                        <Label Text="{Binding Type}"/>
+                    <StackLayout Padding="15,0" Margin="0,20,0,0">
+                        <Label
+                            Text="{Binding Type}"
+                            TextColor="#005486"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Start"
+                            FontSize="16"
+                            FontFamily="{StaticResource Montserrat-SemiBold}"
+                            Margin="20,0,0,0" />
                     </StackLayout>
                 </ViewCell>
             </DataTemplate>

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace FinalProject
@@ -43,8 +39,8 @@ namespace FinalProject
         }
         private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-                User selectedUser = e.SelectedItem as User;
-                Detail = new NavigationPage(new OptionList(selectedUser.Id));
+            User selectedUser = e.SelectedItem as User;
+            Detail = new NavigationPage(new OptionList(selectedUser.Id));
 
             //Navigation.PushModalAsync(new NavigationPage(new OptionList(selectedUser.Id)));
 

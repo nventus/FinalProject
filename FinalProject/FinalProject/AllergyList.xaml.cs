@@ -2,9 +2,6 @@
 using SQLiteNetExtensions.Extensions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -40,9 +37,9 @@ namespace FinalProject
             }
             int result;
             Allergy al;
+            List<Allergy> allergies = user.Allergies;
             if (user.Allergies.Count > 0)
             {
-                List<Allergy> allergies = user.Allergies;
                 for (int i = 0; i < allergies.Count - 1; i++)
                 {
                     for (int j = 0; j < allergies.Count - i - 1; j++)
@@ -56,10 +53,10 @@ namespace FinalProject
                         }
                     }
                 }
-                allergyListView.ItemsSource = allergies;
             }
+            allergyListView.ItemsSource = allergies;
         }
-        private void newAllergyClicked(object sender, EventArgs e)
+    private void newAllergyClicked(object sender, EventArgs e)
         {
 
             Allergy allergy = new Allergy

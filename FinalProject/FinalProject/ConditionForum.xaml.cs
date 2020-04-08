@@ -1,10 +1,6 @@
 ﻿using FinalProject.Tables;
 using SQLiteNetExtensions.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -58,7 +54,7 @@ namespace FinalProject
             {
                 foreach (User u in cond.Users)
                 {
-                    if(u.Id == condition.Users[0].Id)
+                    if (u.Id == condition.Users[0].Id)
                     {
                         exists = true;
                     }

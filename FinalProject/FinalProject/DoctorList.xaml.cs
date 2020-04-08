@@ -2,9 +2,6 @@
 using SQLiteNetExtensions.Extensions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -19,7 +16,7 @@ namespace FinalProject
         public DoctorList(int id)
         {
             InitializeComponent();
-            uid = id;          
+            uid = id;
         }
         protected override void OnAppearing()
         {
@@ -41,7 +38,7 @@ namespace FinalProject
             int result;
             Doctor doc;
             if (user.Doctors.Count > 0)
-            { 
+            {
                 List<Doctor> doctors = user.Doctors;
                 for (int i = 0; i < doctors.Count - 1; i++)
                 {
@@ -72,6 +69,5 @@ namespace FinalProject
             Doctor selectedDoctor = e.SelectedItem as Doctor;
             Navigation.PushAsync(new AppointmentList(selectedDoctor, user));
         }
-
     }
 }

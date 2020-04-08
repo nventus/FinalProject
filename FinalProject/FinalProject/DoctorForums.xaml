@@ -3,37 +3,136 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              mc:Ignorable="d"
-             x:Class="FinalProject.DoctorForums">
+             x:Class="FinalProject.DoctorForums"
+             BackgroundImageSource="LoginBackground.png"
+             Title="Add A Doctor">
     <ContentPage.Content>
-        <StackLayout>
-            <!-- Place new controls here -->
-            <Label Text="Doctor Name:" 
-               FontSize="Large" />
-            <Editor Text=""
-                x:Name="NameEntry"/>
-            <Label Text="Doctor's Practice:" 
-               FontSize="Large"/>
-            <Editor Text=""
-                x:Name="PracticeEntry"/>
-            <Label Text="Type of Doctor:" 
-               FontSize="Large" />
-            <Editor Text=""
-                x:Name="TypeEntry"/>
-            <Label Text="Address:" 
-               FontSize="Large" />
-            <Editor Text=""
-                x:Name="AddressEntry"/>
-            <Label Text="Phone Number:" 
-               FontSize="Large"/>
-            <Editor Text=""
-                x:Name="PhoneEntry"/>
-            <Label Text="Email:"
-               FontSize="Large"/>
-            <Editor Text=""
-                x:Name="EmailEntry"/>
-            <Button x:Name="SubmitButton" Text = "Submit" FontSize="Large" HorizontalOptions="Center"
-                    VerticalOptions="Fill" Clicked="ButtonClicked" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout>
+                <Image
+
+                        Source="logoInt.png"
+                        VerticalOptions="Center"
+                        HeightRequest="125"
+                        Margin="0,30,0,30"/>
+                <!-- Doctor's Name -->
+                <Label
+                        Text="Doctor Name:"
+                        TextColor="#005486"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Start"
+                        FontSize="18"
+                        FontFamily="{StaticResource Montserrat-Bold}"
+                        Margin="20,0,0,0"/>
+
+                <Editor
+                        FontFamily="{StaticResource Montserrat-SemiBold}"
+                        FontSize="17"
+                        x:Name="NameEntry"
+                        TextColor="Black"
+                        Margin="20,0,20,10"/>
+
+                <!-- Doctor's Practice -->
+                <Label
+                        Text="Doctor's Practice:"
+                        TextColor="#005486"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Start"
+                        FontSize="18"
+                        FontFamily="{StaticResource Montserrat-Bold}"
+                        Margin="20,0,0,0"/>
+
+                <Editor
+                        FontFamily="{StaticResource Montserrat-SemiBold}"
+                        FontSize="17"
+                        x:Name="PracticeEntry"
+                        TextColor="Black"
+                        Margin="20,0,20,10"/>
+
+                <!-- Type of Doctor -->
+                <Label
+                        Text="Type of Doctor:"
+                        TextColor="#005486"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Start"
+                        FontSize="18"
+                        FontFamily="{StaticResource Montserrat-Bold}"
+                        Margin="20,0,0,0"/>
+
+                <Editor
+                        FontFamily="{StaticResource Montserrat-SemiBold}"
+                        FontSize="17"
+                        x:Name="TypeEntry"
+                        TextColor="Black"
+                        Margin="20,0,20,10"/>
+
+                <!-- Address -->
+                <Label
+                        Text="Address:"
+                        TextColor="#005486"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Start"
+                        FontSize="18"
+                        FontFamily="{StaticResource Montserrat-Bold}"
+                        Margin="20,0,0,0"/>
+
+                <Editor
+                        FontFamily="{StaticResource Montserrat-SemiBold}"
+                        FontSize="17"
+                        x:Name="AddressEntry"
+                        TextColor="Black"
+                        Margin="20,0,20,10"/>
+
+                <!-- Phone Number -->
+                <Label
+                        Text="Phone Number:"
+                        TextColor="#005486"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Start"
+                        FontSize="18"
+                        FontFamily="{StaticResource Montserrat-Bold}"
+                        Margin="20,0,0,0"/>
+
+                <Editor
+                        FontFamily="{StaticResource Montserrat-SemiBold}"
+                        FontSize="17"
+                        x:Name="PhoneEntry"
+                        TextColor="Black"
+                        Margin="20,0,20,10"/>
+
+                <!-- Email -->
+                <Label
+                        Text="Email:"
+                        TextColor="#005486"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Start"
+                        FontSize="18"
+                        FontFamily="{StaticResource Montserrat-Bold}"
+                        Margin="20,0,0,0"/>
+
+                <Editor
+                        FontFamily="{StaticResource Montserrat-SemiBold}"
+                        FontSize="17"
+                        x:Name="EmailEntry"
+                        TextColor="Black"
+                        Margin="20,0,20,10"/>
+
+                <buttons:SfButton
+                    CornerRadius="20"
+                    BorderWidth="1"
+                    BorderColor="Black"
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                    Margin="8,20,8,40"
+                    x:Name="SubmitButton"
+                    Text = "Submit"
+                    FontSize="18"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Fill"
+                    Clicked="ButtonClicked" />
+
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

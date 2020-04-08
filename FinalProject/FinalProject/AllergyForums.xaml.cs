@@ -1,10 +1,6 @@
 ﻿using FinalProject.Tables;
 using SQLiteNetExtensions.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -54,7 +50,7 @@ namespace FinalProject
             }
             else
             {
-                foreach(User u in a.Users)
+                foreach (User u in a.Users)
                 {
                     if (u.Id == allergy.Users[0].Id)
                     {
