@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FinalProject.Tables;
+using SQLiteNetExtensions.Extensions;
+using System;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -21,7 +23,21 @@ namespace FinalProject
         }
         private void LogAptClicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new DoctorList(uid));
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
+            {
+                conn.CreateTable<User>();
+                //Ignored if the table already exists
+                conn.CreateTable<Doctor>();
+                conn.CreateTable<UsersDoctors>();
+                conn.CreateTable<Vaccine>();
+                conn.CreateTable<Allergy>();
+                conn.CreateTable<UsersAllergies>();
+                conn.CreateTable<Prescription>();
+                conn.CreateTable<Tables.Conditions>();
+                conn.CreateTable<UsersConditions>();
+                User user = conn.GetWithChildren<User>(uid);
+                Navigation.PushAsync(new AppointmentList(user));
+            }
         }
 
         private void RxClicked(object sender, EventArgs e)
@@ -49,6 +65,10 @@ namespace FinalProject
         private void CalendarClicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new Calendar(uid));
+        }
+        private void DoctorClicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new DoctorList(uid));
         }
     }
 }

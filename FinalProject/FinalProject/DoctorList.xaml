@@ -13,7 +13,6 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ListView x:Name="doctorListView"
-                  ItemSelected="doctorSelected" 
                   HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>

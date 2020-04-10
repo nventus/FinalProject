@@ -157,6 +157,24 @@
                                 HorizontalOptions="Center"
                                 VerticalOptions="CenterAndExpand"
                                 Margin="0,0,0,20"/>
+
+                            <ImageButton
+                                x:Name="DoctorButton"
+                                Source="calendar.png"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Start"
+                                BackgroundColor="Transparent"
+                                HeightRequest="100"
+                                Clicked="DoctorClicked"/>
+
+                            <!--My Doctors-->
+                            <Label
+                                Text="My Doctors"
+                                FontSize="18"
+                                TextColor="#005486"
+                                HorizontalOptions="Center"
+                                VerticalOptions="CenterAndExpand"
+                                Margin="0,0,0,20"/>
                         </StackLayout>
                     </Grid>
                 </StackLayout>

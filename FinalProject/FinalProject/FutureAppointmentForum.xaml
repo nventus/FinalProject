@@ -15,6 +15,28 @@
                 HeightRequest="125"
                 Margin="0,30,0,30"/>
 
+
+            <Label
+                    Text="Doctor Name:"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+            <Picker
+                    x:Name="DoctorPicker"
+                    Title="Select your doctor"
+                    SelectedIndexChanged="OnPickerSelectedIndexChanged"
+                    TitleColor="#005486"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+            
             <!-- Appointment Date -->
             <Label
                 Text="Appointment Date:"

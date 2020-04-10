@@ -13,8 +13,10 @@
                      Clicked="futureAppointmentClicked"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-
-        <ListView
+        <StackLayout>
+            <SearchBar x:Name="search"
+                       TextChanged="OnSearch"/>
+            <ListView
             x:Name="appointmentListView"
             ItemSelected="appointmentSelected"
             HasUnevenRows="True">
@@ -37,7 +39,7 @@
                                 Margin="10,0,0,0" />
 
                             <Label
-                                Text="{Binding reasonForVisit}"
+                                Text="{Binding dName}"
                                 TextColor="Black"
                                 HorizontalOptions="Start"
                                 VerticalOptions="Start"
@@ -49,5 +51,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

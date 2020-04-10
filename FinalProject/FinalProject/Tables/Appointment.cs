@@ -38,6 +38,11 @@ namespace FinalProject
             set;
         }
 
+        public string dName
+        {
+            get;
+            set;
+        }
         public string diagnosis
         {
             get;

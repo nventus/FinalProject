@@ -12,8 +12,9 @@ namespace FinalProject
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AppointmentForum : ContentPage
     {
-        Doctor doctor;
+        Doctor doctor = new Doctor();
         User user;
+        List<Doctor> dList = new List<Doctor>();
         bool t0, t1, t2, t3, t4, t5, t6, p0renew, p1renew, p2renew, needReminder = false;
         public AppointmentForum(Appointment appointment)
         {
@@ -27,10 +28,17 @@ namespace FinalProject
             Vaccine0Name.Text = "";
             Vaccine1Name.Text = "";
             Vaccine2Name.Text = "";
+            doctor.dName = "12345";
             using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
             {
                 user = conn.GetWithChildren<User>(appointment.uId);
-                doctor = conn.GetWithChildren<Doctor>(appointment.dId);
+                List<string> dNames = new List<string>();
+                foreach(Doctor d in user.Doctors)
+                {
+                    dNames.Add(conn.GetWithChildren<Doctor>(d.Id).dName);
+                }
+                dList = user.Doctors;
+                DoctorPicker.ItemsSource = dNames;
                 //var doctors = conn.Query<Doctor>("select * from Doctor where Id=?", appointment.dId);
                 //doctor = doctors[0];
             }
@@ -75,347 +83,381 @@ namespace FinalProject
 
         async void ButtonClicked(object sender, EventArgs e)
         {
-
-            //Creates the appointment item to be inserted in the database
-            Appointment appointment = new Appointment()
+            if(doctor.dName.Equals("12345"))
             {
-                aptDate = AppointmentDateEntry.Date.Add(AppointmentTimeEntry.Time),
-                reasonForVisit = Reason.Text,
-                diagnosis = Diagnosis.Text,
-                followUpAdvice = FollowUpRecsEntry.Text,
-                dId = doctor.Id,
-                uId = user.Id
-            };
-            //Creates the prescription 0 item to be inserted in the database
-            Prescription p0 = new Prescription()
-            {
-                RxName = Rx0Name.Text,
-                startDate = Rx0StartDate.Date.ToShortDateString(),
-                endDate = Rx0EndDate.Date.ToShortDateString(),
-                dId = doctor.Id,
-                uId = user.Id
-            };
-            //Creates the prescription 1 item to be inserted in the database
-            Prescription p1 = new Prescription()
-            {
-                RxName = Rx1Name.Text,
-                startDate = Rx1StartDate.Date.ToShortDateString(),
-                endDate = Rx1EndDate.Date.ToShortDateString(),
-                dId = doctor.Id,
-                uId = user.Id
-            };
-            //Creates the prescription 2 item to be inserted in the database
-            Prescription p2 = new Prescription()
-            {
-                RxName = Rx2Name.Text,
-                startDate = Rx2StartDate.Date.ToShortDateString(),
-                endDate = Rx2EndDate.Date.ToShortDateString(),
-                dId = doctor.Id,
-                uId = user.Id
-            };
-
-            //Creates the vaccine 0 item to be inserted in the database
-            Vaccine v0 = new Vaccine()
-            {
-                VaccineName = Vaccine0Name.Text,
-                Date = AppointmentDateEntry.Date.ToShortDateString(),
-                dId = doctor.Id,
-                uId = user.Id
-            };
-            //Creates the vaccine 1 item to be inserted in the database
-            Vaccine v1 = new Vaccine()
-            {
-                VaccineName = Vaccine1Name.Text,
-                Date = AppointmentDateEntry.Date.ToShortDateString(),
-                dId = doctor.Id,
-                uId = user.Id
-            };
-            //Creates the vaccine 2 item to be inserted in the database
-            Vaccine v2 = new Vaccine()
-            {
-                VaccineName = Vaccine2Name.Text,
-                Date = AppointmentDateEntry.Date.ToShortDateString(),
-                dId = doctor.Id,
-                uId = user.Id
-            };
-
-            //Creates a future appointment for the user
-            Appointment fa = new Appointment()
-            {
-                aptDate = FollowUpDateEntry.Date.Add(FollowUpTimeEntry.Time),
-                reminderTime = FollowUpDateEntry.Date.Add(FollowUpReminderEntry.Time),
-                dId = doctor.Id,
-                uId = user.Id
-            };
-
-            //Creates a reminder notification for a future appointment and submits it to the Android OS to handle
-            if(needReminder == true)
-            {
-                CrossLocalNotifications.Current.Show("Appointment Reminder", "You have an appointment with Dr. " + doctor.dName + " at " + fa.aptDate.ToShortTimeString(), fa.Id, fa.reminderTime);
-            }
-
-            //Adds the appointment to the user's appointment list
-            if (user.Appointments == null)
-            {
-                user.Appointments = new List<Appointment>
-                {
-                    appointment
-                };
+                await DisplayAlert("Oops!", "Your need to choose a doctor", "OK");
             }
             else
             {
-                user.Appointments.Add(appointment);
-            }
+                //Creates the appointment item to be inserted in the database
+                Appointment appointment = new Appointment()
+                {
+                    aptDate = AppointmentDateEntry.Date.Add(AppointmentTimeEntry.Time),
+                    reasonForVisit = Reason.Text,
+                    diagnosis = Diagnosis.Text,
+                    followUpAdvice = FollowUpRecsEntry.Text,
+                    uId = user.Id,
+                    dName = doctor.dName
+                };
 
-            //Adds the appointment to the doctor's appointment list
-            if (doctor.Appointments == null)
-            {
-                doctor.Appointments = new List<Appointment>
+                using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
+                {
+                    doctor = conn.Query<Doctor>("select * from Doctor where dName=?", doctor.dName)[0];
+                    doctor = conn.GetWithChildren<Doctor>(doctor.Id);
+                }
+                appointment.dId = doctor.Id;
+
+                //Creates the prescription 0 item to be inserted in the database
+                Prescription p0 = new Prescription()
+                {
+                    RxName = Rx0Name.Text,
+                    startDate = Rx0StartDate.Date.ToShortDateString(),
+                    endDate = Rx0EndDate.Date.ToShortDateString(),
+                    dId = doctor.Id,
+                    uId = user.Id
+                };
+                //Creates the prescription 1 item to be inserted in the database
+                Prescription p1 = new Prescription()
+                {
+                    RxName = Rx1Name.Text,
+                    startDate = Rx1StartDate.Date.ToShortDateString(),
+                    endDate = Rx1EndDate.Date.ToShortDateString(),
+                    dId = doctor.Id,
+                    uId = user.Id
+                };
+                //Creates the prescription 2 item to be inserted in the database
+                Prescription p2 = new Prescription()
+                {
+                    RxName = Rx2Name.Text,
+                    startDate = Rx2StartDate.Date.ToShortDateString(),
+                    endDate = Rx2EndDate.Date.ToShortDateString(),
+                    dId = doctor.Id,
+                    uId = user.Id
+                };
+
+                //Creates the vaccine 0 item to be inserted in the database
+                Vaccine v0 = new Vaccine()
+                {
+                    VaccineName = Vaccine0Name.Text,
+                    Date = AppointmentDateEntry.Date.ToShortDateString(),
+                    dId = doctor.Id,
+                    uId = user.Id
+                };
+                //Creates the vaccine 1 item to be inserted in the database
+                Vaccine v1 = new Vaccine()
+                {
+                    VaccineName = Vaccine1Name.Text,
+                    Date = AppointmentDateEntry.Date.ToShortDateString(),
+                    dId = doctor.Id,
+                    uId = user.Id
+                };
+                //Creates the vaccine 2 item to be inserted in the database
+                Vaccine v2 = new Vaccine()
+                {
+                    VaccineName = Vaccine2Name.Text,
+                    Date = AppointmentDateEntry.Date.ToShortDateString(),
+                    dId = doctor.Id,
+                    uId = user.Id
+                };
+
+                //Creates a future appointment for the user
+                Appointment fa = new Appointment()
+                {
+                    aptDate = FollowUpDateEntry.Date.Add(FollowUpTimeEntry.Time),
+                    reminderTime = FollowUpDateEntry.Date.Add(FollowUpReminderEntry.Time),
+                    dId = doctor.Id,
+                    uId = user.Id
+                };
+
+                //Creates a reminder notification for a future appointment and submits it to the Android OS to handle
+                if (needReminder == true)
+                {
+                    CrossLocalNotifications.Current.Show("Appointment Reminder", "You have an appointment with Dr. " + doctor.dName + " at " + fa.aptDate.ToShortTimeString(), fa.Id, fa.reminderTime);
+                }
+
+                //Adds the appointment to the user's appointment list
+                if (user.Appointments == null)
+                {
+                    user.Appointments = new List<Appointment>
                 {
                     appointment
                 };
-            }
-            else
-            {
-                doctor.Appointments.Add(appointment);
-            }
-
-            //Checks if the first prescription has a null value
-            if (!(p0.RxName.Equals("")))
-            {
-                using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
-                {
-                    //Ignored if the table already exists
-                    conn.CreateTable<Prescription>();
-                    conn.Insert(p0);
                 }
-                //If the prescription has a name, check to see if the user already has a log of said prescription
-                //If they do, then just change the end date
-                if (user.Prescriptions != null)
-                {
-                    foreach (Prescription rx in user.Prescriptions)
-                    {
-                        if (rx.RxName.Equals(p0.RxName))
-                        {
-                            p0renew = true;
-                            rx.endDate = p0.endDate;
-                        }
-                    }
-                    if (p0renew == false)
-                    {
-                        user.Prescriptions.Add(p0);
-                    }
-                }
-                //Otherwise, add the prescription to the user's list
                 else
                 {
-                    user.Prescriptions = new List<Prescription>
+                    user.Appointments.Add(appointment);
+                }
+
+                //Adds the appointment to the doctor's appointment list
+                if (doctor.Appointments == null)
+                {
+                    doctor.Appointments = new List<Appointment>
+                {
+                    appointment
+                };
+                }
+                else
+                {
+                    doctor.Appointments.Add(appointment);
+                }
+
+                //Checks if the first prescription has a null value
+                if (!(p0.RxName.Equals("")))
+                {
+                    using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
+                    {
+                        //Ignored if the table already exists
+                        conn.CreateTable<Prescription>();
+                        conn.Insert(p0);
+                    }
+                    //If the prescription has a name, check to see if the user already has a log of said prescription
+                    //If they do, then just change the end date
+                    if (user.Prescriptions != null)
+                    {
+                        foreach (Prescription rx in user.Prescriptions)
+                        {
+                            if (rx.RxName.Equals(p0.RxName))
+                            {
+                                p0renew = true;
+                                rx.endDate = p0.endDate;
+                            }
+                        }
+                        if (p0renew == false)
+                        {
+                            user.Prescriptions.Add(p0);
+                        }
+                    }
+                    //Otherwise, add the prescription to the user's list
+                    else
+                    {
+                        user.Prescriptions = new List<Prescription>
                     {
                         p0
                     };
-                }
-                //Add the prescription to the doctor's list
-                if (doctor.Prescriptions == null)
-                {
-                    doctor.Prescriptions = new List<Prescription>
+                    }
+                    //Add the prescription to the doctor's list
+                    if (doctor.Prescriptions == null)
+                    {
+                        doctor.Prescriptions = new List<Prescription>
                     {
                         p0
                     };
-                }
-                else
-                {
-                    doctor.Prescriptions.Add(p0);
-                }
-            }
-            if (!(p1.RxName.Equals("")))
-            {
-                using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
-                {
-                    //Ignored if the table already exists
-                    conn.CreateTable<Prescription>();
-                    conn.Insert(p1);
-                }
-                //If the prescription has a name, check to see if the user already has a log of said prescription
-                //If they do, then just change the end date
-                if (user.Prescriptions != null)
-                {
-                    foreach (Prescription rx in user.Prescriptions)
+                    }
+                    else
                     {
-                        if (rx.RxName.Equals(p1.RxName))
+                        doctor.Prescriptions.Add(p0);
+                    }
+                }
+                if (!(p1.RxName.Equals("")))
+                {
+                    using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
+                    {
+                        //Ignored if the table already exists
+                        conn.CreateTable<Prescription>();
+                        conn.Insert(p1);
+                    }
+                    //If the prescription has a name, check to see if the user already has a log of said prescription
+                    //If they do, then just change the end date
+                    if (user.Prescriptions != null)
+                    {
+                        foreach (Prescription rx in user.Prescriptions)
                         {
-                            p1renew = true;
-                            rx.endDate = p1.endDate;
+                            if (rx.RxName.Equals(p1.RxName))
+                            {
+                                p1renew = true;
+                                rx.endDate = p1.endDate;
+                            }
+                        }
+                        if (p1renew == false)
+                        {
+                            user.Prescriptions.Add(p1);
                         }
                     }
-                    if (p1renew == false)
+                    //Otherwise, add the prescription to the user's list
+                    else
                     {
-                        user.Prescriptions.Add(p1);
-                    }
-                }
-                //Otherwise, add the prescription to the user's list
-                else
-                {
-                    user.Prescriptions = new List<Prescription>
+                        user.Prescriptions = new List<Prescription>
                     {
                         p1
                     };
-                }
-                //Add the prescription to the doctor's list
-                if (doctor.Prescriptions == null)
-                {
-                    doctor.Prescriptions = new List<Prescription>
+                    }
+                    //Add the prescription to the doctor's list
+                    if (doctor.Prescriptions == null)
+                    {
+                        doctor.Prescriptions = new List<Prescription>
                     {
                         p1
                     };
-                }
-                else
-                {
-                    doctor.Prescriptions.Add(p1);
-                }
-            }
-            if (!(p2.RxName.Equals("")))
-            {
-                using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
-                {
-                    //Ignored if the table already exists
-                    conn.CreateTable<Prescription>();
-                    conn.Insert(p2);
-                }
-                //If the prescription has a name, check to see if the user already has a log of said prescription
-                //If they do, then just change the end date
-                if (user.Prescriptions != null)
-                {
-                    foreach (Prescription rx in user.Prescriptions)
+                    }
+                    else
                     {
-                        if (rx.RxName.Equals(p2.RxName))
+                        doctor.Prescriptions.Add(p1);
+                    }
+                }
+                if (!(p2.RxName.Equals("")))
+                {
+                    using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
+                    {
+                        //Ignored if the table already exists
+                        conn.CreateTable<Prescription>();
+                        conn.Insert(p2);
+                    }
+                    //If the prescription has a name, check to see if the user already has a log of said prescription
+                    //If they do, then just change the end date
+                    if (user.Prescriptions != null)
+                    {
+                        foreach (Prescription rx in user.Prescriptions)
                         {
-                            p2renew = true;
-                            rx.endDate = p2.endDate;
+                            if (rx.RxName.Equals(p2.RxName))
+                            {
+                                p2renew = true;
+                                rx.endDate = p2.endDate;
+                            }
+                        }
+                        if (p2renew == false)
+                        {
+                            user.Prescriptions.Add(p2);
                         }
                     }
-                    if (p2renew == false)
+                    //Otherwise, add the prescription to the user's list
+                    else
                     {
-                        user.Prescriptions.Add(p2);
+                        user.Prescriptions = new List<Prescription>
+                    {
+                        p2
+                    };
+                    }
+                    //Add the prescription to the doctor's list
+                    if (doctor.Prescriptions == null)
+                    {
+                        doctor.Prescriptions = new List<Prescription>
+                    {
+                        p2
+                    };
+                    }
+                    else
+                    {
+                        doctor.Prescriptions.Add(p2);
                     }
                 }
-                //Otherwise, add the prescription to the user's list
-                else
+                if (!(v0.VaccineName.Equals("")))
                 {
-                    user.Prescriptions = new List<Prescription>
+                    using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
                     {
-                        p2
-                    };
-                }
-                //Add the prescription to the doctor's list
-                if (doctor.Prescriptions == null)
-                {
-                    doctor.Prescriptions = new List<Prescription>
-                    {
-                        p2
-                    };
-                }
-                else
-                {
-                    doctor.Prescriptions.Add(p2);
-                }
-            }
-            if (!(v0.VaccineName.Equals("")))
-            {
-                using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
-                {
-                    //Ignored if the table already exists
-                    conn.CreateTable<Vaccine>();
-                    conn.Insert(v0);
-                }
+                        //Ignored if the table already exists
+                        conn.CreateTable<Vaccine>();
+                        conn.Insert(v0);
+                    }
 
-                if (user.Vaccines != null)
-                {
-                    user.Vaccines.Add(v0);
-                }
-                else
-                {
-                    user.Vaccines = new List<Vaccine>
+                    if (user.Vaccines != null)
+                    {
+                        user.Vaccines.Add(v0);
+                    }
+                    else
+                    {
+                        user.Vaccines = new List<Vaccine>
                     {
                         v0
                     };
+                    }
                 }
-            }
-            if (!(v1.VaccineName.Equals("")))
-            {
-                using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
+                if (!(v1.VaccineName.Equals("")))
                 {
-                    //Ignored if the table already exists
-                    conn.CreateTable<Vaccine>();
-                    conn.Insert(v1);
-                }
+                    using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
+                    {
+                        //Ignored if the table already exists
+                        conn.CreateTable<Vaccine>();
+                        conn.Insert(v1);
+                    }
 
-                if (user.Vaccines != null)
-                {
-                    user.Vaccines.Add(v1);
-                }
-                else
-                {
-                    user.Vaccines = new List<Vaccine>
+                    if (user.Vaccines != null)
+                    {
+                        user.Vaccines.Add(v1);
+                    }
+                    else
+                    {
+                        user.Vaccines = new List<Vaccine>
                     {
                         v1
                     };
+                    }
                 }
-            }
-            if (!(v2.VaccineName.Equals("")))
-            {
-                using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
+                if (!(v2.VaccineName.Equals("")))
                 {
-                    //Ignored if the table already exists
-                    conn.CreateTable<Vaccine>();
-                    conn.Insert(v2);
-                }
+                    using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
+                    {
+                        //Ignored if the table already exists
+                        conn.CreateTable<Vaccine>();
+                        conn.Insert(v2);
+                    }
 
-                if (user.Vaccines != null)
-                {
-                    user.Vaccines.Add(v2);
-                }
-                else
-                {
-                    user.Vaccines = new List<Vaccine>
+                    if (user.Vaccines != null)
+                    {
+                        user.Vaccines.Add(v2);
+                    }
+                    else
+                    {
+                        user.Vaccines = new List<Vaccine>
                     {
                         v2
                     };
+                    }
                 }
-            }
-            if (t6)
-            {
-                using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
+                if (t6)
                 {
-                    conn.CreateTable<Appointment>();
-                    conn.Insert(fa);
-                }
+                    using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
+                    {
+                        conn.CreateTable<Appointment>();
+                        conn.Insert(fa);
+                    }
 
-                if (user.Appointments != null)
-                {
-                    user.Appointments.Add(fa);
-                }
-                else
-                {
-                    user.Appointments = new List<Appointment>
+                    if (user.Appointments != null)
+                    {
+                        user.Appointments.Add(fa);
+                    }
+                    else
+                    {
+                        user.Appointments = new List<Appointment>
                     {
                         fa
                     };
+                    }
                 }
+                //Adds the appointment to the database
+                //updates the user with its new appointment info
+                //Updates the doctor with its new appointment info
+                using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
+                {
+                    //Ignored if the table already exists
+                    conn.CreateTable<Appointment>();
+                    conn.CreateTable<Doctor>();
+                    conn.CreateTable<User>();
+                    conn.Insert(appointment);
+                    conn.Update(user);
+                    conn.Update(doctor);
+                }
+                await Navigation.PopModalAsync();
             }
-            //Adds the appointment to the database
-            //updates the user with its new appointment info
-            //Updates the doctor with its new appointment info
-            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
+        }
+
+        private async void OnPickerSelectedIndexChanged(object sender, EventArgs e)
+        {
+            var picker = (Picker)sender;
+            int selectedIndex = picker.SelectedIndex;
+
+            if(selectedIndex != -1)
             {
-                //Ignored if the table already exists
-                conn.CreateTable<Appointment>();
-                conn.CreateTable<Doctor>();
-                conn.CreateTable<User>();
-                conn.Insert(appointment);
-                conn.Update(user);
-                conn.Update(doctor);
+                using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
+                {
+                    var doctors = conn.Query<Doctor>("select * from Doctor where dName=?", (string)picker.ItemsSource[selectedIndex]);
+                    doctor = conn.GetWithChildren<Doctor>(doctors[0].Id);
+                }
+                
             }
-            await Navigation.PopModalAsync();
+            else
+            {
+                await DisplayAlert("Oops!", "Your need to choose a doctor", "OK");
+            }
         }
         private void OnToggle0(object sender, ToggledEventArgs e)
         {

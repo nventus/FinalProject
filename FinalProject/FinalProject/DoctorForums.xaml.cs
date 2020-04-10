@@ -55,7 +55,7 @@ namespace FinalProject
                 using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
                 {
                     conn.CreateTable<Doctor>();
-                    var doctors = conn.Query<Doctor>("select * from Doctor where dName=? AND dPractice=?", doctor.dName, doctor.dPractice);
+                    var doctors = conn.Query<Doctor>("select * from Doctor where dName=?", doctor.dName);
                     //If the doctor already exists, then make sure that the user accessing this doesn't already see that doctor
                     if (doctors?.Any() == true)
                     {
