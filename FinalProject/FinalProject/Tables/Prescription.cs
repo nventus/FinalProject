@@ -38,5 +38,12 @@ namespace FinalProject
             get;
             set;
         }
+
+        [ForeignKey(typeof(Appointment))]
+        public int aId
+        {
+            get;
+            set;
+        }
     }
 }

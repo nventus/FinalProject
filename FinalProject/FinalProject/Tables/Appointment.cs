@@ -1,6 +1,8 @@
-﻿using SQLite;
+﻿using FinalProject.Tables;
+using SQLite;
 using SQLiteNetExtensions.Attributes;
 using System;
+using System.Collections.Generic;
 
 namespace FinalProject
 {
@@ -59,6 +61,18 @@ namespace FinalProject
         [ForeignKey(typeof(User))]
 
         public int uId
+        {
+            get;
+            set;
+        }
+        [OneToMany]
+        public List<Vaccine> Vaccines
+        {
+            get;
+            set;
+        }
+        [OneToMany]
+        public List<Prescription> Prescriptions
         {
             get;
             set;

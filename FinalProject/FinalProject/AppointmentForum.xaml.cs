@@ -114,7 +114,8 @@ namespace FinalProject
                     startDate = Rx0StartDate.Date.ToShortDateString(),
                     endDate = Rx0EndDate.Date.ToShortDateString(),
                     dId = doctor.Id,
-                    uId = user.Id
+                    uId = user.Id,
+                    aId = appointment.Id
                 };
                 //Creates the prescription 1 item to be inserted in the database
                 Prescription p1 = new Prescription()
@@ -123,7 +124,8 @@ namespace FinalProject
                     startDate = Rx1StartDate.Date.ToShortDateString(),
                     endDate = Rx1EndDate.Date.ToShortDateString(),
                     dId = doctor.Id,
-                    uId = user.Id
+                    uId = user.Id,
+                    aId = appointment.Id
                 };
                 //Creates the prescription 2 item to be inserted in the database
                 Prescription p2 = new Prescription()
@@ -132,7 +134,8 @@ namespace FinalProject
                     startDate = Rx2StartDate.Date.ToShortDateString(),
                     endDate = Rx2EndDate.Date.ToShortDateString(),
                     dId = doctor.Id,
-                    uId = user.Id
+                    uId = user.Id,
+                    aId = appointment.Id
                 };
 
                 //Creates the vaccine 0 item to be inserted in the database
@@ -141,7 +144,8 @@ namespace FinalProject
                     VaccineName = Vaccine0Name.Text,
                     Date = AppointmentDateEntry.Date.ToShortDateString(),
                     dId = doctor.Id,
-                    uId = user.Id
+                    uId = user.Id,
+                    aId = appointment.Id
                 };
                 //Creates the vaccine 1 item to be inserted in the database
                 Vaccine v1 = new Vaccine()
@@ -149,7 +153,8 @@ namespace FinalProject
                     VaccineName = Vaccine1Name.Text,
                     Date = AppointmentDateEntry.Date.ToShortDateString(),
                     dId = doctor.Id,
-                    uId = user.Id
+                    uId = user.Id,
+                    aId = appointment.Id
                 };
                 //Creates the vaccine 2 item to be inserted in the database
                 Vaccine v2 = new Vaccine()
@@ -157,7 +162,8 @@ namespace FinalProject
                     VaccineName = Vaccine2Name.Text,
                     Date = AppointmentDateEntry.Date.ToShortDateString(),
                     dId = doctor.Id,
-                    uId = user.Id
+                    uId = user.Id,
+                    aId = appointment.Id
                 };
 
                 //Creates a future appointment for the user
@@ -247,6 +253,18 @@ namespace FinalProject
                     {
                         doctor.Prescriptions.Add(p0);
                     }
+
+                    if (appointment.Prescriptions == null)
+                    {
+                        appointment.Prescriptions = new List<Prescription>
+                            {
+                                p0
+                            };
+                    }
+                    else
+                    {
+                        appointment.Prescriptions.Add(p0);
+                    }
                 }
                 if (!(p1.RxName.Equals("")))
                 {
@@ -292,6 +310,17 @@ namespace FinalProject
                     else
                     {
                         doctor.Prescriptions.Add(p1);
+                    }
+                    if (appointment.Prescriptions == null)
+                    {
+                        appointment.Prescriptions = new List<Prescription>
+                            {
+                                p1
+                            };
+                    }
+                    else
+                    {
+                        appointment.Prescriptions.Add(p1);
                     }
                 }
                 if (!(p2.RxName.Equals("")))
@@ -339,6 +368,18 @@ namespace FinalProject
                     {
                         doctor.Prescriptions.Add(p2);
                     }
+
+                    if (appointment.Prescriptions == null)
+                    {
+                        appointment.Prescriptions = new List<Prescription>
+                        {
+                            p2
+                        };
+                    }
+                    else
+                    {
+                        appointment.Prescriptions.Add(p2);
+                    }
                 }
                 if (!(v0.VaccineName.Equals("")))
                 {
@@ -356,9 +397,21 @@ namespace FinalProject
                     else
                     {
                         user.Vaccines = new List<Vaccine>
+                        {
+                            v0
+                        };
+                    }
+                    
+                    if (appointment.Vaccines != null)
                     {
-                        v0
-                    };
+                        appointment.Vaccines.Add(v0);
+                    }
+                    else
+                    {
+                        appointment.Vaccines = new List<Vaccine>
+                        {
+                            v0
+                        };
                     }
                 }
                 if (!(v1.VaccineName.Equals("")))
@@ -381,6 +434,7 @@ namespace FinalProject
                         v1
                     };
                     }
+                    appointment.Vaccines.Add(v1);
                 }
                 if (!(v2.VaccineName.Equals("")))
                 {
@@ -402,6 +456,7 @@ namespace FinalProject
                         v2
                     };
                     }
+                    appointment.Vaccines.Add(v2);
                 }
                 if (t6)
                 {
@@ -432,7 +487,7 @@ namespace FinalProject
                     conn.CreateTable<Appointment>();
                     conn.CreateTable<Doctor>();
                     conn.CreateTable<User>();
-                    conn.Insert(appointment);
+                    conn.InsertWithChildren(appointment);
                     conn.Update(user);
                     conn.Update(doctor);
                 }

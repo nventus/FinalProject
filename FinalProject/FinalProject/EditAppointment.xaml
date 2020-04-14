@@ -16,6 +16,26 @@
                     HeightRequest="125"
                     Margin="0,30,0,30"/>
 
+
+                <Label
+                    Text="Doctor Name:"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <Label
+                TextColor="#005486"
+                x:Name="DoctorName"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+                
+                
                 <!-- Appointment Date -->
                 <Label
                     Text="Appointment Date:"
@@ -105,9 +125,61 @@
                     FontSize="17"
                     TextColor="Black"
                     Margin="20,0,20,10"/>
-
-                <!-- Reminder controls -->
+                <!-- Did You Schedule A Follow-Up Appointment? -->
                 <Label
+                    Text="Did You Schedule A Follow-Up Appointment?"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <Switch
+                    x:Name="togSwitch6"
+                    IsToggled="false"
+                    Toggled="OnToggle6"/>
+
+                <!-- Follow-Up Date -->
+                <Label
+                    x:Name="FollowUpDateLabel"
+                    Text="Follow-Up Date:"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <DatePicker
+                    x:Name="FollowUpDateEntry"
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                    FontSize="17"
+                    Date="{Binding DateTime.Now}"
+                    Format="d"
+                    TextColor="Black"
+                    Margin="20,0,20,10"/>
+                <!-- Follow-Up Appointment Time -->
+                <Label
+                    x:Name="FollowUpTimeLabel"
+                    Text="Follow-Up Appointment Time:"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <TimePicker
+                    x:Name="FollowUpTimeEntry"
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                    FontSize="17"
+                    TextColor="Black"
+                    Margin="20,0,20,10"/>
+
+                <!-- Follow-Up Appointment Reminder -->
+                <Label
+                    x:Name="FollowUpReminderLabel"
                     Text="Remind Me At"
                     TextColor="#005486"
                     HorizontalOptions="Start"
@@ -117,7 +189,368 @@
                     Margin="20,0,0,0"/>
 
                 <TimePicker
-                    x:Name="BeforeAppt"
+                    x:Name="FollowUpReminderEntry"
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                    FontSize="17"
+                    TextColor="Black"
+                    Margin="20,0,20,10"/>
+                <!-- Did You Receive Any Medication? -->
+                <Label
+                    Text="Did You Receive Any Medication?"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <Label
+                    Text="Prescriptions Already Logged:"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <Label
+                    x:Name="PrescriptionList"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <Switch
+                    x:Name="togSwitch0"
+                    IsToggled="false"
+                    Toggled="OnToggle0"/>
+
+                <!-- Prescription Name -->
+                <Label
+                    x:Name="Rx0Label"
+                    Text="Prescription Name:"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <Editor
+                    x:Name="Rx0Name"
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                    FontSize="17"
+                    TextColor="Black"
+                    Margin="20,0,20,10"/>
+
+                <!-- Prescription Start Date -->
+                <Label
+                    x:Name="Rx0StartLabel"
+                    Text="Prescription Start Date:"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <DatePicker
+                    x:Name="Rx0StartDate"
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                    FontSize="17"
+                    Date="{Binding DateTime.Now}"
+                    Format="d"
+                    TextColor="Black"
+                    Margin="20,0,20,10"/>
+
+                <!-- Prescription End Date -->
+                <Label
+                    x:Name="Rx0EndLabel"
+                    Text="Prescription End Date:"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <DatePicker
+                    x:Name="Rx0EndDate"
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                    FontSize="17"
+                    Date="{Binding DateTime.Now}"
+                    Format="d"
+                    TextColor="Black"
+                    Margin="20,0,20,10"/>
+
+                <!-- Did You Receive More Medication? -->
+                <Label
+                    x:Name="Rx0More"
+                    Text="Did You Receive More Medication?"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <Switch
+                    x:Name="togSwitch1"
+                    IsToggled="false"
+                    Toggled="OnToggle1"/>
+
+                <!-- Prescription Name -->
+                <Label
+                    x:Name="Rx1Label"
+                    Text="Prescription Name:"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <Editor
+                    x:Name="Rx1Name"
+                    Text=""
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                    FontSize="17"
+                    TextColor="Black"
+                    Margin="20,0,20,10"/>
+
+                <!-- Prescription Start Date -->
+                <Label
+                    x:Name="Rx1StartLabel"
+                    Text="Prescription Start Date:"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <DatePicker
+                    x:Name="Rx1StartDate"
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                    FontSize="17"
+                    Date="{Binding DateTime.Now}"
+                    Format="d"
+                    TextColor="Black"
+                    Margin="20,0,20,10"/>
+
+                <!-- Prescription End Date -->
+                <Label
+                    x:Name="Rx1EndLabel"
+                    Text="Prescription End Date:"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <DatePicker
+                    x:Name="Rx1EndDate"
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                    FontSize="17"
+                    Date="{Binding DateTime.Now}"
+                    Format="d"
+                    TextColor="Black"
+                    Margin="20,0,20,10"/>
+
+                <!-- Did You Receive More Medication? -->
+                <Label
+                    x:Name="Rx1More"
+                    Text="Did You Receive More Medication?"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <Switch
+                    x:Name="togSwitch2"
+                    IsToggled="false"
+                    Toggled="OnToggle2"/>
+
+                <!-- Prescription Name -->
+                <Label
+                    x:Name="Rx2Label"
+                    Text="Prescription Name:"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <Editor
+                    x:Name="Rx2Name"
+                    Text=""
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                    FontSize="17"
+                    TextColor="Black"
+                    Margin="20,0,20,10"/>
+
+                <!-- Prescription Start Date -->
+                <Label
+                    x:Name="Rx2StartLabel"
+                    Text="Prescription Start Date:"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <DatePicker
+                    x:Name="Rx2StartDate"
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                    FontSize="17"
+                    Date="{Binding DateTime.Now}"
+                    Format="d"
+                    TextColor="Black"
+                    Margin="20,0,20,10"/>
+
+                <!-- Prescription End Date -->
+                <Label
+                    x:Name="Rx2EndLabel"
+                    Text="Prescription End Date:"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <DatePicker
+                    x:Name="Rx2EndDate"
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                    FontSize="17"
+                    Date="{Binding DateTime.Now}"
+                    Format="d"
+                    TextColor="Black"
+                    Margin="20,0,20,10"/>
+
+                <Label
+                    Text="Vaccinations Already Logged:"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+                
+                <Label
+                    x:Name="VaccineList"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+                
+                <!-- Did You Receive Any Vaccinations? -->
+                <Label
+                    x:Name="Vaccine0More"
+                    Text="Did You Receive Any Vaccinations?"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <Switch
+                    x:Name="togSwitch3"
+                    IsToggled="false"
+                    Toggled="OnToggle3"/>
+
+                <!-- Vaccine Name -->
+                <Label
+                    x:Name="Vaccine0Label"
+                    Text="Vaccine Name:"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <Editor
+                    x:Name="Vaccine0Name"
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                    FontSize="17"
+                    TextColor="Black"
+                    Margin="20,0,20,10"/>
+
+                <!-- Did You Receive Any More Vaccinations? -->
+                <Label
+                    x:Name="Vaccine1More"
+                    Text="Did You Receive Any More Vaccinations?"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <Switch
+                    x:Name="togSwitch4"
+                    IsToggled="false"
+                    Toggled="OnToggle4"/>
+
+                <!-- Vaccine Name -->
+                <Label
+                    x:Name="Vaccine1Label"
+                    Text="Vaccine Name:"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <Editor
+                    x:Name="Vaccine1Name"
+                    Text=""
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                    FontSize="17"
+                    TextColor="Black"
+                    Margin="20,0,20,10"/>
+
+                <!-- Did You Receive Any More Vaccinations? -->
+                <Label
+                    x:Name="Vaccine2More"
+                    Text="Did You Receive Any More Vaccinations?"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <Switch
+                    x:Name="togSwitch5"
+                    IsToggled="false"
+                    Toggled="OnToggle5"/>
+
+                <!-- Vaccine Name -->
+                <Label
+                    x:Name="Vaccine2Label"
+                    Text="Vaccine Name:"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+
+                <Editor
+                    x:Name="Vaccine2Name"
                     FontFamily="{StaticResource Montserrat-SemiBold}"
                     FontSize="17"
                     TextColor="Black"

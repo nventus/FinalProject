@@ -35,7 +35,7 @@ namespace FinalProject
         {
             if (viewedAppt.aptDate > DateTime.Now)
             {
-                Navigation.PushModalAsync(new FutureAppointmentForum(viewedAppt));
+                Navigation.PushModalAsync(new EditFutureAppointment(viewedAppt));
             }
             else
             {

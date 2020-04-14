@@ -4,6 +4,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Collections.Generic;
 using System.Linq;
+using SQLiteNetExtensions.Extensions;
 
 namespace FinalProject
 {
@@ -17,9 +18,7 @@ namespace FinalProject
         {
             InitializeComponent();
             user = usr;
-            doctor = null;
         }
-
         //Overloaded constructor for when we want to see an appointment list for a specific doctor/user combination.
         public AppointmentList(User usr, Doctor doc)
         {
@@ -27,6 +26,7 @@ namespace FinalProject
             user = usr;
             doctor = doc;
         }
+
         //When the appointments list is opened up, this makes a list of all appointments.
         //The embedded sql statement makes it so that only the appointments of the doctor you've listed show up
         protected override void OnAppearing()
@@ -37,15 +37,13 @@ namespace FinalProject
                 int result;
                 Appointment appt;
                 conn.CreateTable<Appointment>();
-             
-                    List<Appointment> appointments = user.Appointments;
+                List<Appointment> appointments = user.Appointments;
 
-                    //If the doctor var is initialized, then we have been sent here directly from the DoctorList and the user should only see appointments from the doctor they selected there.
-                    if(doctor != null)
-                    {
-                        appointments = appointments.Where(item => item.dId.Equals(doctor.Id)).ToList();
-                    }
-                    
+                //If the doctor var is initialized, then we have been sent here directly from the DoctorList and the user should only see appointments from the doctor they selected there.
+                if (doctor != null)
+                {
+                    appointments = appointments.Where(item => item.dId.Equals(doctor.Id)).ToList();
+                }
 
                 if (appointments.Count > 0)
                 {
@@ -104,7 +102,11 @@ namespace FinalProject
         private void appointmentSelected(object sender, SelectedItemChangedEventArgs e)
         {
             Appointment appt = e.SelectedItem as Appointment;
-            Navigation.PushModalAsync(new AppointmentDetail(appt));
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
+            {
+                appt = conn.GetWithChildren<Appointment>(appt.Id);
+            }
+                Navigation.PushAsync(new AppointmentDetail(appt));
         }
 
         private void OnSearch(object sender, TextChangedEventArgs e)

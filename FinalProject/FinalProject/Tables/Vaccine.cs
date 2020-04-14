@@ -33,6 +33,12 @@ namespace FinalProject.Tables
             get;
             set;
         }
+        [ForeignKey(typeof(Appointment))]
+        public int aId
+        {
+            get;
+            set;
+        }
     }
 }
 
