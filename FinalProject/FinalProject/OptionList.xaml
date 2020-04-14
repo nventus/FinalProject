@@ -8,45 +8,56 @@
              x:Class="FinalProject.OptionList"
              BackgroundImageSource="LoginBackground.png">
 
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal"  VerticalOptions="Center" HorizontalOptions="Center" Spacing="20" >
+            <Image Source="ToolbarIcon.png"/>
+            <Label Text="" FontSize="16" VerticalTextAlignment="Center" />
+        </StackLayout>
+    </NavigationPage.TitleView>
 
-    <ContentPage.BindingContext> 
+    <ContentPage.BindingContext>
         <viewModel:SignUpPageViewModel />
     </ContentPage.BindingContext>
-    <ContentPage.ToolbarItems>
+    <ContentPage.ToolbarItems >
 
         <ToolbarItem Text="My Account"
-                     Clicked="accountInfoClicked"/>
+                     Clicked="accountInfoClicked"
+                     Order="Secondary"
+                     Priority="0"/>
         <ToolbarItem Text="New User"
-                     Clicked="newUserClicked"/>
+                     Clicked="newUserClicked"
+                     Order="Secondary"
+                     Priority="1"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <ScrollView HeightRequest="100">
-        <Grid>
-            <StackLayout>
-                <Label Text="My Health Chart Options List"
+        <ScrollView>
+            <Grid>
+                <StackLayout>
+                    <Label Text="My Health Chart"
                        FontFamily="{StaticResource Montserrat-SemiBold}"
-                       FontSize="20"
+                       FontSize="28"
                        HorizontalOptions="CenterAndExpand"
                        HorizontalTextAlignment="Center"
                        TextColor="{DynamicResource Gray-900}"
                        VerticalOptions="EndAndExpand"
-                       Margin="0,20,0,30"/>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+                       Margin="0,20,0,20"/>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="0" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
 
-                    <StackLayout Grid.Row="0" Grid.Column="0">
+                        <StackLayout Grid.Row="0" Grid.Column="0">
 
-                        <!-- Appointments -->
-                        <ImageButton
+                            <!-- Appointments -->
+                            <ImageButton
                                 x:Name="LogAppts"
                                 Source="appointments.png"
                                 HorizontalOptions="Center"
@@ -55,34 +66,16 @@
                                 HeightRequest="100"
                                 Clicked="LogAptClicked"/>
 
-                        <Label
-                                Text="Appointment Logs"
+                            <Label
+                                Text="Appointments"
                                 FontSize="18"
                                 TextColor="#005486"
                                 HorizontalOptions="Center"
                                 VerticalOptions="CenterAndExpand"
                                 Margin="0,0,0,20"/>
 
-                        <!-- Vaccines -->
-                        <ImageButton
-                                x:Name="VaccineList"
-                                Source="vaccines.png"
-                                HorizontalOptions="Center"
-                                VerticalOptions="Start"
-                                BackgroundColor="Transparent"
-                                HeightRequest="100"
-                                Clicked="VaccineClicked"/>
-
-                        <Label
-                                Text="Vaccines"
-                                FontSize="18"
-                                TextColor="#005486"
-                                HorizontalOptions="Center"
-                                VerticalOptions="CenterAndExpand"
-                                Margin="0,0,0,20" />
-
-                        <!-- ConditionList -->
-                        <ImageButton
+                            <!-- ConditionList -->
+                            <ImageButton
                                 x:Name="ConditionList"
                                 Source="conditionslist.png"
                                 HorizontalOptions="Center"
@@ -91,7 +84,7 @@
                                 HeightRequest="100"
                                 Clicked="ConditionClicked"/>
 
-                        <Label
+                            <Label
                                 Text="Conditions"
                                 FontSize="18"
                                 TextColor="#005486"
@@ -99,9 +92,43 @@
                                 VerticalOptions="CenterAndExpand"
                                 Margin="0,0,0,20" />
 
-                    </StackLayout>
+                            <!--My Doctors-->
+                            <ImageButton
+                                x:Name="DoctorList"
+                                Source="mydoctors.png"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Start"
+                                BackgroundColor="Transparent"
+                                HeightRequest="100"
+                                Clicked="DoctorClicked"/>
 
+                            <Label
+                                Text="Doctors"
+                                FontSize="18"
+                                TextColor="#005486"
+                                HorizontalOptions="Center"
+                                VerticalOptions="CenterAndExpand"
+                                Margin="0,0,0,20" />
 
+                            <!--AllergiesList -->
+                            <ImageButton
+                                x:Name="AllergyList"
+                                Source="allergies.png"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Start"
+                                BackgroundColor="Transparent"
+                                HeightRequest="100"
+                                Clicked="AllergyClicked"/>
+
+                            <Label
+                                Text="Allergies"
+                                FontSize="18"
+                                TextColor="#005486"
+                                HorizontalOptions="Center"
+                                VerticalOptions="CenterAndExpand"
+                                Margin="0,0,0,20"/>
+
+                        </StackLayout>
                         <StackLayout Grid.Row="0" Grid.Column="1">
 
                             <!--PricriptionsList -->
@@ -116,24 +143,6 @@
 
                             <Label
                                 Text="Prescriptions"
-                                FontSize="18"
-                                TextColor="#005486"
-                                HorizontalOptions="Center"
-                                VerticalOptions="CenterAndExpand"
-                                Margin="0,0,0,20"/>
-
-                            <!--AllergiesList -->
-                            <ImageButton
-                                x:Name="AllergyList"
-                                Source="allergies.png"
-                                HorizontalOptions="Center"
-                                VerticalOptions="Start"
-                                BackgroundColor="Transparent"
-                                HeightRequest="100"
-                                Clicked="AllergyClicked"/>
-
-                            <Label
-                                Text="Allergies"
                                 FontSize="18"
                                 TextColor="#005486"
                                 HorizontalOptions="Center"
@@ -158,27 +167,46 @@
                                 VerticalOptions="CenterAndExpand"
                                 Margin="0,0,0,20"/>
 
+                            <!-- My Medical Notes!!!!!!! THIS NEEDS WORK CURRENTLY NO PAGE OR NOTES SECTION?-->
                             <ImageButton
-                                x:Name="DoctorButton"
-                                Source="calendar.png"
+                                x:Name="MyMedicalNotesList"
+                                Source="mymedicalnotes.png"
                                 HorizontalOptions="Center"
                                 VerticalOptions="Start"
                                 BackgroundColor="Transparent"
-                                HeightRequest="100"
-                                Clicked="DoctorClicked"/>
+                                HeightRequest="100"/>
+                            <!--Clicked="MyMedicalNotesClicked"/> -->
 
-                            <!--My Doctors-->
                             <Label
-                                Text="My Doctors"
+                                Text="Medical Notes"
                                 FontSize="18"
                                 TextColor="#005486"
                                 HorizontalOptions="Center"
                                 VerticalOptions="CenterAndExpand"
-                                Margin="0,0,0,20"/>
+                                Margin="0,0,0,20" />
+
+                            <!-- Vaccines -->
+                            <ImageButton
+                                x:Name="VaccineList"
+                                Source="vaccines.png"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Start"
+                                BackgroundColor="Transparent"
+                                HeightRequest="100"
+                                Clicked="VaccineClicked"/>
+
+                            <Label
+                                Text="Vaccines"
+                                FontSize="18"
+                                TextColor="#005486"
+                                HorizontalOptions="Center"
+                                VerticalOptions="CenterAndExpand"
+                                Margin="0,0,0,20" />
                         </StackLayout>
                     </Grid>
                 </StackLayout>
             </Grid>
+
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

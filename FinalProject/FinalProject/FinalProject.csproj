@@ -18,28 +18,28 @@
     <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.1.1" />
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
     <PackageReference Include="SQLiteNetExtensions" Version="2.1.0" />
-    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="18.1.0.42" />
-    <PackageReference Include="Syncfusion.Xamarin.Cards" Version="18.1.0.42" />
-    <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.1.0.42" />
-    <PackageReference Include="Syncfusion.Xamarin.DataSource" Version="18.1.0.42" />
-    <PackageReference Include="Syncfusion.Xamarin.Expander" Version="18.1.0.42" />
-    <PackageReference Include="Syncfusion.Xamarin.GridCommon" Version="18.1.0.42" />
-    <PackageReference Include="Syncfusion.Xamarin.SfBadgeView" Version="18.1.0.42" />
-    <PackageReference Include="Syncfusion.Xamarin.SfBarcode" Version="18.1.0.42" />
-    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="18.1.0.42" />
-    <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="18.1.0.42" />
-    <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="18.1.0.42" />
-    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="18.1.0.42" />
-    <PackageReference Include="Syncfusion.Xamarin.SfMaps" Version="18.1.0.42" />
-    <PackageReference Include="Syncfusion.Xamarin.SfParallaxView" Version="18.1.0.42" />
-    <PackageReference Include="Syncfusion.Xamarin.SfPicker" Version="18.1.0.42" />
-    <PackageReference Include="Syncfusion.Xamarin.SfPopupLayout" Version="18.1.0.42" />
-    <PackageReference Include="Syncfusion.Xamarin.SfProgressBar" Version="18.1.0.42" />
-    <PackageReference Include="Syncfusion.Xamarin.SfRotator" Version="18.1.0.42" />
-    <PackageReference Include="Syncfusion.Xamarin.SfSchedule" Version="18.1.0.42" />
-    <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="18.1.0.42" />
+    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="18.1.0.43" />
+    <PackageReference Include="Syncfusion.Xamarin.Cards" Version="18.1.0.43" />
+    <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.1.0.43" />
+    <PackageReference Include="Syncfusion.Xamarin.DataSource" Version="18.1.0.43" />
+    <PackageReference Include="Syncfusion.Xamarin.Expander" Version="18.1.0.43" />
+    <PackageReference Include="Syncfusion.Xamarin.GridCommon" Version="18.1.0.43" />
+    <PackageReference Include="Syncfusion.Xamarin.SfBadgeView" Version="18.1.0.43" />
+    <PackageReference Include="Syncfusion.Xamarin.SfBarcode" Version="18.1.0.43" />
+    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="18.1.0.43" />
+    <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="18.1.0.43" />
+    <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="18.1.0.43" />
+    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="18.1.0.43" />
+    <PackageReference Include="Syncfusion.Xamarin.SfMaps" Version="18.1.0.43" />
+    <PackageReference Include="Syncfusion.Xamarin.SfParallaxView" Version="18.1.0.43" />
+    <PackageReference Include="Syncfusion.Xamarin.SfPicker" Version="18.1.0.43" />
+    <PackageReference Include="Syncfusion.Xamarin.SfPopupLayout" Version="18.1.0.43" />
+    <PackageReference Include="Syncfusion.Xamarin.SfProgressBar" Version="18.1.0.43" />
+    <PackageReference Include="Syncfusion.Xamarin.SfRotator" Version="18.1.0.43" />
+    <PackageReference Include="Syncfusion.Xamarin.SfSchedule" Version="18.1.0.43" />
+    <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="18.1.0.43" />
     <PackageReference Include="Xam.Plugins.Notifier" Version="3.0.1" />
-    <PackageReference Include="Xamarin.Forms" Version="4.5.0.530" />
+    <PackageReference Include="Xamarin.Forms" Version="4.5.0.617" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
     <PackageReference Include="XamForms.Controls.Calendar" Version="1.1.1" />
   </ItemGroup>

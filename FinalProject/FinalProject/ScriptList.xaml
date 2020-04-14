@@ -7,6 +7,14 @@
              x:Class="FinalProject.ScriptList"
              Title="My Precriptions"
              BackgroundImageSource="LoginBackground.png">
+
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal"  VerticalOptions="Center" HorizontalOptions="Center" Spacing="60" >
+            <Image Source="ToolbarIcon.png"/>
+            <Label Text="" FontSize="16" VerticalTextAlignment="Center" />
+        </StackLayout>
+    </NavigationPage.TitleView>
+
     <ContentPage.Content>
         <ListView x:Name="RxListView"
                   ItemSelected="RxSelected"
@@ -22,15 +30,14 @@
                                 IsDestructive="True" />
                         </ViewCell.ContextActions>
 
-                        <StackLayout Padding="15,0">
-
+                        <StackLayout Padding="15,0" Margin="0,20,0,0">
                             <Label Text="{Binding RxName}"
                                    TextColor="#005486"
-                                   FontSize="16"
+                                   FontSize="18"
                                    FontFamily="{StaticResource Montserrat-SemiBold}"/>
                             <Label Text="{Binding endDate}"
                                    TextColor="Black"
-                                   FontSize="14"
+                                   FontSize="16"
                                    FontFamily="{StaticResource Montserrat-SemiBold}"
                                    Margin="0,0,0,10"/>
                         </StackLayout>

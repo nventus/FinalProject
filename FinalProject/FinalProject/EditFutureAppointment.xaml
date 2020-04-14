@@ -4,20 +4,84 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:controls="clr-namespace:FinalProject.Controls"
+             xmlns:converter="clr-namespace:FinalProject.Converters"
              mc:Ignorable="d"
              x:Class="FinalProject.EditFutureAppointment"
              BackgroundImageSource="LoginBackground.png">
-    <ContentPage.Content>
-        <StackLayout>
-            <Image
-                Source="logoInt.png"
-                VerticalOptions="Center"
-                HeightRequest="125"
-                Margin="0,30,0,30"/>
 
-            <!--Doctor's name (cannot change here)-->
-            <Label
-                    Text="Doctor Name:"
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="ColorConverter" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Image
+                    Source="logoInt.png"
+                    VerticalOptions="Center"
+                    HeightRequest="125"
+                    Margin="0,30,0,30"/>
+
+                <!--Doctor's name (cannot change here)-->
+                <Label
+                    TextColor="#005486"
+                    x:Name="DoctorName"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,20"/>
+
+                <!-- Appointment Date -->
+                <Label
+                        Text="Appointment Date:"
+                        TextColor="#005486"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Start"
+                        FontSize="18"
+                        FontFamily="{StaticResource Montserrat-Bold}"
+                        Margin="20,0,0,0"/>
+                <border:SfBorder BorderColor="{Binding Source={x:Reference AppointmentDateEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                                 Style="{StaticResource AddADoctorFormBorderStyle}">
+                    <DatePicker
+                        x:Name="AppointmentDateEntry"
+                        FontFamily="{StaticResource Montserrat-SemiBold}"
+                        FontSize="17"
+                        Date="{Binding DateTime.Now}"
+                        Format="d"
+                        TextColor="Black"
+                        Margin="10,0,0,0"/>
+                </border:SfBorder>
+
+                <!-- Appointment Time -->
+                <Label
+                    Text="Appointment Time:"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+                <border:SfBorder BorderColor="{Binding Source={x:Reference AppointmentTimeEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                                 Style="{StaticResource AddADoctorFormBorderStyle}">
+
+                    <TimePicker
+                        x:Name="AppointmentTimeEntry"
+                        FontFamily="{StaticResource Montserrat-SemiBold}"
+                        FontSize="17"
+                        TextColor="Black"
+                        Margin="10,0,0,0"/>
+                </border:SfBorder>
+
+            <!-- Reason For Visit -->
+                <Label
+                    Text="Reason For Visit:"
                     TextColor="#005486"
                     HorizontalOptions="Start"
                     VerticalOptions="Start"
@@ -25,87 +89,39 @@
                     FontFamily="{StaticResource Montserrat-Bold}"
                     Margin="20,0,0,0"/>
 
-            <Label
-                TextColor="#005486"
-                x:Name="DoctorName"
+                <border:SfBorder BorderColor="{Binding Source={x:Reference Reason}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                                 Style="{StaticResource AddADoctorFormBorderStyle}">
+                    <controls:BorderlessEntry
+                        x:Name="Reason"
+                        Placeholder="What is the reason for your visit."
+                        Text="{Binding Reason}"
+                        TextColor="Black"
+                        Style="{StaticResource EntryTextBoxStyle}" />
+                </border:SfBorder>
+
+                <!-- Reminder controls -->
+                <Label
+                    Text="Remind Me At"
+                    TextColor="#005486"
                     HorizontalOptions="Start"
                     VerticalOptions="Start"
                     FontSize="18"
                     FontFamily="{StaticResource Montserrat-Bold}"
                     Margin="20,0,0,0"/>
-            
-            <!-- Appointment Date -->
-            <Label
-                Text="Appointment Date:"
-                TextColor="#005486"
-                HorizontalOptions="Start"
-                VerticalOptions="Start"
-                FontSize="18"
-                FontFamily="{StaticResource Montserrat-Bold}"
-                Margin="20,0,0,0"/>
 
-            <DatePicker
-                x:Name="AppointmentDateEntry"
-                FontFamily="{StaticResource Montserrat-SemiBold}"
-                FontSize="17"
-                Date="{Binding DateTime.Now}"
-                Format="d"
-                TextColor="Black"
-                Margin="20,0,20,10"/>
+                <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference BeforeAppt}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource AddADoctorFormBorderStyle}">
+                    <TimePicker
+                        x:Name="BeforeAppt"
+                        FontFamily="{StaticResource Montserrat-SemiBold}"
+                        FontSize="17"
+                        TextColor="Black"
+                        Margin="10,0,0,0"/>
+                </border:SfBorder>
 
-            <!-- Appointment Time -->
-            <Label
-                Text="Appointment Time:"
-                TextColor="#005486"
-                HorizontalOptions="Start"
-                VerticalOptions="Start"
-                FontSize="18"
-                FontFamily="{StaticResource Montserrat-Bold}"
-                Margin="20,0,0,0"/>
-
-            <TimePicker
-                x:Name="AppointmentTimeEntry"
-                FontFamily="{StaticResource Montserrat-SemiBold}"
-                FontSize="17"
-                TextColor="Black"
-                Margin="20,0,20,10"/>
-
-            <!-- Reason For Visit -->
-            <Label
-                Text="Reason For Visit:"
-                TextColor="#005486"
-                HorizontalOptions="Start"
-                VerticalOptions="Start"
-                FontSize="18"
-                FontFamily="{StaticResource Montserrat-Bold}"
-                Margin="20,0,0,0"/>
-
-            <Editor
-                x:Name="Reason"
-                FontFamily="{StaticResource Montserrat-SemiBold}"
-                FontSize="17"
-                TextColor="Black"
-                Margin="20,0,20,10"/>
-
-            <!-- Reminder controls -->
-            <Label
-                Text="Remind Me At"
-                TextColor="#005486"
-                HorizontalOptions="Start"
-                VerticalOptions="Start"
-                FontSize="18"
-                FontFamily="{StaticResource Montserrat-Bold}"
-                Margin="20,0,0,0"/>
-
-            <TimePicker
-                x:Name="BeforeAppt"
-                FontFamily="{StaticResource Montserrat-SemiBold}"
-                FontSize="17"
-                TextColor="Black"
-                Margin="20,0,20,10"/>
-
-            <!-- Submit -->
-            <buttons:SfButton
+                <!-- Submit -->
+                <buttons:SfButton
                     CornerRadius="20"
                     BorderWidth="1"
                     BorderColor="Black"
@@ -117,6 +133,7 @@
                     HorizontalOptions="Center"
                     VerticalOptions="Fill"
                     Clicked="ButtonClicked" />
-        </StackLayout>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

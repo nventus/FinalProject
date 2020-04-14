@@ -4,9 +4,21 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:controls="clr-namespace:FinalProject.Controls"
+             xmlns:converter="clr-namespace:FinalProject.Converters"
              mc:Ignorable="d"
              x:Class="FinalProject.ConditionForum"
              BackgroundImageSource="LoginBackground.png">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="ColorConverter" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
 
     <ContentPage.Content>
@@ -28,12 +40,14 @@
                     FontFamily="{StaticResource Montserrat-Bold}"
                     Margin="20,0,0,0"/>
 
-                <Editor
-                    x:Name="NameEntry"
-                    FontFamily="{StaticResource Montserrat-SemiBold}"
-                    FontSize="17"
-                    TextColor="Black"
-                    Margin="20,0,20,10"/>
+                <border:SfBorder BorderColor="{Binding Source={x:Reference NameEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                                 Style="{StaticResource AddADoctorFormBorderStyle}">
+                    <controls:BorderlessEntry
+                            x:Name="NameEntry"
+                            Placeholder="Enter your condition."
+                            Text="{Binding NameEntry}"
+                            Style="{StaticResource EntryTextBoxStyle}" />
+                </border:SfBorder>
 
                 <!-- Submit -->
                 <buttons:SfButton
@@ -41,7 +55,7 @@
                     BorderWidth="1"
                     BorderColor="Black"
                     FontFamily="{StaticResource Montserrat-SemiBold}"
-                    Margin="8,20,8,40"
+                    Margin="8,20,8,320"
                     x:Name="SubmitButton"
                     Text = "Submit"
                     FontSize="18"

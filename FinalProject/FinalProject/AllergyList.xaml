@@ -7,9 +7,18 @@
              x:Class="FinalProject.AllergyList"
              BackgroundImageSource="LoginBackground.png"
              Title="My Allergies">
+
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal"  VerticalOptions="Center" HorizontalOptions="Center" Spacing="20" >
+            <Image Source="ToolbarIcon.png"/>
+            <Label Text="" FontSize="16" VerticalTextAlignment="Center" />
+        </StackLayout>
+    </NavigationPage.TitleView>
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add Allergy"
-                     Clicked="newAllergyClicked"/>
+                     Clicked="newAllergyClicked"
+                     Order="Secondary"/>
     </ContentPage.ToolbarItems>
     <ListView x:Name="allergyListView" HasUnevenRows="True">
         <ListView.ItemTemplate>
@@ -21,7 +30,8 @@
                             CommandParameter="{Binding Type}"
                             Text="Delete" IsDestructive="True" />
                     </ViewCell.ContextActions>
-                    <StackLayout Padding="15,0" Margin="0,20,0,0">
+                    <StackLayout Padding="15,0" Margin="0,20,0,20">
+
                         <Label
                             Text="{Binding Type}"
                             TextColor="#005486"

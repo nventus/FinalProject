@@ -8,13 +8,16 @@
              x:Class="FinalProject.Calendar"
              BackgroundImageSource="LoginBackground.png"
              Title="My Calendar">
+
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal"  VerticalOptions="Center" HorizontalOptions="Center" Spacing="60" >
+            <Image Source="ToolbarIcon.png"/>
+            <Label Text="" FontSize="16" VerticalTextAlignment="Center" />
+        </StackLayout>
+    </NavigationPage.TitleView>
+
     <ContentPage.Content>
         <StackLayout Margin="0,20,0,0">
-            <Image
-                Source="logoInt.png"
-                VerticalOptions="Center"
-                HeightRequest="125"
-                Margin="0,0,0,30"/>
             <controls:Calendar
                 Padding="10,0,10,0"
                 x:Name="MyCal"

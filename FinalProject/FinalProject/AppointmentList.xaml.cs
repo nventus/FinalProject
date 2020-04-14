@@ -19,6 +19,7 @@ namespace FinalProject
             InitializeComponent();
             user = usr;
         }
+
         //Overloaded constructor for when we want to see an appointment list for a specific doctor/user combination.
         public AppointmentList(User usr, Doctor doc)
         {
@@ -44,7 +45,6 @@ namespace FinalProject
                 {
                     appointments = appointments.Where(item => item.dId.Equals(doctor.Id)).ToList();
                 }
-
                 if (appointments.Count > 0)
                 {
                     for (int i = 0; i < appointments.Count - 1; i++)

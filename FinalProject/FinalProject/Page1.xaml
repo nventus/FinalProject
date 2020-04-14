@@ -6,20 +6,39 @@
              mc:Ignorable="d"
              x:Class="FinalProject.Page1"
              BackgroundImageSource="home.png">
+
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal"  VerticalOptions="Center" HorizontalOptions="Center" Spacing="20" >
+            <Image Source="ToolbarIcon.png"/>
+            <Label Text="" FontSize="16" VerticalTextAlignment="Center" />
+        </StackLayout>
+
+    </NavigationPage.TitleView>
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="New User"
-                     Clicked="newUserClicked"/>
+                     Clicked="newUserClicked"
+                     Order="Secondary"/>
     </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
         <StackLayout>
             <Label
-                Text="Welcome to My Health Chart"
+                Text="Welcome To"
                 VerticalOptions="Start"
                 HorizontalOptions="CenterAndExpand"
                 TextColor="White"
-                FontSize="20"
+                FontSize="Large"
                 FontFamily="{StaticResource Montserrat-SemiBold}"
                 Margin="0,40,0,0" />
+
+            <Label
+                Text="My Health Chart"
+                VerticalOptions="Start"
+                HorizontalOptions="CenterAndExpand"
+                TextColor="White"
+                FontSize="28"
+                FontFamily="{StaticResource Montserrat-SemiBold}"
+                Margin="0,0,0,0" />
 
         </StackLayout>
     </ContentPage.Content>

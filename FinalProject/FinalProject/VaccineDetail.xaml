@@ -7,14 +7,16 @@
              x:Class="FinalProject.VaccineDetail"
              BackgroundImageSource="LoginBackground.png"
              Title="My Vaccines">
+
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal"  VerticalOptions="Center" HorizontalOptions="Center" Spacing="60" >
+            <Image Source="ToolbarIcon.png"/>
+            <Label Text="" FontSize="16" VerticalTextAlignment="Center" />
+        </StackLayout>
+    </NavigationPage.TitleView>
+
     <ContentPage.Content>
         <StackLayout>
-            <Image
-                Source="logoInt.png"
-                VerticalOptions="Center"
-                HeightRequest="125"
-                Margin="0,30,0,30"/>
-
             <!-- Vaccine -->
             <Label
                 Text="Vaccine:"

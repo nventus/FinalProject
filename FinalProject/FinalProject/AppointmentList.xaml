@@ -6,16 +6,27 @@
              mc:Ignorable="d"
              x:Class="FinalProject.AppointmentList"
              BackgroundImageSource="LoginBackground.png">
+
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal"  VerticalOptions="Center" HorizontalOptions="Center" Spacing="20" >
+            <Image Source="ToolbarIcon.png"/>
+            <Label Text="" FontSize="16" VerticalTextAlignment="Center" />
+        </StackLayout>
+    </NavigationPage.TitleView>
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Log Appointment"
-                     Clicked="newAppointmentClicked"/>
+                     Clicked="newAppointmentClicked"
+                     Order="Secondary"/>
         <ToolbarItem Text="Future Appointment"
-                     Clicked="futureAppointmentClicked"/>
+                     Clicked="futureAppointmentClicked"
+                     Order="Secondary"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <SearchBar x:Name="search"
-                       TextChanged="OnSearch"/>
+                       TextChanged="OnSearch"
+                       Placeholder="Search"/>
             <ListView
             x:Name="appointmentListView"
             ItemSelected="appointmentSelected"
@@ -26,9 +37,7 @@
                         <ViewCell.ContextActions>
                             <MenuItem />
                         </ViewCell.ContextActions>
-                        <StackLayout
-                            Padding="15,0"
-                            Margin="0,10,0,0">
+                        <StackLayout Padding="15,0" Margin="0,10,0,0">
                             <Label
                                 Text="{Binding aptDate}"
                                 TextColor="#005486"

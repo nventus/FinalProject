@@ -36,6 +36,17 @@ namespace FinalProject
             set;
         }
         [MaxLength(10)]
+        public string dState
+        {
+            get;
+            set;
+        }
+
+        public string dZipCode
+        {
+            get;
+            set;
+        }
         public string dPhone
         {
             get;

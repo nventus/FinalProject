@@ -4,12 +4,22 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="FinalProject.ConditionList">
+             x:Class="FinalProject.ConditionList"
+             BackgroundImageSource="LoginBackground.png">
+
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal"  VerticalOptions="Center" HorizontalOptions="Center" Spacing="20" >
+            <Image Source="ToolbarIcon.png"/>
+            <Label Text="" FontSize="16" VerticalTextAlignment="Center" />
+        </StackLayout>
+    </NavigationPage.TitleView>
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add Condition"
-                     Clicked="newConditionClicked"/>
+                     Clicked="newConditionClicked"
+                     Order="Secondary"/>
     </ContentPage.ToolbarItems>
-    <ListView x:Name="conditionListView">
+    <ListView x:Name="conditionListView" HasUnevenRows="True">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
@@ -27,7 +37,7 @@
                             VerticalOptions="Start"
                             FontSize="18"
                             FontFamily="{StaticResource Montserrat-SemiBold}"
-                            Margin="10,0,0,0" />
+                            Margin="10,0,0,10" />
 
                     </StackLayout>
                 </ViewCell>

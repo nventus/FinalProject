@@ -42,42 +42,63 @@ namespace FinalProject
                 //var doctors = conn.Query<Doctor>("select * from Doctor where Id=?", appointment.dId);
                 //doctor = doctors[0];
             }
+
             Rx0EndDate.IsVisible = false;
             Rx0EndLabel.IsVisible = false;
+            Rx0EndDateEntryBox.IsVisible = false;
             Rx0Label.IsVisible = false;
+            Rx0NameEntryBox.IsVisible = false;
             Rx0Name.IsVisible = false;
             Rx0StartDate.IsVisible = false;
             Rx0StartLabel.IsVisible = false;
+            Rx0StartDateEntryBox.IsVisible = false;
             Rx0More.IsVisible = false;
+
             togSwitch1.IsVisible = false;
             Rx1EndDate.IsVisible = false;
             Rx1EndLabel.IsVisible = false;
+            Rx1EndDateEntryBox.IsVisible = false;
             Rx1Label.IsVisible = false;
+            Rx1NameEntryBox.IsVisible = false;
             Rx1Name.IsVisible = false;
             Rx1StartDate.IsVisible = false;
             Rx1StartLabel.IsVisible = false;
+            Rx1StartDateEntryBox.IsVisible = false;
             Rx1More.IsVisible = false;
+
             togSwitch2.IsVisible = false;
             Rx2EndDate.IsVisible = false;
             Rx2EndLabel.IsVisible = false;
+            Rx2EndDateEntryBox.IsVisible = false;
             Rx2Label.IsVisible = false;
+            Rx2NameEntryBox.IsVisible = false;
             Rx2Name.IsVisible = false;
             Rx2StartDate.IsVisible = false;
             Rx2StartLabel.IsVisible = false;
+            Rx2StartDateEntryBox.IsVisible = false;
             Vaccine0Label.IsVisible = false;
             Vaccine0Name.IsVisible = false;
+            Vaccine0NameEntryBox.IsVisible = false;
             Vaccine1Label.IsVisible = false;
+            Vaccine1NameEntryBox.IsVisible = false;
             Vaccine1More.IsVisible = false;
             Vaccine1Name.IsVisible = false;
+
             togSwitch4.IsVisible = false;
             Vaccine2Label.IsVisible = false;
+            Vaccine2NameEntryBox.IsVisible = false;
             Vaccine2More.IsVisible = false;
             Vaccine2Name.IsVisible = false;
+
             togSwitch5.IsVisible = false;
+            FollowUpDateEntryBox.IsVisible = false;
             FollowUpDateEntry.IsVisible = false;
+            FollowUpTimeEntryBox.IsVisible = false;
             FollowUpTimeEntry.IsVisible = false;
             FollowUpDateLabel.IsVisible = false;
             FollowUpTimeLabel.IsVisible = false;
+            FollowUpReminderLabel.IsVisible = false;
+            FollowUpReminderEntryBox.IsVisible = false;
             FollowUpReminderEntry.IsVisible = false;
         }
 
@@ -401,7 +422,7 @@ namespace FinalProject
                             v0
                         };
                     }
-                    
+
                     if (appointment.Vaccines != null)
                     {
                         appointment.Vaccines.Add(v0);
@@ -507,7 +528,7 @@ namespace FinalProject
                     var doctors = conn.Query<Doctor>("select * from Doctor where dName=?", (string)picker.ItemsSource[selectedIndex]);
                     doctor = conn.GetWithChildren<Doctor>(doctors[0].Id);
                 }
-                
+
             }
             else
             {
@@ -521,10 +542,13 @@ namespace FinalProject
             {
                 Rx0EndDate.IsVisible = true;
                 Rx0EndLabel.IsVisible = true;
+                Rx0EndDateEntryBox.IsVisible = true;
                 Rx0Label.IsVisible = true;
+                Rx0NameEntryBox.IsVisible = true;
                 Rx0Name.IsVisible = true;
                 Rx0StartDate.IsVisible = true;
                 Rx0StartLabel.IsVisible = true;
+                Rx0StartDateEntryBox.IsVisible = true;
                 Rx0More.IsVisible = true;
                 togSwitch1.IsVisible = true;
             }
@@ -532,26 +556,34 @@ namespace FinalProject
             {
                 Rx0EndDate.IsVisible = false;
                 Rx0EndLabel.IsVisible = false;
+                Rx0EndDateEntryBox.IsVisible = false;
                 Rx0Label.IsVisible = false;
+                Rx0NameEntryBox.IsVisible = false;
                 Rx0Name.IsVisible = false;
                 Rx0StartDate.IsVisible = false;
                 Rx0StartLabel.IsVisible = false;
+                Rx0StartDateEntryBox.IsVisible = false;
                 Rx0More.IsVisible = false;
                 togSwitch1.IsVisible = false;
                 Rx1EndDate.IsVisible = false;
                 Rx1EndLabel.IsVisible = false;
+                Rx1EndDateEntryBox.IsVisible = false;
                 Rx1Label.IsVisible = false;
                 Rx1Name.IsVisible = false;
                 Rx1StartDate.IsVisible = false;
                 Rx1StartLabel.IsVisible = false;
+                Rx1StartDateEntryBox.IsVisible = false;
                 Rx1More.IsVisible = false;
                 togSwitch2.IsVisible = false;
                 Rx2EndDate.IsVisible = false;
                 Rx2EndLabel.IsVisible = false;
+                Rx2EndDateEntryBox.IsVisible = false;
                 Rx2Label.IsVisible = false;
+                Rx2NameEntryBox.IsVisible = false;
                 Rx2Name.IsVisible = false;
                 Rx2StartDate.IsVisible = false;
                 Rx2StartLabel.IsVisible = false;
+                Rx2StartDateEntryBox.IsVisible = false;
                 t1 = false;
                 t2 = false;
             }
@@ -563,10 +595,13 @@ namespace FinalProject
             {
                 Rx1EndDate.IsVisible = true;
                 Rx1EndLabel.IsVisible = true;
+                Rx1EndDateEntryBox.IsVisible = true;
                 Rx1Label.IsVisible = true;
+                Rx1NameEntryBox.IsVisible = true;
                 Rx1Name.IsVisible = true;
                 Rx1StartDate.IsVisible = true;
                 Rx1StartLabel.IsVisible = true;
+                Rx1StartDateEntryBox.IsVisible = true;
                 Rx1More.IsVisible = true;
                 togSwitch2.IsVisible = true;
             }
@@ -574,18 +609,24 @@ namespace FinalProject
             {
                 Rx1EndDate.IsVisible = false;
                 Rx1EndLabel.IsVisible = false;
+                Rx1EndDateEntryBox.IsVisible = false;
                 Rx1Label.IsVisible = false;
+                Rx1NameEntryBox.IsVisible = false;
                 Rx1Name.IsVisible = false;
                 Rx1StartDate.IsVisible = false;
                 Rx1StartLabel.IsVisible = false;
+                Rx1StartDateEntryBox.IsVisible = false;
                 Rx1More.IsVisible = false;
                 togSwitch2.IsVisible = false;
                 Rx2EndDate.IsVisible = false;
                 Rx2EndLabel.IsVisible = false;
+                Rx2EndDateEntryBox.IsVisible = false;
                 Rx2Label.IsVisible = false;
                 Rx2Name.IsVisible = false;
+                Rx2NameEntryBox.IsVisible = false;
                 Rx2StartDate.IsVisible = false;
                 Rx2StartLabel.IsVisible = false;
+                Rx2StartDateEntryBox.IsVisible = false;
                 t2 = false;
             }
         }
@@ -596,19 +637,25 @@ namespace FinalProject
             {
                 Rx2EndDate.IsVisible = true;
                 Rx2EndLabel.IsVisible = true;
+                Rx2EndDateEntryBox.IsVisible = true;
                 Rx2Label.IsVisible = true;
+                Rx2NameEntryBox.IsVisible = true;
                 Rx2Name.IsVisible = true;
                 Rx2StartDate.IsVisible = true;
                 Rx2StartLabel.IsVisible = true;
+                Rx2StartDateEntryBox.IsVisible = true;
             }
             else
             {
                 Rx2EndDate.IsVisible = false;
                 Rx2EndLabel.IsVisible = false;
+                Rx2EndDateEntryBox.IsVisible = false;
                 Rx2Label.IsVisible = false;
+                Rx2NameEntryBox.IsVisible = false;
                 Rx2Name.IsVisible = false;
                 Rx2StartDate.IsVisible = false;
                 Rx2StartLabel.IsVisible = false;
+                Rx2StartDateEntryBox.IsVisible = false;
             }
         }
 
@@ -623,6 +670,7 @@ namespace FinalProject
             if (t3)
             {
                 Vaccine0Label.IsVisible = true;
+                Vaccine0NameEntryBox.IsVisible = true;
                 Vaccine1More.IsVisible = true;
                 Vaccine0Name.IsVisible = true;
                 togSwitch4.IsVisible = true;
@@ -630,13 +678,16 @@ namespace FinalProject
             else
             {
                 Vaccine0Label.IsVisible = false;
+                Vaccine0NameEntryBox.IsVisible = false;
                 Vaccine0Name.IsVisible = false;
                 togSwitch4.IsVisible = false;
                 Vaccine1Label.IsVisible = false;
+                Vaccine1NameEntryBox.IsVisible = false;
                 Vaccine1More.IsVisible = false;
                 Vaccine1Name.IsVisible = false;
                 togSwitch5.IsVisible = false;
                 Vaccine2Label.IsVisible = false;
+                Vaccine2NameEntryBox.IsVisible = false;
                 Vaccine2More.IsVisible = false;
                 Vaccine2Name.IsVisible = false;
                 t4 = false;
@@ -650,6 +701,7 @@ namespace FinalProject
             if (t4)
             {
                 Vaccine1Label.IsVisible = true;
+                Vaccine1NameEntryBox.IsVisible = true;
                 Vaccine2More.IsVisible = true;
                 Vaccine1Name.IsVisible = true;
                 togSwitch5.IsVisible = true;
@@ -657,6 +709,7 @@ namespace FinalProject
             else
             {
                 Vaccine1Label.IsVisible = false;
+                Vaccine1NameEntryBox.IsVisible = false;
                 Vaccine2More.IsVisible = false;
                 Vaccine1Name.IsVisible = false;
                 togSwitch5.IsVisible = false;
@@ -673,11 +726,13 @@ namespace FinalProject
             if (t5)
             {
                 Vaccine2Label.IsVisible = true;
+                Vaccine2NameEntryBox.IsVisible = true;
                 Vaccine2Name.IsVisible = true;
             }
             else
             {
                 Vaccine2Label.IsVisible = false;
+                Vaccine2NameEntryBox.IsVisible = false;
                 Vaccine2Name.IsVisible = false;
             }
         }
@@ -687,21 +742,27 @@ namespace FinalProject
 
             if (t6)
             {
+                FollowUpDateEntryBox.IsVisible = true;
                 FollowUpDateEntry.IsVisible = true;
                 FollowUpDateLabel.IsVisible = true;
+                FollowUpTimeEntryBox.IsVisible = true;
                 FollowUpTimeEntry.IsVisible = true;
                 FollowUpTimeLabel.IsVisible = true;
                 FollowUpReminderLabel.IsVisible = true;
+                FollowUpReminderEntryBox.IsVisible = true;
                 FollowUpReminderEntry.IsVisible = true;
                 needReminder = true;
             }
             else
             {
+                FollowUpDateEntryBox.IsVisible = false;
                 FollowUpDateEntry.IsVisible = false;
+                FollowUpTimeEntryBox.IsVisible = false;
                 FollowUpTimeEntry.IsVisible = false;
                 FollowUpDateLabel.IsVisible = false;
                 FollowUpTimeLabel.IsVisible = false;
                 FollowUpReminderLabel.IsVisible = false;
+                FollowUpReminderEntryBox.IsVisible = false;
                 FollowUpReminderEntry.IsVisible = false;
                 needReminder = false;
             }

@@ -6,17 +6,21 @@
              mc:Ignorable="d"
              x:Class="FinalProject.AppointmentDetail"
              BackgroundImageSource="LoginBackground.png">
+
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal"  VerticalOptions="Center" HorizontalOptions="Center" Spacing="10" >
+            <Image Source="ToolbarIcon.png"/>
+            <Label Text="" FontSize="16" VerticalTextAlignment="Center" />
+        </StackLayout>
+    </NavigationPage.TitleView>
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Edit Appointment"
-                     Clicked="editAppointmentClicked"/>
+                     Clicked="editAppointmentClicked"
+                     Order="Secondary"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <Image
-                Source="logoInt.png"
-                VerticalOptions="Center"
-                HeightRequest="125"
-                Margin="0,30,0,30"/>
 
             <!-- Appointment Date -->
             <Label
@@ -27,7 +31,7 @@
                 VerticalOptions="Start"
                 FontSize="18"
                 FontFamily="{StaticResource Montserrat-Bold}"
-                Margin="20,0,0,0"/>
+                Margin="20,20,0,0"/>
 
             <Label
                 x:Name="AppointmentDate"

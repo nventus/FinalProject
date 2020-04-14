@@ -4,9 +4,21 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:controls="clr-namespace:FinalProject.Controls"
+             xmlns:converter="clr-namespace:FinalProject.Converters"
              mc:Ignorable="d"
              x:Class="FinalProject.AppointmentForum"
              BackgroundImageSource="LoginBackground.png">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="ColorConverter" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.Content>
         <ScrollView>
@@ -17,27 +29,21 @@
                     HeightRequest="125"
                     Margin="0,30,0,30"/>
 
-
-                <Label
-                    Text="Doctor Name:"
-                    TextColor="#005486"
-                    HorizontalOptions="Start"
-                    VerticalOptions="Start"
-                    FontSize="18"
-                    FontFamily="{StaticResource Montserrat-Bold}"
-                    Margin="20,0,0,0"/>
-
-                <Picker
-                    x:Name="DoctorPicker"
-                    Title="Select your doctor"
-                    SelectedIndexChanged = "OnPickerSelectedIndexChanged"
-                    TitleColor="#005486"
-                    TextColor="#005486"
-                    HorizontalOptions="Start"
-                    VerticalOptions="Start"
-                    FontSize="18"
-                    FontFamily="{StaticResource Montserrat-Bold}"
-                    Margin="20,0,0,0"/>
+                <!--Doctor's Name -->
+                <border:SfBorder BorderColor="{Binding Source={x:Reference DoctorPicker}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                                 Style="{StaticResource AddADoctorFormBorderStyle}">
+                    <Picker
+                        x:Name="DoctorPicker"
+                        Title="Select your doctor"
+                        SelectedIndexChanged = "OnPickerSelectedIndexChanged"
+                        TitleColor="#005486"
+                        TextColor="#005486"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Start"
+                        FontSize="18"
+                        FontFamily="{StaticResource Montserrat-Bold}"
+                        Margin="10,0,0,0"/>
+                </border:SfBorder>
 
                 <!-- Appointment Date -->
                 <Label
@@ -48,15 +54,17 @@
                     FontSize="18"
                     FontFamily="{StaticResource Montserrat-Bold}"
                     Margin="20,0,0,0"/>
-
-                <DatePicker
-                    x:Name="AppointmentDateEntry"
-                    FontFamily="{StaticResource Montserrat-SemiBold}"
-                    FontSize="17"
-                    Date="{Binding DateTime.Now}"
-                    Format="d"
-                    TextColor="Black"
-                    Margin="20,0,20,10"/>
+                <border:SfBorder BorderColor="{Binding Source={x:Reference AppointmentDateEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                                 Style="{StaticResource AddADoctorFormBorderStyle}">
+                    <DatePicker
+                        x:Name="AppointmentDateEntry"
+                        FontFamily="{StaticResource Montserrat-SemiBold}"
+                        FontSize="17"
+                        Date="{Binding DateTime.Now}"
+                        Format="d"
+                        TextColor="Black"
+                        Margin="10,0,0,0"/>
+                </border:SfBorder>
 
                 <!-- Appointment Time -->
                 <Label
@@ -67,13 +75,16 @@
                     FontSize="18"
                     FontFamily="{StaticResource Montserrat-Bold}"
                     Margin="20,0,0,0"/>
+                <border:SfBorder BorderColor="{Binding Source={x:Reference AppointmentTimeEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                                 Style="{StaticResource AddADoctorFormBorderStyle}">
 
-                <TimePicker
-                    x:Name="AppointmentTimeEntry"
-                    FontFamily="{StaticResource Montserrat-SemiBold}"
-                    FontSize="17"
-                    TextColor="Black"
-                    Margin="20,0,20,10"/>
+                    <TimePicker
+                        x:Name="AppointmentTimeEntry"
+                        FontFamily="{StaticResource Montserrat-SemiBold}"
+                        FontSize="17"
+                        TextColor="Black"
+                        Margin="10,0,0,0"/>
+                </border:SfBorder>
 
                 <!-- Reason For Visit -->
                 <Label
@@ -85,12 +96,15 @@
                     FontFamily="{StaticResource Montserrat-Bold}"
                     Margin="20,0,0,0"/>
 
-                <Editor
-                    x:Name="Reason"
-                    FontFamily="{StaticResource Montserrat-SemiBold}"
-                    FontSize="17"
-                    TextColor="Black"
-                    Margin="20,0,20,10"/>
+                <border:SfBorder BorderColor="{Binding Source={x:Reference Reason}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                                 Style="{StaticResource AddADoctorFormBorderStyle}">
+                    <controls:BorderlessEntry
+                            x:Name="Reason"
+                            Placeholder="What is the reason for your visit."
+                            Text="{Binding Reason}"
+                            TextColor="Black"
+                            Style="{StaticResource EntryTextBoxStyle}" />
+                </border:SfBorder>
 
                 <!-- Diagnosis -->
                 <Label
@@ -102,12 +116,14 @@
                     FontFamily="{StaticResource Montserrat-Bold}"
                     Margin="20,0,0,0"/>
 
-                <Editor
-                    x:Name="Diagnosis"
-                    FontFamily="{StaticResource Montserrat-SemiBold}"
-                    FontSize="17"
-                    TextColor="Black"
-                    Margin="20,0,20,10"/>
+                <border:SfBorder BorderColor="{Binding Source={x:Reference Diagnosis}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                                 Style="{StaticResource AddADoctorFormBorderStyle}">
+                    <controls:BorderlessEntry
+                            x:Name="Diagnosis"
+                            Placeholder="What is your diagnosis."
+                            Text="{Binding Diagnosis}"
+                            Style="{StaticResource EntryTextBoxStyle}" />
+                </border:SfBorder>
 
                 <!-- Aftercare -->
                 <Label
@@ -119,13 +135,14 @@
                     FontFamily="{StaticResource Montserrat-Bold}"
                     Margin="20,0,0,0"/>
 
-                <Editor
-                    x:Name="FollowUpRecsEntry"
-                    Text=""
-                    FontFamily="{StaticResource Montserrat-SemiBold}"
-                    FontSize="17"
-                    TextColor="Black"
-                    Margin="20,0,20,10"/>
+                <border:SfBorder BorderColor="{Binding Source={x:Reference FollowUpRecsEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                                 Style="{StaticResource AddADoctorFormBorderStyle}">
+                    <controls:BorderlessEntry
+                            x:Name="FollowUpRecsEntry"
+                            Placeholder="Do you have aftercare?"
+                            Text="{Binding FollowUp}"
+                            Style="{StaticResource EntryTextBoxStyle}" />
+                </border:SfBorder>
 
                 <!-- Did You Schedule A Follow-Up Appointment? -->
                 <Label
@@ -137,6 +154,7 @@
                     FontFamily="{StaticResource Montserrat-Bold}"
                     Margin="20,0,0,0"/>
 
+                <StackLayout>
                 <Switch
                     x:Name="togSwitch6"
                     IsToggled="false"
@@ -153,14 +171,20 @@
                     FontFamily="{StaticResource Montserrat-Bold}"
                     Margin="20,0,0,0"/>
 
-                <DatePicker
-                    x:Name="FollowUpDateEntry"
-                    FontFamily="{StaticResource Montserrat-SemiBold}"
-                    FontSize="17"
-                    Date="{Binding DateTime.Now}"
-                    Format="d"
-                    TextColor="Black"
-                    Margin="20,0,20,10"/>
+                    <border:SfBorder
+                        x:Name="FollowUpDateEntryBox"
+                        BorderColor="{Binding Source={x:Reference FollowUpDateEntryBox}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource AddADoctorFormBorderStyle}">
+                        <DatePicker
+                            x:Name="FollowUpDateEntry"
+                            FontFamily="{StaticResource Montserrat-SemiBold}"
+                            FontSize="17"
+                            Date="{Binding DateTime.Now}"
+                            Format="d"
+                            TextColor="Black"
+                            Margin="10,0,0,0"/>
+                    </border:SfBorder>
+                </StackLayout>
 
                 <!-- Follow-Up Appointment Time -->
                 <Label
@@ -172,14 +196,18 @@
                     FontSize="18"
                     FontFamily="{StaticResource Montserrat-Bold}"
                     Margin="20,0,0,0"/>
+                <border:SfBorder
+                        x:Name="FollowUpTimeEntryBox"
+                        BorderColor="{Binding Source={x:Reference FollowUpTimeEntryBox}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource AddADoctorFormBorderStyle}">
+                    <TimePicker
+                        x:Name="FollowUpTimeEntry"
+                        FontFamily="{StaticResource Montserrat-SemiBold}"
+                        FontSize="17"
+                        TextColor="Black"
+                        Margin="10,0,0,0"/>
+                </border:SfBorder>
 
-                <TimePicker
-                    x:Name="FollowUpTimeEntry"
-                    FontFamily="{StaticResource Montserrat-SemiBold}"
-                    FontSize="17"
-                    TextColor="Black"
-                    Margin="20,0,20,10"/>
-                
                 <!-- Follow-Up Appointment Reminder -->
                 <Label
                     x:Name="FollowUpReminderLabel"
@@ -190,13 +218,17 @@
                     FontSize="18"
                     FontFamily="{StaticResource Montserrat-Bold}"
                     Margin="20,0,0,0"/>
-
-                <TimePicker
-                    x:Name="FollowUpReminderEntry"
-                    FontFamily="{StaticResource Montserrat-SemiBold}"
-                    FontSize="17"
-                    TextColor="Black"
-                    Margin="20,0,20,10"/>
+                <border:SfBorder
+                        x:Name="FollowUpReminderEntryBox"
+                        BorderColor="{Binding Source={x:Reference FollowUpReminderEntryBox}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource AddADoctorFormBorderStyle}">
+                    <TimePicker
+                        x:Name="FollowUpReminderEntry"
+                        FontFamily="{StaticResource Montserrat-SemiBold}"
+                        FontSize="17"
+                        TextColor="Black"
+                        Margin="10,0,0,0"/>
+                </border:SfBorder>
 
                 <!-- Did You Receive Any Medication? -->
                 <Label
@@ -223,13 +255,18 @@
                     FontSize="18"
                     FontFamily="{StaticResource Montserrat-Bold}"
                     Margin="20,0,0,0"/>
+                <border:SfBorder
+                        x:Name="Rx0NameEntryBox"
+                        BorderColor="{Binding Source={x:Reference Rx0NameEntryBox}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource AddADoctorFormBorderStyle}">
 
-                <Editor
-                    x:Name="Rx0Name"
-                    FontFamily="{StaticResource Montserrat-SemiBold}"
-                    FontSize="17"
-                    TextColor="Black"
-                    Margin="20,0,20,10"/>
+                    <controls:BorderlessEntry
+                            x:Name="Rx0Name"
+                            Placeholder="Enter your prescription."
+                            Text="{Binding Rx0Name}"
+                            Style="{StaticResource EntryTextBoxStyle}"
+                            Margin="10,0,0,0"/>
+                </border:SfBorder>
 
                 <!-- Prescription Start Date -->
                 <Label
@@ -241,15 +278,19 @@
                     FontSize="18"
                     FontFamily="{StaticResource Montserrat-Bold}"
                     Margin="20,0,0,0"/>
-
-                <DatePicker
-                    x:Name="Rx0StartDate"
-                    FontFamily="{StaticResource Montserrat-SemiBold}"
-                    FontSize="17"
-                    Date="{Binding DateTime.Now}"
-                    Format="d"
-                    TextColor="Black"
-                    Margin="20,0,20,10"/>
+                <border:SfBorder
+                        x:Name="Rx0StartDateEntryBox"
+                        BorderColor="{Binding Source={x:Reference Rx0StartDateEntryBox}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource AddADoctorFormBorderStyle}">
+                    <DatePicker
+                        x:Name="Rx0StartDate"
+                        FontFamily="{StaticResource Montserrat-SemiBold}"
+                        FontSize="17"
+                        Date="{Binding DateTime.Now}"
+                        Format="d"
+                        TextColor="Black"
+                        Margin="10,0,0,0"/>
+                </border:SfBorder>
 
                 <!-- Prescription End Date -->
                 <Label
@@ -262,14 +303,19 @@
                     FontFamily="{StaticResource Montserrat-Bold}"
                     Margin="20,0,0,0"/>
 
-                <DatePicker
-                    x:Name="Rx0EndDate"
-                    FontFamily="{StaticResource Montserrat-SemiBold}"
-                    FontSize="17"
-                    Date="{Binding DateTime.Now}"
-                    Format="d"
-                    TextColor="Black"
-                    Margin="20,0,20,10"/>
+                <border:SfBorder
+                        x:Name="Rx0EndDateEntryBox"
+                        BorderColor="{Binding Source={x:Reference Rx0EndDateEntryBox}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource AddADoctorFormBorderStyle}">
+                    <DatePicker
+                        x:Name="Rx0EndDate"
+                        FontFamily="{StaticResource Montserrat-SemiBold}"
+                        FontSize="17"
+                        Date="{Binding DateTime.Now}"
+                        Format="d"
+                        TextColor="Black"
+                        Margin="10,0,0,0"/>
+                </border:SfBorder>
 
                 <!-- Did You Receive More Medication? -->
                 <Label
@@ -298,13 +344,18 @@
                     FontFamily="{StaticResource Montserrat-Bold}"
                     Margin="20,0,0,0"/>
 
-                <Editor
-                    x:Name="Rx1Name"
-                    Text=""
-                    FontFamily="{StaticResource Montserrat-SemiBold}"
-                    FontSize="17"
-                    TextColor="Black"
-                    Margin="20,0,20,10"/>
+                <border:SfBorder
+                        x:Name="Rx1NameEntryBox"
+                        BorderColor="{Binding Source={x:Reference Rx1NameEntryBox}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource AddADoctorFormBorderStyle}">
+
+                    <controls:BorderlessEntry
+                            x:Name="Rx1Name"
+                            Placeholder="Enter your prescription."
+                            Text="{Binding Rx1Name}"
+                            Style="{StaticResource EntryTextBoxStyle}"
+                            Margin="10,0,0,0"/>
+                </border:SfBorder>
 
                 <!-- Prescription Start Date -->
                 <Label
@@ -317,14 +368,19 @@
                     FontFamily="{StaticResource Montserrat-Bold}"
                     Margin="20,0,0,0"/>
 
-                <DatePicker
-                    x:Name="Rx1StartDate"
-                    FontFamily="{StaticResource Montserrat-SemiBold}"
-                    FontSize="17"
-                    Date="{Binding DateTime.Now}"
-                    Format="d"
-                    TextColor="Black"
-                    Margin="20,0,20,10"/>
+                <border:SfBorder
+                        x:Name="Rx1StartDateEntryBox"
+                        BorderColor="{Binding Source={x:Reference Rx1StartDateEntryBox}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource AddADoctorFormBorderStyle}">
+                    <DatePicker
+                        x:Name="Rx1StartDate"
+                        FontFamily="{StaticResource Montserrat-SemiBold}"
+                        FontSize="17"
+                        Date="{Binding DateTime.Now}"
+                        Format="d"
+                        TextColor="Black"
+                        Margin="10,0,0,0"/>
+                </border:SfBorder>
 
                 <!-- Prescription End Date -->
                 <Label
@@ -337,14 +393,20 @@
                     FontFamily="{StaticResource Montserrat-Bold}"
                     Margin="20,0,0,0"/>
 
-                <DatePicker
-                    x:Name="Rx1EndDate"
-                    FontFamily="{StaticResource Montserrat-SemiBold}"
-                    FontSize="17"
-                    Date="{Binding DateTime.Now}"
-                    Format="d"
-                    TextColor="Black"
-                    Margin="20,0,20,10"/>
+                <border:SfBorder
+                        x:Name="Rx1EndDateEntryBox"
+                        BorderColor="{Binding Source={x:Reference Rx1EndDateEntryBox}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource AddADoctorFormBorderStyle}">
+                    <DatePicker
+                        x:Name="Rx1EndDate"
+                        FontFamily="{StaticResource Montserrat-SemiBold}"
+                        FontSize="17"
+                        Date="{Binding DateTime.Now}"
+                        Format="d"
+                        TextColor="Black"
+                        Margin="10,0,0,0"/>
+                </border:SfBorder>
+
 
                 <!-- Did You Receive More Medication? -->
                 <Label
@@ -373,13 +435,18 @@
                     FontFamily="{StaticResource Montserrat-Bold}"
                     Margin="20,0,0,0"/>
 
-                <Editor
-                    x:Name="Rx2Name"
-                    Text=""
-                    FontFamily="{StaticResource Montserrat-SemiBold}"
-                    FontSize="17"
-                    TextColor="Black"
-                    Margin="20,0,20,10"/>
+                <border:SfBorder
+                        x:Name="Rx2NameEntryBox"
+                        BorderColor="{Binding Source={x:Reference Rx2NameEntryBox}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource AddADoctorFormBorderStyle}">
+
+                    <controls:BorderlessEntry
+                            x:Name="Rx2Name"
+                            Placeholder="Enter your prescription."
+                            Text="{Binding Rx2Name}"
+                            Style="{StaticResource EntryTextBoxStyle}"
+                            Margin="10,0,0,0"/>
+                </border:SfBorder>
 
                 <!-- Prescription Start Date -->
                 <Label
@@ -392,14 +459,19 @@
                     FontFamily="{StaticResource Montserrat-Bold}"
                     Margin="20,0,0,0"/>
 
-                <DatePicker
-                    x:Name="Rx2StartDate"
-                    FontFamily="{StaticResource Montserrat-SemiBold}"
-                    FontSize="17"
-                    Date="{Binding DateTime.Now}"
-                    Format="d"
-                    TextColor="Black"
-                    Margin="20,0,20,10"/>
+                <border:SfBorder
+                        x:Name="Rx2StartDateEntryBox"
+                        BorderColor="{Binding Source={x:Reference Rx2StartDateEntryBox}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource AddADoctorFormBorderStyle}">
+                    <DatePicker
+                        x:Name="Rx2StartDate"
+                        FontFamily="{StaticResource Montserrat-SemiBold}"
+                        FontSize="17"
+                        Date="{Binding DateTime.Now}"
+                        Format="d"
+                        TextColor="Black"
+                        Margin="10,0,0,0"/>
+                </border:SfBorder>
 
                 <!-- Prescription End Date -->
                 <Label
@@ -412,14 +484,19 @@
                     FontFamily="{StaticResource Montserrat-Bold}"
                     Margin="20,0,0,0"/>
 
-                <DatePicker
-                    x:Name="Rx2EndDate"
-                    FontFamily="{StaticResource Montserrat-SemiBold}"
-                    FontSize="17"
-                    Date="{Binding DateTime.Now}"
-                    Format="d"
-                    TextColor="Black"
-                    Margin="20,0,20,10"/>
+                <border:SfBorder
+                        x:Name="Rx2EndDateEntryBox"
+                        BorderColor="{Binding Source={x:Reference Rx2EndDateEntryBox}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource AddADoctorFormBorderStyle}">
+                    <DatePicker
+                        x:Name="Rx2EndDate"
+                        FontFamily="{StaticResource Montserrat-SemiBold}"
+                        FontSize="17"
+                        Date="{Binding DateTime.Now}"
+                        Format="d"
+                        TextColor="Black"
+                        Margin="10,0,0,0"/>
+                </border:SfBorder>
 
                 <!-- Did You Receive Any Vaccinations? -->
                 <Label
@@ -448,12 +525,18 @@
                     FontFamily="{StaticResource Montserrat-Bold}"
                     Margin="20,0,0,0"/>
 
-                <Editor
-                    x:Name="Vaccine0Name"
-                    FontFamily="{StaticResource Montserrat-SemiBold}"
-                    FontSize="17"
-                    TextColor="Black"
-                    Margin="20,0,20,10"/>
+                <border:SfBorder
+                        x:Name="Vaccine0NameEntryBox"
+                        BorderColor="{Binding Source={x:Reference Vaccine0NameEntryBox}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource AddADoctorFormBorderStyle}">
+
+                    <controls:BorderlessEntry
+                            x:Name="Vaccine0Name"
+                            Placeholder="Enter your vaccine."
+                            Text="{Binding Vaccine0Name}"
+                            Style="{StaticResource EntryTextBoxStyle}"
+                            Margin="10,0,0,0"/>
+                </border:SfBorder>
 
                 <!-- Did You Receive Any More Vaccinations? -->
                 <Label
@@ -482,13 +565,18 @@
                     FontFamily="{StaticResource Montserrat-Bold}"
                     Margin="20,0,0,0"/>
 
-                <Editor
-                    x:Name="Vaccine1Name"
-                    Text=""
-                    FontFamily="{StaticResource Montserrat-SemiBold}"
-                    FontSize="17"
-                    TextColor="Black"
-                    Margin="20,0,20,10"/>
+                <border:SfBorder
+                        x:Name="Vaccine1NameEntryBox"
+                        BorderColor="{Binding Source={x:Reference Vaccine1NameEntryBox}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource AddADoctorFormBorderStyle}">
+
+                    <controls:BorderlessEntry
+                            x:Name="Vaccine1Name"
+                            Placeholder="Enter your vaccine."
+                            Text="{Binding Vaccine1Name}"
+                            Style="{StaticResource EntryTextBoxStyle}"
+                            Margin="10,0,0,0"/>
+                </border:SfBorder>
 
                 <!-- Did You Receive Any More Vaccinations? -->
                 <Label
@@ -517,12 +605,18 @@
                     FontFamily="{StaticResource Montserrat-Bold}"
                     Margin="20,0,0,0"/>
 
-                <Editor
-                    x:Name="Vaccine2Name"
-                    FontFamily="{StaticResource Montserrat-SemiBold}"
-                    FontSize="17"
-                    TextColor="Black"
-                    Margin="20,0,20,10"/>
+                <border:SfBorder
+                        x:Name="Vaccine2NameEntryBox"
+                        BorderColor="{Binding Source={x:Reference Vaccine2NameEntryBox}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource AddADoctorFormBorderStyle}">
+
+                    <controls:BorderlessEntry
+                            x:Name="Vaccine2Name"
+                            Placeholder="Enter your vaccine."
+                            Text="{Binding Vaccine2Name}"
+                            Style="{StaticResource EntryTextBoxStyle}"
+                            Margin="10,0,0,0"/>
+                </border:SfBorder>
 
                 <!-- Submit -->
                 <buttons:SfButton

@@ -3,16 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=netstandard"
              xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:converter="clr-namespace:FinalProject.Converters" xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" xmlns:controls="clr-namespace:FinalProject.Controls" xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
              mc:Ignorable="d"
              x:Class="FinalProject.DoctorForums"
              BackgroundImageSource="LoginBackground.png"
              Title="Add A Doctor">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="ColorConverter" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
                 <Image
-
                         Source="logoInt.png"
                         VerticalOptions="Center"
                         HeightRequest="125"
@@ -26,13 +37,14 @@
                         FontSize="18"
                         FontFamily="{StaticResource Montserrat-Bold}"
                         Margin="20,0,0,0"/>
-
-                <Editor
-                        FontFamily="{StaticResource Montserrat-SemiBold}"
-                        FontSize="17"
-                        x:Name="NameEntry"
-                        TextColor="Black"
-                        Margin="20,0,20,10"/>
+                <border:SfBorder BorderColor="{Binding Source={x:Reference NameEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                                 Style="{StaticResource AddADoctorFormBorderStyle}">
+                    <controls:BorderlessEntry
+                            x:Name="NameEntry"
+                            Placeholder="Enter your doctors name."
+                            Text="{Binding NameEntry}"
+                            Style="{StaticResource EntryTextBoxStyle}" />
+                </border:SfBorder>
 
                 <!-- Doctor's Practice -->
                 <Label
@@ -44,12 +56,14 @@
                         FontFamily="{StaticResource Montserrat-Bold}"
                         Margin="20,0,0,0"/>
 
-                <Editor
-                        FontFamily="{StaticResource Montserrat-SemiBold}"
-                        FontSize="17"
-                        x:Name="PracticeEntry"
-                        TextColor="Black"
-                        Margin="20,0,20,10"/>
+                <border:SfBorder BorderColor="{Binding Source={x:Reference PracticeEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                                 Style="{StaticResource AddADoctorFormBorderStyle}">
+                    <controls:BorderlessEntry
+                            x:Name="PracticeEntry"
+                            Placeholder="What is your doctors practice?"
+                            Text="{Binding DoctorsPractice}"
+                            Style="{StaticResource EntryTextBoxStyle}" />
+                </border:SfBorder>
 
                 <!-- Type of Doctor -->
                 <Label
@@ -61,12 +75,41 @@
                         FontFamily="{StaticResource Montserrat-Bold}"
                         Margin="20,0,0,0"/>
 
-                <Editor
-                        FontFamily="{StaticResource Montserrat-SemiBold}"
-                        FontSize="17"
-                        x:Name="TypeEntry"
-                        TextColor="Black"
-                        Margin="20,0,20,10"/>
+                <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference TypeEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource AddADoctorFormBorderStyle}">
+                    <combobox:SfComboBox
+                                x:Name="TypeEntry"
+                                SelectedValue="{Binding Business, Mode=TwoWay}"
+                                Style="{StaticResource ComboBoxStyle}"
+                                Watermark="Choose the type of doctor."
+                                VerticalOptions="CenterAndExpand">
+                        <combobox:SfComboBox.ComboBoxSource>
+                            <ListCollection:List x:TypeArguments="x:String">
+                                <x:String>Allergists</x:String>
+                                <x:String>Cardiologists</x:String>
+                                <x:String>Family Practice Physician</x:String>
+                                <x:String>Pediatricians</x:String>
+                                <x:String>Gynecologists</x:String>
+                                <x:String>Endocrinologists</x:String>
+                                <x:String>Veterinarian</x:String>
+                            </ListCollection:List>
+                        </combobox:SfComboBox.ComboBoxSource>
+                        <combobox:SfComboBox.DropDownButtonSettings>
+                            <combobox:DropDownButtonSettings>
+                                <combobox:DropDownButtonSettings.View>
+                                    <Label
+                                                    FontFamily="{StaticResource FontIcons}"
+                                                    FontSize="25"
+                                                    HorizontalTextAlignment="Center"
+                                                    Text="{StaticResource DropDownButtonIcon}"
+                                                    TextColor="{DynamicResource Gray-600}"
+                                                    VerticalTextAlignment="Center" />
+                                </combobox:DropDownButtonSettings.View>
+                            </combobox:DropDownButtonSettings>
+                        </combobox:SfComboBox.DropDownButtonSettings>
+                    </combobox:SfComboBox>
+                </border:SfBorder>
 
                 <!-- Address -->
                 <Label
@@ -77,13 +120,107 @@
                         FontSize="18"
                         FontFamily="{StaticResource Montserrat-Bold}"
                         Margin="20,0,0,0"/>
+                <border:SfBorder Grid.Column="0" BorderColor="{Binding Source={x:Reference AddressEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                                 Style="{StaticResource AddADoctorFormBorderStyle}">
+                    <controls:BorderlessEntry
+                            x:Name="AddressEntry"
+                            Placeholder="Street Address"
+                            Text="{Binding StreetAddress}"
+                            Style="{StaticResource EntryTextBoxStyle}" />
+                </border:SfBorder>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="4" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <border:SfBorder Grid.Column="0" BorderColor="{Binding Source={x:Reference StateEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                                 Style="{StaticResource AddADoctorFormBorderStyle}">
+                        <combobox:SfComboBox
+                                x:Name="StateEntry"
+                                SelectedValue="{Binding Business, Mode=TwoWay}"
+                                Style="{StaticResource ComboBoxStyle}"
+                                Watermark="State"
+                                VerticalOptions="CenterAndExpand">
+                            <combobox:SfComboBox.ComboBoxSource>
+                                <ListCollection:List x:TypeArguments="x:String">
+                                    <x:String>AL</x:String>
+                                    <x:String>AK</x:String>
+                                    <x:String>AZ</x:String>
+                                    <x:String>AR</x:String>
+                                    <x:String>CA</x:String>
+                                    <x:String>CO</x:String>
+                                    <x:String>CT</x:String>
+                                    <x:String>DE</x:String>
+                                    <x:String>FL</x:String>
+                                    <x:String>GA</x:String>
+                                    <x:String>HI</x:String>
+                                    <x:String>ID</x:String>
+                                    <x:String>IL</x:String>
+                                    <x:String>IN</x:String>
+                                    <x:String>IA</x:String>
+                                    <x:String>KS</x:String>
+                                    <x:String>KY</x:String>
+                                    <x:String>LA</x:String>
+                                    <x:String>ME</x:String>
+                                    <x:String>MD</x:String>
+                                    <x:String>MA</x:String>
+                                    <x:String>MI</x:String>
+                                    <x:String>MN</x:String>
+                                    <x:String>MS</x:String>
+                                    <x:String>MO</x:String>
+                                    <x:String>MT</x:String>
+                                    <x:String>NE</x:String>
+                                    <x:String>NV</x:String>
+                                    <x:String>NH</x:String>
+                                    <x:String>NJ</x:String>
+                                    <x:String>NM</x:String>
+                                    <x:String>NY</x:String>
+                                    <x:String>NC</x:String>
+                                    <x:String>ND</x:String>
+                                    <x:String>OH</x:String>
+                                    <x:String>OK</x:String>
+                                    <x:String>OR</x:String>
+                                    <x:String>PA</x:String>
+                                    <x:String>RI</x:String>
+                                    <x:String>SC</x:String>
+                                    <x:String>SD</x:String>
+                                    <x:String>TN</x:String>
+                                    <x:String>TX</x:String>
+                                    <x:String>UT</x:String>
+                                    <x:String>VT</x:String>
+                                    <x:String>VA</x:String>
+                                    <x:String>WA</x:String>
+                                    <x:String>WV</x:String>
+                                    <x:String>WI</x:String>
+                                    <x:String>WY</x:String>
+                                </ListCollection:List>
+                            </combobox:SfComboBox.ComboBoxSource>
+                            <combobox:SfComboBox.DropDownButtonSettings>
+                                <combobox:DropDownButtonSettings>
+                                    <combobox:DropDownButtonSettings.View>
+                                        <Label
+                                                    FontFamily="{StaticResource FontIcons}"
+                                                    FontSize="25"
+                                                    HorizontalTextAlignment="Center"
+                                                    Text="{StaticResource DropDownButtonIcon}"
+                                                    TextColor="{DynamicResource Gray-600}"
+                                                    VerticalTextAlignment="Center" />
+                                    </combobox:DropDownButtonSettings.View>
+                                </combobox:DropDownButtonSettings>
+                            </combobox:SfComboBox.DropDownButtonSettings>
+                        </combobox:SfComboBox>
+                    </border:SfBorder>
 
-                <Editor
-                        FontFamily="{StaticResource Montserrat-SemiBold}"
-                        FontSize="17"
-                        x:Name="AddressEntry"
-                        TextColor="Black"
-                        Margin="20,0,20,10"/>
+                    <border:SfBorder Grid.Column="2"  BorderColor="{Binding Source={x:Reference ZipCodeEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                                 Style="{StaticResource AddADoctorFormBorderStyle}">
+                        <controls:BorderlessEntry
+                            x:Name="ZipCodeEntry"
+                            Placeholder="Zip Code"
+                            Text="{Binding StreetAddress}"
+                            Style="{StaticResource EntryTextBoxStyle}" />
+                    </border:SfBorder>
+                </Grid>
 
                 <!-- Phone Number -->
                 <Label
@@ -94,13 +231,14 @@
                         FontSize="18"
                         FontFamily="{StaticResource Montserrat-Bold}"
                         Margin="20,0,0,0"/>
-
-                <Editor
-                        FontFamily="{StaticResource Montserrat-SemiBold}"
-                        FontSize="17"
-                        x:Name="PhoneEntry"
-                        TextColor="Black"
-                        Margin="20,0,20,10"/>
+                <border:SfBorder BorderColor="{Binding Source={x:Reference PhoneEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                                 Style="{StaticResource AddADoctorFormBorderStyle}">
+                    <controls:BorderlessEntry
+                            x:Name="PhoneEntry"
+                            Placeholder="Enter your phone number"
+                            Text="{Binding PhoneEntry}"
+                            Style="{StaticResource EntryTextBoxStyle}" />
+                </border:SfBorder>
 
                 <!-- Email -->
                 <Label
@@ -111,13 +249,14 @@
                         FontSize="18"
                         FontFamily="{StaticResource Montserrat-Bold}"
                         Margin="20,0,0,0"/>
-
-                <Editor
-                        FontFamily="{StaticResource Montserrat-SemiBold}"
-                        FontSize="17"
-                        x:Name="EmailEntry"
-                        TextColor="Black"
-                        Margin="20,0,20,10"/>
+                <border:SfBorder BorderColor="{Binding Source={x:Reference EmailEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                                 Style="{StaticResource AddADoctorFormBorderStyle}">
+                    <controls:BorderlessEntry
+                            x:Name="EmailEntry"
+                            Placeholder="Enter your email"
+                            Text="{Binding PhoneEntry}"
+                            Style="{StaticResource EntryTextBoxStyle}" />
+                </border:SfBorder>
 
                 <buttons:SfButton
                     CornerRadius="20"
