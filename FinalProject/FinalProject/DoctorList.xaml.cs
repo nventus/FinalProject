@@ -63,13 +63,13 @@ namespace FinalProject
             Navigation.PushModalAsync(new DoctorForums(user));
         }
 
-        /*
+        
         //Sends the user to the appointment listings, with the chosen doctor's name as a parameter
         private void doctorSelected(object sender, SelectedItemChangedEventArgs e)
         {
             Doctor selectedDoctor = e.SelectedItem as Doctor;
-            Navigation.PushAsync(new AppointmentList(user));
+            Navigation.PushModalAsync(new AppointmentList(user, selectedDoctor));
         }
-        */
+        
     }
 }

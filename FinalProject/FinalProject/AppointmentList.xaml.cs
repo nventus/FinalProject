@@ -11,13 +11,22 @@ namespace FinalProject
     public partial class AppointmentList : ContentPage
     {
         User user;
+        Doctor doctor;
         List<Appointment> appointmentlist = new List<Appointment>();
         public AppointmentList(User usr)
         {
             InitializeComponent();
             user = usr;
+            doctor = null;
         }
 
+        //Overloaded constructor for when we want to see an appointment list for a specific doctor/user combination.
+        public AppointmentList(User usr, Doctor doc)
+        {
+            InitializeComponent();
+            user = usr;
+            doctor = doc;
+        }
         //When the appointments list is opened up, this makes a list of all appointments.
         //The embedded sql statement makes it so that only the appointments of the doctor you've listed show up
         protected override void OnAppearing()
@@ -28,7 +37,16 @@ namespace FinalProject
                 int result;
                 Appointment appt;
                 conn.CreateTable<Appointment>();
-                List<Appointment> appointments = user.Appointments;
+             
+                    List<Appointment> appointments = user.Appointments;
+
+                    //If the doctor var is initialized, then we have been sent here directly from the DoctorList and the user should only see appointments from the doctor they selected there.
+                    if(doctor != null)
+                    {
+                        appointments = appointments.Where(item => item.dId.Equals(doctor.Id)).ToList();
+                    }
+                    
+
                 if (appointments.Count > 0)
                 {
                     for (int i = 0; i < appointments.Count - 1; i++)
@@ -86,7 +104,7 @@ namespace FinalProject
         private void appointmentSelected(object sender, SelectedItemChangedEventArgs e)
         {
             Appointment appt = e.SelectedItem as Appointment;
-            Navigation.PushAsync(new AppointmentDetail(appt));
+            Navigation.PushModalAsync(new AppointmentDetail(appt));
         }
 
         private void OnSearch(object sender, TextChangedEventArgs e)
