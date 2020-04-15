@@ -1,6 +1,7 @@
 ﻿using SQLite;
 using SQLiteNetExtensions.Attributes;
-
+using System;
+using System.Collections.Generic;
 namespace FinalProject
 {
     public class Prescription
@@ -22,6 +23,17 @@ namespace FinalProject
             set;
         }
         public string endDate
+        {
+            get;
+            set;
+        }
+        public DateTime reminderTime
+        {
+            get;
+            set;
+        }
+        [OneToMany]
+        public List<PrescriptionNotificationID> PrescriptionNotificationIDs
         {
             get;
             set;

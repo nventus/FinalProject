@@ -26,6 +26,7 @@ namespace FinalProject
                 DName.Text = docs[0].dName;
             }
             LScriptDate.Text = script.endDate;
+            ScriptReminderTime.Text = script.reminderTime.ToString();
         }
     }
 }

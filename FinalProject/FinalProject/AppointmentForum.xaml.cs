@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Plugin.LocalNotifications;
+using Xamarin.Essentials;
 
 namespace FinalProject
 {
@@ -16,6 +17,7 @@ namespace FinalProject
         User user;
         List<Doctor> dList = new List<Doctor>();
         bool t0, t1, t2, t3, t4, t5, t6, p0renew, p1renew, p2renew, needReminder = false;
+
         public AppointmentForum(Appointment appointment)
         {
             InitializeComponent();
@@ -53,6 +55,9 @@ namespace FinalProject
             Rx0StartLabel.IsVisible = false;
             Rx0StartDateEntryBox.IsVisible = false;
             Rx0More.IsVisible = false;
+            Rx0ReminderEntry.IsVisible = false;
+            Rx0ReminderEntryBox.IsVisible = false;
+            Rx0ReminderLabel.IsVisible = false;
 
             togSwitch1.IsVisible = false;
             Rx1EndDate.IsVisible = false;
@@ -65,6 +70,9 @@ namespace FinalProject
             Rx1StartLabel.IsVisible = false;
             Rx1StartDateEntryBox.IsVisible = false;
             Rx1More.IsVisible = false;
+            Rx1ReminderEntry.IsVisible = false;
+            Rx1ReminderEntryBox.IsVisible = false;
+            Rx1ReminderLabel.IsVisible = false;
 
             togSwitch2.IsVisible = false;
             Rx2EndDate.IsVisible = false;
@@ -76,6 +84,10 @@ namespace FinalProject
             Rx2StartDate.IsVisible = false;
             Rx2StartLabel.IsVisible = false;
             Rx2StartDateEntryBox.IsVisible = false;
+            Rx2ReminderEntry.IsVisible = false;
+            Rx2ReminderEntryBox.IsVisible = false;
+            Rx2ReminderLabel.IsVisible = false;
+
             Vaccine0Label.IsVisible = false;
             Vaccine0Name.IsVisible = false;
             Vaccine0NameEntryBox.IsVisible = false;
@@ -134,31 +146,46 @@ namespace FinalProject
                     RxName = Rx0Name.Text,
                     startDate = Rx0StartDate.Date.ToShortDateString(),
                     endDate = Rx0EndDate.Date.ToShortDateString(),
+                    reminderTime = Rx0StartDate.Date + Rx0ReminderEntry.Time,
                     dId = doctor.Id,
                     uId = user.Id,
-                    aId = appointment.Id
+                    aId = appointment.Id,
+                    
                 };
-                //Creates the prescription 1 item to be inserted in the database
+                if (t0)
+                {   //Set up notifications for the prescription reminder
+                    PrescriptionNotifClass.PrescriptionNotifHandler(p0);
+                }
+                //Creates the prescription 1 item to be inserted into the database
                 Prescription p1 = new Prescription()
                 {
                     RxName = Rx1Name.Text,
                     startDate = Rx1StartDate.Date.ToShortDateString(),
                     endDate = Rx1EndDate.Date.ToShortDateString(),
+                    reminderTime = Rx1StartDate.Date + Rx1ReminderEntry.Time,
                     dId = doctor.Id,
                     uId = user.Id,
                     aId = appointment.Id
                 };
+                if (t1)
+                {  //Set up notifications for the prescription reminder
+                    PrescriptionNotifClass.PrescriptionNotifHandler(p1);
+                 }
                 //Creates the prescription 2 item to be inserted in the database
                 Prescription p2 = new Prescription()
                 {
                     RxName = Rx2Name.Text,
                     startDate = Rx2StartDate.Date.ToShortDateString(),
                     endDate = Rx2EndDate.Date.ToShortDateString(),
+                    reminderTime = Rx2StartDate.Date + Rx2ReminderEntry.Time,
                     dId = doctor.Id,
                     uId = user.Id,
                     aId = appointment.Id
                 };
-
+                if (t2)
+                {   //Set up notifications for the prescription reminder
+                    PrescriptionNotifClass.PrescriptionNotifHandler(p2);
+                }
                 //Creates the vaccine 0 item to be inserted in the database
                 Vaccine v0 = new Vaccine()
                 {
@@ -550,6 +577,9 @@ namespace FinalProject
                 Rx0StartLabel.IsVisible = true;
                 Rx0StartDateEntryBox.IsVisible = true;
                 Rx0More.IsVisible = true;
+                Rx0ReminderEntry.IsVisible = true;
+                Rx0ReminderEntryBox.IsVisible = true;
+                Rx0ReminderLabel.IsVisible = true;
                 togSwitch1.IsVisible = true;
             }
             else
@@ -563,6 +593,9 @@ namespace FinalProject
                 Rx0StartDate.IsVisible = false;
                 Rx0StartLabel.IsVisible = false;
                 Rx0StartDateEntryBox.IsVisible = false;
+                Rx0ReminderEntry.IsVisible = false;
+                Rx0ReminderEntryBox.IsVisible = false;
+                Rx0ReminderLabel.IsVisible = false;
                 Rx0More.IsVisible = false;
                 togSwitch1.IsVisible = false;
                 Rx1EndDate.IsVisible = false;
@@ -573,6 +606,9 @@ namespace FinalProject
                 Rx1StartDate.IsVisible = false;
                 Rx1StartLabel.IsVisible = false;
                 Rx1StartDateEntryBox.IsVisible = false;
+                Rx1ReminderEntry.IsVisible = false;
+                Rx1ReminderEntryBox.IsVisible = false;
+                Rx1ReminderLabel.IsVisible = false;
                 Rx1More.IsVisible = false;
                 togSwitch2.IsVisible = false;
                 Rx2EndDate.IsVisible = false;
@@ -584,6 +620,9 @@ namespace FinalProject
                 Rx2StartDate.IsVisible = false;
                 Rx2StartLabel.IsVisible = false;
                 Rx2StartDateEntryBox.IsVisible = false;
+                Rx2ReminderEntry.IsVisible = false;
+                Rx2ReminderEntryBox.IsVisible = false;
+                Rx2ReminderLabel.IsVisible = false;
                 t1 = false;
                 t2 = false;
             }
@@ -603,6 +642,9 @@ namespace FinalProject
                 Rx1StartLabel.IsVisible = true;
                 Rx1StartDateEntryBox.IsVisible = true;
                 Rx1More.IsVisible = true;
+                Rx1ReminderEntry.IsVisible = true;
+                Rx1ReminderEntryBox.IsVisible = true;
+                Rx1ReminderLabel.IsVisible = true;
                 togSwitch2.IsVisible = true;
             }
             else
@@ -616,6 +658,9 @@ namespace FinalProject
                 Rx1StartDate.IsVisible = false;
                 Rx1StartLabel.IsVisible = false;
                 Rx1StartDateEntryBox.IsVisible = false;
+                Rx1ReminderEntry.IsVisible = false;
+                Rx1ReminderEntryBox.IsVisible = false;
+                Rx1ReminderLabel.IsVisible = false;
                 Rx1More.IsVisible = false;
                 togSwitch2.IsVisible = false;
                 Rx2EndDate.IsVisible = false;
@@ -627,6 +672,9 @@ namespace FinalProject
                 Rx2StartDate.IsVisible = false;
                 Rx2StartLabel.IsVisible = false;
                 Rx2StartDateEntryBox.IsVisible = false;
+                Rx2ReminderEntry.IsVisible = false;
+                Rx2ReminderEntryBox.IsVisible = false;
+                Rx2ReminderLabel.IsVisible = false;
                 t2 = false;
             }
         }
@@ -644,6 +692,9 @@ namespace FinalProject
                 Rx2StartDate.IsVisible = true;
                 Rx2StartLabel.IsVisible = true;
                 Rx2StartDateEntryBox.IsVisible = true;
+                Rx2ReminderEntry.IsVisible = true;
+                Rx2ReminderEntryBox.IsVisible = true;
+                Rx2ReminderLabel.IsVisible = true;
             }
             else
             {
@@ -656,6 +707,9 @@ namespace FinalProject
                 Rx2StartDate.IsVisible = false;
                 Rx2StartLabel.IsVisible = false;
                 Rx2StartDateEntryBox.IsVisible = false;
+                Rx2ReminderEntry.IsVisible = false;
+                Rx2ReminderEntryBox.IsVisible = false;
+                Rx2ReminderLabel.IsVisible = false;
             }
         }
 

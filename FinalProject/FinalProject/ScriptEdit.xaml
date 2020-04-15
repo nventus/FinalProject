@@ -62,8 +62,24 @@
                 Format="d"
                 TextColor="Black"
                 Margin="20,0,20,10"/>
+            
+            <!-- RX Reminder Start -->
+            <Label
+                Text="Remind Me At"
+                TextColor="#005486"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                FontSize="17"
+                FontFamily="{StaticResource Montserrat-Bold}"
+                Margin="20,0,0,0"/>
+            <TimePicker
+                x:Name="RxReminderEntry"    
+                FontFamily="{StaticResource Montserrat-SemiBold}"       
+                FontSize="17"    
+                TextColor="Black"  
+                Margin="10,0,0,0"/>
 
-            <!-- Submit -->
+                <!-- Submit -->
             <buttons:SfButton
                     CornerRadius="20"
                     BorderWidth="1"

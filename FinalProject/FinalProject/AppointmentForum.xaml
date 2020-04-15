@@ -316,6 +316,29 @@
                         TextColor="Black"
                         Margin="10,0,0,0"/>
                 </border:SfBorder>
+                
+                <!-- RX0 Reminder Start -->
+                <Label
+                    x:Name="Rx0ReminderLabel"
+                    Text="Remind Me At"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+                <border:SfBorder
+                        x:Name="Rx0ReminderEntryBox"
+                        BorderColor="{Binding Source={x:Reference Rx0ReminderEntryBox}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource AddADoctorFormBorderStyle}">
+                    <TimePicker
+                        x:Name="Rx0ReminderEntry"
+                        FontFamily="{StaticResource Montserrat-SemiBold}"
+                        FontSize="17"
+                        TextColor="Black"
+                        Margin="10,0,0,0"/>
+                </border:SfBorder>
+
 
                 <!-- Did You Receive More Medication? -->
                 <Label
@@ -403,6 +426,27 @@
                         FontSize="17"
                         Date="{Binding DateTime.Now}"
                         Format="d"
+                        TextColor="Black"
+                        Margin="10,0,0,0"/>
+                </border:SfBorder>
+                <!-- RX1 Reminder Start -->
+                <Label
+                    x:Name="Rx1ReminderLabel"
+                    Text="Remind Me At"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+                <border:SfBorder
+                        x:Name="Rx1ReminderEntryBox"
+                        BorderColor="{Binding Source={x:Reference Rx1ReminderEntryBox}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource AddADoctorFormBorderStyle}">
+                    <TimePicker
+                        x:Name="Rx1ReminderEntry"
+                        FontFamily="{StaticResource Montserrat-SemiBold}"
+                        FontSize="17"
                         TextColor="Black"
                         Margin="10,0,0,0"/>
                 </border:SfBorder>
@@ -494,6 +538,28 @@
                         FontSize="17"
                         Date="{Binding DateTime.Now}"
                         Format="d"
+                        TextColor="Black"
+                        Margin="10,0,0,0"/>
+                </border:SfBorder>
+                
+                <!-- RX2 Reminder Start -->
+                <Label
+                    x:Name="Rx2ReminderLabel"
+                    Text="Remind Me At"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+                <border:SfBorder
+                        x:Name="Rx2ReminderEntryBox"
+                        BorderColor="{Binding Source={x:Reference Rx2ReminderEntryBox}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource AddADoctorFormBorderStyle}">
+                    <TimePicker
+                        x:Name="Rx2ReminderEntry"
+                        FontFamily="{StaticResource Montserrat-SemiBold}"
+                        FontSize="17"
                         TextColor="Black"
                         Margin="10,0,0,0"/>
                 </border:SfBorder>
