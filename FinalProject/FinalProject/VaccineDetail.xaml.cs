@@ -1,5 +1,5 @@
 ﻿using FinalProject.Tables;
-
+using SQLiteNetExtensions.Extensions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -20,11 +20,12 @@ namespace FinalProject
             base.OnAppearing();
             VaccineName.Text = vax.VaccineName;
             VaccineDate.Text = vax.Date;
+            Doctor doctor;
             using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
             {
                 conn.CreateTable<Prescription>();
-                var docs = conn.Query<Doctor>("select * from Doctor where Id=?", vax.dId);
-                DName.Text = docs[0].dName;
+                doctor = conn.GetWithChildren<Doctor>(vax.dId);
+                DName.Text = doctor.dName;
             }
         }
     }

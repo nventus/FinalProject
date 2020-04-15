@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Plugin.LocalNotifications;
-using Xamarin.Essentials;
 
 namespace FinalProject
 {
@@ -17,7 +16,6 @@ namespace FinalProject
         User user;
         List<Doctor> dList = new List<Doctor>();
         bool t0, t1, t2, t3, t4, t5, t6, p0renew, p1renew, p2renew, needReminder = false;
-
         public AppointmentForum(Appointment appointment)
         {
             InitializeComponent();
@@ -31,6 +29,7 @@ namespace FinalProject
             Vaccine1Name.Text = "";
             Vaccine2Name.Text = "";
             doctor.dName = "12345";
+            AppointmentTimeEntry.Time = DateTime.Now.TimeOfDay;
             using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
             {
                 user = conn.GetWithChildren<User>(appointment.uId);
@@ -149,35 +148,34 @@ namespace FinalProject
                     reminderTime = Rx0StartDate.Date + Rx0ReminderEntry.Time,
                     dId = doctor.Id,
                     uId = user.Id,
-                    aId = appointment.Id,
-                    
+                    aId = appointment.Id
                 };
                 if (t0)
                 {   //Set up notifications for the prescription reminder
                     PrescriptionNotifClass.PrescriptionNotifHandler(p0);
                 }
-                //Creates the prescription 1 item to be inserted into the database
+                //Creates the prescription 1 item to be inserted in the database
                 Prescription p1 = new Prescription()
                 {
                     RxName = Rx1Name.Text,
                     startDate = Rx1StartDate.Date.ToShortDateString(),
                     endDate = Rx1EndDate.Date.ToShortDateString(),
-                    reminderTime = Rx1StartDate.Date + Rx1ReminderEntry.Time,
+                    reminderTime = Rx0StartDate.Date + Rx0ReminderEntry.Time,
                     dId = doctor.Id,
                     uId = user.Id,
                     aId = appointment.Id
                 };
                 if (t1)
-                {  //Set up notifications for the prescription reminder
-                    PrescriptionNotifClass.PrescriptionNotifHandler(p1);
-                 }
+                {   //Set up notifications for the prescription reminder
+                    PrescriptionNotifClass.PrescriptionNotifHandler(p0);
+                }
                 //Creates the prescription 2 item to be inserted in the database
                 Prescription p2 = new Prescription()
                 {
                     RxName = Rx2Name.Text,
                     startDate = Rx2StartDate.Date.ToShortDateString(),
                     endDate = Rx2EndDate.Date.ToShortDateString(),
-                    reminderTime = Rx2StartDate.Date + Rx2ReminderEntry.Time,
+                    reminderTime = Rx1StartDate.Date + Rx1ReminderEntry.Time,
                     dId = doctor.Id,
                     uId = user.Id,
                     aId = appointment.Id
@@ -193,7 +191,7 @@ namespace FinalProject
                     Date = AppointmentDateEntry.Date.ToShortDateString(),
                     dId = doctor.Id,
                     uId = user.Id,
-                    aId = appointment.Id
+                    aId = appointment.Id,
                 };
                 //Creates the vaccine 1 item to be inserted in the database
                 Vaccine v1 = new Vaccine()
@@ -220,7 +218,8 @@ namespace FinalProject
                     aptDate = FollowUpDateEntry.Date.Add(FollowUpTimeEntry.Time),
                     reminderTime = FollowUpDateEntry.Date.Add(FollowUpReminderEntry.Time),
                     dId = doctor.Id,
-                    uId = user.Id
+                    uId = user.Id,
+                    dName = doctor.dName
                 };
 
                 //Creates a reminder notification for a future appointment and submits it to the Android OS to handle
@@ -461,6 +460,18 @@ namespace FinalProject
                             v0
                         };
                     }
+                    
+                    if(doctor.Vaccines != null)
+                    {
+                        doctor.Vaccines.Add(v0);
+                    }
+                    else
+                    {
+                        doctor.Vaccines = new List<Vaccine>
+                        {
+                            v0
+                        };
+                    }
                 }
                 if (!(v1.VaccineName.Equals("")))
                 {
@@ -483,6 +494,18 @@ namespace FinalProject
                     };
                     }
                     appointment.Vaccines.Add(v1);
+
+                    if (doctor.Vaccines != null)
+                    {
+                        doctor.Vaccines.Add(v1);
+                    }
+                    else
+                    {
+                        doctor.Vaccines = new List<Vaccine>
+                        {
+                            v1
+                        };
+                    }
                 }
                 if (!(v2.VaccineName.Equals("")))
                 {
@@ -505,13 +528,24 @@ namespace FinalProject
                     };
                     }
                     appointment.Vaccines.Add(v2);
+                    if (doctor.Vaccines != null)
+                    {
+                        doctor.Vaccines.Add(v2);
+                    }
+                    else
+                    {
+                        doctor.Vaccines = new List<Vaccine>
+                        {
+                            v2
+                        };
+                    }
                 }
                 if (t6)
                 {
                     using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
                     {
                         conn.CreateTable<Appointment>();
-                        conn.Insert(fa);
+                        conn.InsertWithChildren(fa);
                     }
 
                     if (user.Appointments != null)
@@ -521,9 +555,21 @@ namespace FinalProject
                     else
                     {
                         user.Appointments = new List<Appointment>
+                        {
+                            fa
+                        };
+                    }
+
+                    if(doctor.Appointments != null)
                     {
-                        fa
-                    };
+                        doctor.Appointments.Add(fa);
+                    }
+                    else
+                    {
+                        doctor.Appointments = new List<Appointment>
+                        {
+                            fa
+                        };
                     }
                 }
                 //Adds the appointment to the database
@@ -536,8 +582,8 @@ namespace FinalProject
                     conn.CreateTable<Doctor>();
                     conn.CreateTable<User>();
                     conn.InsertWithChildren(appointment);
-                    conn.Update(user);
-                    conn.Update(doctor);
+                    conn.UpdateWithChildren(user);
+                    conn.UpdateWithChildren(doctor);
                 }
                 await Navigation.PopModalAsync();
             }
@@ -712,8 +758,6 @@ namespace FinalProject
                 Rx2ReminderLabel.IsVisible = false;
             }
         }
-
-
 
 
 

@@ -21,7 +21,37 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
+            <Label
+                Text="Doctor Name:"
+                TextColor="#005486"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                FontSize="18"
+                FontFamily="{StaticResource Montserrat-Bold}"
+                Margin="20,20,0,0"/>
 
+            <Label
+                x:Name="DoctorName"
+                FontFamily="{StaticResource Montserrat-SemiBold}"
+                FontSize="16"
+                TextColor="Black"
+                Margin="20,0,0,10"/>
+            
+            <Label
+                Text="Address:"
+                TextColor="#005486"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                FontSize="18"
+                FontFamily="{StaticResource Montserrat-Bold}"
+                Margin="20,20,0,0"/>
+
+            <Label
+                x:Name="Address"
+                FontFamily="{StaticResource Montserrat-SemiBold}"
+                FontSize="16"
+                TextColor="Black"
+                Margin="20,0,0,10"/>
             <!-- Appointment Date -->
             <Label
                 x:Name="AppointmentDateLabel"
@@ -89,6 +119,41 @@
 
             <Label
                 x:Name="FollowUpRecs"
+                FontFamily="{StaticResource Montserrat-SemiBold}"
+                FontSize="16"
+                TextColor="Black"
+                Margin="20,0,0,10"/>
+            
+            <!-- Prescriptions -->
+            <Label
+                x:Name="PrescriptionLabel"
+                Text="Prescriptions Received:"
+                TextColor="#005486"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                FontSize="18"
+                FontFamily="{StaticResource Montserrat-Bold}"
+                Margin="20,0,0,0"/>
+
+            <Label
+                x:Name="PrescriptionsReceived"
+                FontFamily="{StaticResource Montserrat-SemiBold}"
+                FontSize="16"
+                TextColor="Black"
+                Margin="20,0,0,10"/>
+            <!-- Vaccines -->
+            <Label
+                x:Name="VaccineLabel"
+                Text="Vaccines Received:"
+                TextColor="#005486"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                FontSize="18"
+                FontFamily="{StaticResource Montserrat-Bold}"
+                Margin="20,0,0,0"/>
+
+            <Label
+                x:Name="VaccinesReceived"
                 FontFamily="{StaticResource Montserrat-SemiBold}"
                 FontSize="16"
                 TextColor="Black"

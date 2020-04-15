@@ -38,6 +38,7 @@ namespace FinalProject
                 int result;
                 Appointment appt;
                 conn.CreateTable<Appointment>();
+                user = conn.GetWithChildren<User>(user.Id);
                 List<Appointment> appointments = user.Appointments;
 
                 //If the doctor var is initialized, then we have been sent here directly from the DoctorList and the user should only see appointments from the doctor they selected there.
@@ -45,6 +46,23 @@ namespace FinalProject
                 {
                     appointments = appointments.Where(item => item.dId.Equals(doctor.Id)).ToList();
                 }
+                if (appointments.Count > 0)
+                {
+                    for (int i = 0; i < appointments.Count - 1; i++)
+                    {
+                        for (int j = 0; j < appointments.Count - i - 1; j++)
+                        {
+                            result = DateTime.Compare(appointments[j + 1].aptDate, appointments[j].aptDate);
+                            if (result > 0)
+                            {
+                                appt = appointments[j];
+                                appointments[j] = appointments[j + 1];
+                                appointments[j + 1] = appt;
+                            }
+                        }
+                    }
+                }
+
                 if (appointments.Count > 0)
                 {
                     for (int i = 0; i < appointments.Count - 1; i++)

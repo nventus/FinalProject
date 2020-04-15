@@ -41,10 +41,10 @@ namespace FinalProject
                 {
                     PrescriptionReminderID = Preferences.Get("PrescriptionReminderNotifID", 1000000);
                     //If the ID number gets within 10000 of overflowing, we will reset it.
-                    if((PrescriptionReminderID + 10000) >= int.MaxValue)
+                    if ((PrescriptionReminderID + 10000) >= int.MaxValue)
                     {
                         PrescriptionReminderID = 1000000;
-                        
+
                     }
                 }
 
@@ -60,7 +60,7 @@ namespace FinalProject
                     {
                         foreach (var prescript in prescriptions)
                         {   //Refresh the reminder notifications for each prescription if it is not entirely past the time that it must be taken.
-                            if(DateTime.Parse(prescript.endDate) >= DateTime.Now)
+                            if (DateTime.Parse(prescript.endDate) >= DateTime.Now)
                             {
                                 PrescriptionNotifClass.PrescriptionNotifHandler(prescript);
                             }

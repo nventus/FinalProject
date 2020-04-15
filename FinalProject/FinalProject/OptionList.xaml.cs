@@ -15,6 +15,20 @@ namespace FinalProject
         {
             InitializeComponent();
             uid = id;
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
+            {
+                conn.CreateTable<Folders>();
+                conn.CreateTable<Note>();
+                conn.CreateTable<Doctor>();
+                conn.CreateTable<Allergy>();
+                conn.CreateTable<Prescription>();
+                conn.CreateTable<Vaccine>();
+                conn.CreateTable<Appointment>();
+                conn.CreateTable<Conditions>();
+                conn.CreateTable<UsersDoctors>();
+                conn.CreateTable<UsersConditions>();
+                conn.CreateTable<UsersAllergies>();
+            }
         }
 
         private void newUserClicked(object sender, EventArgs e)
@@ -69,6 +83,11 @@ namespace FinalProject
         private void DoctorClicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new DoctorList(uid));
+        }
+
+        private void NotesClicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new NoteRoot(uid));
         }
     }
 }

@@ -96,6 +96,7 @@ namespace FinalProject
             FollowUpDateLabel.IsVisible = false;
             FollowUpTimeLabel.IsVisible = false;
             FollowUpReminderEntry.IsVisible = false;
+            FollowUpReminderLabel.IsVisible = false;
         }
 
         async void ButtonClicked(object sender, EventArgs e)
@@ -181,7 +182,8 @@ namespace FinalProject
                 aptDate = FollowUpDateEntry.Date.Add(FollowUpTimeEntry.Time),
                 reminderTime = FollowUpDateEntry.Date.Add(FollowUpReminderEntry.Time),
                 dId = doctor.Id,
-                uId = user.Id
+                uId = user.Id,
+                dName = doctor.dName
             };
 
             //Creates a reminder notification for a future appointment and submits it to the Android OS to handle
@@ -514,6 +516,18 @@ namespace FinalProject
                         v0
                     };
                     }
+
+                    if (doctor.Vaccines != null)
+                    {
+                        doctor.Vaccines.Add(v0);
+                    }
+                    else
+                    {
+                        doctor.Vaccines = new List<Vaccine>
+                        {
+                            v0
+                        };
+                    }
                 }
             }
             if (!(v1.VaccineName.Equals("")))
@@ -558,6 +572,17 @@ namespace FinalProject
                     else
                     {
                         appointment.Vaccines = new List<Vaccine>
+                        {
+                            v1
+                        };
+                    }
+                    if (doctor.Vaccines != null)
+                    {
+                        doctor.Vaccines.Add(v1);
+                    }
+                    else
+                    {
+                        doctor.Vaccines = new List<Vaccine>
                         {
                             v1
                         };
@@ -611,7 +636,18 @@ namespace FinalProject
                             v2
                         };
                     }
+                    if (doctor.Vaccines != null)
+                    {
+                        doctor.Vaccines.Add(v2);
                     }
+                    else
+                    {
+                        doctor.Vaccines = new List<Vaccine>
+                        {
+                            v2
+                        };
+                    }
+                }
             }
             if (t6)
             {
@@ -632,6 +668,18 @@ namespace FinalProject
                         fa
                     };
                 }
+
+                if (doctor.Appointments != null)
+                {
+                    doctor.Appointments.Add(fa);
+                }
+                else
+                {
+                    doctor.Appointments = new List<Appointment>
+                    {
+                        fa
+                    };
+                }
             }
             //Adds the appointment to the database
             //updates the user with its new appointment info
@@ -643,8 +691,8 @@ namespace FinalProject
                 conn.CreateTable<Doctor>();
                 conn.CreateTable<User>();
                 conn.UpdateWithChildren(appointment);
-                conn.Update(user);
-                conn.Update(doctor);
+                conn.UpdateWithChildren(user);
+                conn.UpdateWithChildren(doctor);
                 await Navigation.PopModalAsync();
             }
         }

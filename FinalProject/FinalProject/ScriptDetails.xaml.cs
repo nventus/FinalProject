@@ -1,7 +1,7 @@
 ﻿
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
+using System.Globalization;
 namespace FinalProject
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -26,7 +26,8 @@ namespace FinalProject
                 DName.Text = docs[0].dName;
             }
             LScriptDate.Text = script.endDate;
-            ScriptReminderTime.Text = script.reminderTime.ToString();
+
+            ScriptReminderTime.Text = script.reminderTime.TimeOfDay.ToString();
         }
     }
 }

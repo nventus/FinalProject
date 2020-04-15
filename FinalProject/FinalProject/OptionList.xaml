@@ -174,7 +174,8 @@
                                 HorizontalOptions="Center"
                                 VerticalOptions="Start"
                                 BackgroundColor="Transparent"
-                                HeightRequest="100"/>
+                                HeightRequest="100"
+                                Clicked="NotesClicked"/>
                             <!--Clicked="MyMedicalNotesClicked"/> -->
 
                             <Label

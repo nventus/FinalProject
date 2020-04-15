@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Essentials;
 using Plugin.LocalNotifications;
-using System.Collections.Generic;
 using System.Linq;
 using SQLiteNetExtensions.Extensions;
 
@@ -46,7 +45,8 @@ namespace FinalProject
                         numDaysToRemind++;
 
                     }
-                }else
+                }
+                else
                 {
                     //the startdate is in the future.
                     numDaysToRemind++;
@@ -82,7 +82,7 @@ namespace FinalProject
                     {
                         p0.PrescriptionNotificationIDs.Add(pnid0);
                     }
-                    
+
                     CrossLocalNotifications.Current.Show("Prescription Reminder", "This is a reminder to take " + p0.RxName, PrescriptionReminderID, reminderDayAndTime);
                     //track the unique notification IDs used in case we have to cancel the notifications when the user edits the time they want to be reminded at.
 
@@ -90,10 +90,10 @@ namespace FinalProject
                     //CrossLocalNotifications.Current.Show("TempRemind", "Created Reminder for day " + reminderDayAndTime, mytempid, DateTime.Now.AddSeconds(10));
                     numDaysToRemind--;
                     reminderDayAndTime = reminderDayAndTime.AddDays(1);
-                //mytempid++;
-                Preferences.Set("PrescriptionReminderNotifID", PrescriptionReminderID);
-                conn.Update(p0);
-            }
+                    //mytempid++;
+                    Preferences.Set("PrescriptionReminderNotifID", PrescriptionReminderID);
+                    conn.Update(p0);
+                }
 
             }
 

@@ -99,7 +99,7 @@ namespace FinalProject
                     {
                         doctor.Appointments = new List<Appointment>
                         {
-                        appointment
+                            appointment
                         };
                     }
                     else

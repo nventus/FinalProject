@@ -10,7 +10,7 @@ namespace FinalProject
             get;
             set;
         }
-        
+
         [ForeignKey(typeof(Prescription))]
         public int pId
         {

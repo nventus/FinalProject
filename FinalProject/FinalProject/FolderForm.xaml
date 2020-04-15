@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:converter="clr-namespace:FinalProject.Converters" xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" xmlns:controls="clr-namespace:FinalProject.Controls" xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             mc:Ignorable="d"
+             x:Class="FinalProject.FolderForm"
+             BackgroundImageSource="LoginBackground.png"
+             Title="Add A Folder">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="ColorConverter" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Image
+                        Source="logoInt.png"
+                        VerticalOptions="Center"
+                        HeightRequest="125"
+                        Margin="0,30,0,30"/>
+                <!-- Note Title -->
+                <Label
+                        Text="Title:"
+                        TextColor="#005486"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Start"
+                        FontSize="18"
+                        FontFamily="{StaticResource Montserrat-Bold}"
+                        Margin="20,0,0,0"/>
+                <border:SfBorder BorderColor="{Binding Source={x:Reference TitleEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                                 Style="{StaticResource AddADoctorFormBorderStyle}">
+                    <controls:BorderlessEntry
+                            x:Name="TitleEntry"
+                            Placeholder="Title"
+                            Text="{Binding TitleEntry}"
+                            Style="{StaticResource EntryTextBoxStyle}" />
+                </border:SfBorder>
+                
+                <buttons:SfButton
+                    CornerRadius="20"
+                    BorderWidth="1"
+                    BorderColor="Black"
+                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                    Margin="8,20,8,40"
+                    x:Name="SubmitButton"
+                    Text = "Submit"
+                    FontSize="18"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Fill"
+                    Clicked="ButtonClicked" />
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

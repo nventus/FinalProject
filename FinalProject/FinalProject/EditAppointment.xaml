@@ -194,16 +194,7 @@
                     FontSize="17"
                     TextColor="Black"
                     Margin="20,0,20,10"/>
-                <!-- Did You Receive Any Medication? -->
-                <Label
-                    Text="Did You Receive Any Medication?"
-                    TextColor="#005486"
-                    HorizontalOptions="Start"
-                    VerticalOptions="Start"
-                    FontSize="18"
-                    FontFamily="{StaticResource Montserrat-Bold}"
-                    Margin="20,0,0,0"/>
-
+                
                 <Label
                     Text="Prescriptions Already Logged:"
                     TextColor="#005486"
@@ -215,6 +206,15 @@
 
                 <Label
                     x:Name="PrescriptionList"
+                    TextColor="#005486"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="18"
+                    FontFamily="{StaticResource Montserrat-Bold}"
+                    Margin="20,0,0,0"/>
+                <!-- Did You Receive Any Medication? -->
+                <Label
+                    Text="Did You Receive Any Medication?"
                     TextColor="#005486"
                     HorizontalOptions="Start"
                     VerticalOptions="Start"

@@ -56,6 +56,21 @@ namespace FinalProject
             get;
             set;
         }
+
+        [OneToMany]
+        public List<Folders> Folds
+        {
+            get;
+            set;
+        }
+
+        [OneToMany]
+        public List<Note> Notes
+        {
+            get;
+            set;
+        }
+
         [ManyToMany(typeof(UsersAllergies))]
         public List<Allergy> Allergies
         {

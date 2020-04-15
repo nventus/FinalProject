@@ -79,7 +79,7 @@
                 TextColor="Black"  
                 Margin="10,0,0,0"/>
 
-                <!-- Submit -->
+            <!-- Submit -->
             <buttons:SfButton
                     CornerRadius="20"
                     BorderWidth="1"

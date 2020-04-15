@@ -338,8 +338,7 @@
                         TextColor="Black"
                         Margin="10,0,0,0"/>
                 </border:SfBorder>
-
-
+                
                 <!-- Did You Receive More Medication? -->
                 <Label
                     x:Name="Rx0More"
@@ -429,6 +428,7 @@
                         TextColor="Black"
                         Margin="10,0,0,0"/>
                 </border:SfBorder>
+                
                 <!-- RX1 Reminder Start -->
                 <Label
                     x:Name="Rx1ReminderLabel"
@@ -450,7 +450,6 @@
                         TextColor="Black"
                         Margin="10,0,0,0"/>
                 </border:SfBorder>
-
 
                 <!-- Did You Receive More Medication? -->
                 <Label
@@ -541,7 +540,6 @@
                         TextColor="Black"
                         Margin="10,0,0,0"/>
                 </border:SfBorder>
-                
                 <!-- RX2 Reminder Start -->
                 <Label
                     x:Name="Rx2ReminderLabel"
@@ -563,7 +561,6 @@
                         TextColor="Black"
                         Margin="10,0,0,0"/>
                 </border:SfBorder>
-
                 <!-- Did You Receive Any Vaccinations? -->
                 <Label
                     x:Name="Vaccine0More"

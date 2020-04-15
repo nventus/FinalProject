@@ -39,6 +39,7 @@ namespace FinalProject
                 dPhone = PhoneEntry.Text,
                 dEmail = EmailEntry.Text
             };
+            doctor.dAddress = doctor.dAddress + " " + StateEntry.Text + " " + ZipCodeEntry.Text;
 
             //Only adds the document to the database if it has a valid marker for the Doctor's name
             if (doctor.dName.Equals(""))

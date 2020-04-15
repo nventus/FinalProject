@@ -1,4 +1,5 @@
 ﻿using FinalProject.Tables;
+using SQLiteNetExtensions.Extensions;
 using System;
 
 using Xamarin.Forms;
@@ -54,6 +55,10 @@ namespace FinalProject
         private void vaccineSelected(object sender, SelectedItemChangedEventArgs e)
         {
             Vaccine v = e.SelectedItem as Vaccine;
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.FilePath))
+            {
+                v = conn.GetWithChildren<Vaccine>(v.Id);
+            }
             Navigation.PushAsync(new VaccineDetail(v));
         }
     }
